@@ -1,0 +1,16 @@
+﻿# Python cache
+__pycache__/
+*.pyc
+
+# IDE
+.idea/
+.vscode/
+
+# Runtime outputs
+prescription/docs/results/*.json
+prescription/docs/summaries/*.md
+prescription/docs/results_log.md
+
+# Keep empty folders with .gitkeep
+!prescription/docs/results/.gitkeep
+!prescription/docs/summaries/.gitkeep
