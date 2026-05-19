@@ -14,6 +14,8 @@ import cv2
 import mediapipe as mp
 from mediapipe.framework.formats import landmark_pb2
 
+from result_storage import save_prescription_artifacts
+
 
 CAMERA_DEVICE = "/dev/video21"
 CAMERA_BACKEND = cv2.CAP_V4L2
@@ -215,6 +217,22 @@ def build_compact_keypoints(landmarks, selected_rule: dict[str, object]) -> dict
     return compact
 
 
+def split_host_port(host_header: str) -> tuple[str, str]:
+    text = host_header.strip()
+    if not text:
+        return "unknown", str(PORT)
+
+    if text.startswith("[") and "]:" in text:
+        host, port = text.rsplit(":", 1)
+        return host.strip("[]"), port
+
+    if text.count(":") == 1:
+        host, port = text.rsplit(":", 1)
+        return host, port
+
+    return text.strip("[]"), str(PORT)
+
+
 def build_prescription(
     patient_id: str,
     action_name: str,
@@ -272,7 +290,9 @@ def sanitize_text(value: object, default: str) -> str:
 
 
 def open_camera() -> cv2.VideoCapture:
-    cap = cv2.VideoCapture(CAMERA_DEVICE, CAMERA_BACKEND)
+    cap = cv2.VideoCapture(21, CAMERA_BACKEND)
+    if not cap.isOpened():
+        cap = cv2.VideoCapture(CAMERA_DEVICE)
     cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*FOURCC))
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, FRAME_WIDTH)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, FRAME_HEIGHT)
@@ -304,6 +324,7 @@ class RecorderState:
 
         self.last_export_payload: dict[str, object] | None = None
         self.last_export_summary: dict[str, object] | None = None
+        self.last_export_board_result: dict[str, object] | None = None
         self.last_export_error: str | None = None
         self.awaiting_ack = False
 
@@ -320,6 +341,7 @@ class RecorderState:
     def clear_export(self) -> None:
         self.last_export_payload = None
         self.last_export_summary = None
+        self.last_export_board_result = None
         self.last_export_error = None
         self.awaiting_ack = False
 
@@ -395,7 +417,7 @@ def build_page_html() -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RK3588 处方录制</title>
+  <title>RK3588 处方录制（双端同步保存）</title>
   <style>
     :root {
       --bg: #f2efe7;
@@ -545,8 +567,8 @@ def build_page_html() -> str:
 <body>
   <div class="wrap">
     <section class="hero">
-      <h1>RK3588 浏览器版处方录制</h1>
-      <p>视频画面只保留原始图像和骨架，不再在画面里叠加文字。所有状态统一看右侧中文面板；点击保存后，结果会转存到 Windows 本机的 <span class="mono">docs/results/</span> 和 <span class="mono">docs/summaries/</span>。</p>
+      <h1>RK3588 浏览器版处方录制（双端同步保存）</h1>
+      <p>视频画面只保留原始图像和骨架，不再在画面里叠加文字。所有状态统一看右侧中文面板；点击保存后，板端会先写入 <span class="mono">docs/results/</span> 和 <span class="mono">docs/summaries/</span>，再同步一份到 Windows 本机。</p>
     </section>
     <div class="grid">
       <section class="panel">
@@ -576,7 +598,7 @@ def build_page_html() -> str:
         </form>
         <div class="buttons">
           <button id="start-btn">开始录制</button>
-          <button id="save-btn" class="ok">保存到本地</button>
+          <button id="save-btn" class="ok">双端同步保存</button>
           <button id="retry-btn" class="alt">重试导出最近结果</button>
           <button id="clear-btn" class="alt">清空缓存</button>
           <button id="cancel-btn" class="warn">取消本轮录制</button>
@@ -753,20 +775,38 @@ def build_page_html() -> str:
       setBusy(true);
       try {
         const boardResult = await postJson("/api/save", {});
-        const localResult = await pushToLocalSink({
-          board_ip: window.location.hostname,
-          board_port: window.location.port || "8082",
-          source: "record_prescription_http",
-          prescription: boardResult.prescription,
-        });
         try {
-          await ackBoardSaved();
-          setMessage(successMessage(localResult, "保存完成。"));
-        } catch (ackError) {
-          setMessage(`${successMessage(localResult, "本机已保存，但板端确认失败。")}\n${String(ackError.message || ackError)}\n板端仍保留最近一次导出，可稍后重试。`);
+          const localResult = await pushToLocalSink({
+            board_ip: window.location.hostname,
+            board_port: window.location.port || "8082",
+            source: "record_prescription_http",
+            prescription: boardResult.prescription,
+          });
+          try {
+            await ackBoardSaved();
+            const boardSummaryPath = boardResult.board_summary_path ? `
+板端摘要：${boardResult.board_summary_path}` : "";
+            const localSummaryPath = localResult.summary_path ? `
+Windows摘要：${localResult.summary_path}` : "";
+            setMessage(`双端保存完成。
+板端模板：${boardResult.board_saved_path || "-"}${boardSummaryPath}
+Windows模板：${localResult.saved_path || "-"}${localSummaryPath}`);
+          } catch (ackError) {
+            setMessage(`Windows 已保存，但板端确认清理失败。
+板端模板：${boardResult.board_saved_path || "-"}
+Windows模板：${localResult.saved_path || "-"}
+${String(ackError.message || ackError)}
+板端仍保留最近一次导出，可以稍后重试。`);
+          }
+        } catch (error) {
+          setMessage(`板端已保底落盘，但 Windows 同步失败。
+板端模板：${boardResult.board_saved_path || "-"}
+板端摘要：${boardResult.board_summary_path || "-"}
+${String(error.message || error)}
+请先确认 Windows 本机的 local_result_sink.py 已启动，然后点击“重试导出最近结果”。`);
         }
       } catch (error) {
-        setMessage(`板端结果已生成，但本机保存失败。\n${String(error.message || error)}\n板端会保留最近一次导出，请先确认 Windows 本机的 local_result_sink.py 已启动，然后点击“重试导出最近结果”。`);
+        setMessage(String(error.message || error));
       } finally {
         setBusy(false);
         getStatus();
@@ -930,7 +970,16 @@ class PrescriptionHTTPHandler(BaseHTTPRequestHandler):
             if state.last_export_payload is None:
                 make_json_response(self, {"ok": False, "error": "没有待重试导出的结果。"}, status_code=404)
                 return
-            make_json_response(self, {"ok": True, "prescription": state.last_export_payload, "summary": state.last_export_summary})
+            response_payload = {
+                "ok": True,
+                "prescription": state.last_export_payload,
+                "summary": state.last_export_summary,
+            }
+            if state.last_export_board_result is not None:
+                response_payload["board_saved_path"] = state.last_export_board_result.get("saved_path")
+                response_payload["board_summary_path"] = state.last_export_board_result.get("summary_path")
+                response_payload["board_summary"] = state.last_export_board_result.get("summary")
+            make_json_response(self, response_payload)
             return
 
         if parsed.path == "/stream.mjpg":
@@ -1028,6 +1077,19 @@ class PrescriptionHTTPHandler(BaseHTTPRequestHandler):
                 state.selected_rule_at_recording or state.selected_rule,
                 meta,
             )
+            board_ip, board_port = split_host_port(self.headers.get("Host", ""))
+            try:
+                board_save_result = save_prescription_artifacts(
+                    prescription,
+                    board_ip=board_ip,
+                    board_port=board_port,
+                    source="record_prescription_http_board",
+                )
+            except OSError as error:
+                state.last_export_error = f"?????????{error}"
+                make_json_response(self, {"ok": False, "error": state.last_export_error}, status_code=500)
+                return
+
             state.last_export_payload = prescription
             baseline = prescription["clinical_baseline"]
             state.last_export_summary = {
@@ -1037,6 +1099,7 @@ class PrescriptionHTTPHandler(BaseHTTPRequestHandler):
                 "duration_seconds": baseline["duration_seconds"],
                 "rom_flexion": baseline["rom_flexion"],
             }
+            state.last_export_board_result = board_save_result
             state.last_export_error = None
             state.awaiting_ack = True
             make_json_response(
@@ -1045,7 +1108,10 @@ class PrescriptionHTTPHandler(BaseHTTPRequestHandler):
                     "ok": True,
                     "prescription": prescription,
                     "summary": state.last_export_summary,
-                    "message": "板端已生成精简版 JSON，请转存到 Windows 本机；只有 ack_saved 成功后才会清理板端缓存。",
+                    "board_saved_path": board_save_result["saved_path"],
+                    "board_summary_path": board_save_result["summary_path"],
+                    "board_summary": board_save_result["summary"],
+                    "message": "???????????????????? Windows ???",
                 },
             )
             return
@@ -1077,13 +1143,12 @@ def main() -> None:
 
     server = ThreadedHTTPServer(("0.0.0.0", PORT), PrescriptionHTTPHandler)
 
-    print(f"处方录制服务已启动: http://板子IP:{PORT}")
+    print(f"8082 双端同步保存服务已启动: http://板子IP:{PORT}")
     print(f"摄像头设备: {CAMERA_DEVICE}")
     print(f"采集分辨率: {FRAME_WIDTH}x{FRAME_HEIGHT}")
     print(f"推理分辨率: {INFER_WIDTH}x{INFER_HEIGHT}")
-    print("说明: 板子不会落盘保存结果文件。保存后，浏览器会把结果转存到 Windows 本机 docs/results 和 docs/summaries。")
-    print("提示: 当前默认保存的是精简版模板 JSON，适合后续模板复用；日常查看请优先打开 docs/summaries 下的中文摘要。")
-    print("提示: 请先在 Windows 本机启动 local_result_sink.py。")
+    print("说明: 保存时会先写入板端 docs/results/、docs/summaries/ 和 docs/results_log.md，再同步到 Windows。")
+    print("提示: 如需 Windows 副本，请先在 Windows 本机启动 local_result_sink.py。")
 
     try:
         server.serve_forever()
