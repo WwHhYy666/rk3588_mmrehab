@@ -46,14 +46,38 @@
 
 ```text
 project/
+├── feedback/
+│   └── tts/
+│       ├── banzi/
+│       │   ├── tts_board.py
+│       │   └── explain.md
+│       ├── windows/
+│       │   ├── prescription_voice_demo.py
+│       │   └── tts_test.py
+│       ├── _current_script.js
+│       ├── _legacy_script.js
+│       └── _tmp_record_page.js
 ├── hardware/
+│   ├── docs/
 │   └── motro_control/
 │       ├── motor_controller.py
+│       ├── motor_hardware_test.py
+│       ├── hardware_bringup.md
 │       ├── explain.md
 │       └── readme.md
 ├── prescription/
-├── feedback/
-│   └── tts/
+│   ├── docs/
+│   │   ├── results/
+│   │   ├── summaries/
+│   │   ├── results_log.md
+│   │   └── rk3588_prescription_guide.md
+│   ├── local_result_sink.py
+│   ├── read_prescription_json.py
+│   ├── record_prescription_http.py
+│   ├── record_prescription_http.py.bak_20260517_legacy_rebuild
+│   ├── record_prescription_http_legacy.py
+│   ├── record_prescription_json_improved.py
+│   └── result_storage.py
 ├── vision/
 │   ├── camera_test.py
 │   ├── pose_mediapipe_demo.py
@@ -71,16 +95,19 @@ project/
 - `readme.md`
   - 当前这个文件
   - 是全项目总入口
+- `feedback/tts/`
+  - 当前板端和 Windows 侧文本转语音模块目录
+  - `banzi/` 存放板端播报脚本
+  - `windows/` 存放 Windows 侧语音验证脚本
 - `hardware/motro_control/`
   - 目前是硬件马达控制模块的主要工作目录
-- `vision/`
-  - 目前是摄像头、骨骼识别和板端预览验证目录
+  - 已包含真实硬件测试脚本和上板联调文档
 - `prescription/`
   - 当前已完成一阶段主链路的处方模块目录
   - 已具备 RK3588 浏览器版录制、板端本地保存、Windows 同步保存和结果读取
   - 当前结果默认保存在 `prescription/docs/results/`，中文摘要保存在 `prescription/docs/summaries/`
-- `feedback/tts/`
-  - 当前板端文本转语音模块目录
+- `vision/`
+  - 目前是摄像头、骨骼识别和板端预览验证目录
 
 注意：
 
@@ -101,9 +128,9 @@ project/
 
 状态总结：
 
-- `motor_controller.py`：已完成（软件逻辑）
+- `motor_controller.py`：已完成并已上板验证
 - Mock 模式本地运行：已验证 Demo
-- 真实硬件 GPIO 联调：待硬件
+- 真实硬件 GPIO 联调：已完成
 
 目前已完成内容：
 
@@ -111,7 +138,8 @@ project/
 - 已实现三种震动模式：
   - `short_buzz()`
   - `long_buzz()`
-  - `rapid_buzz()`
+  - `interval_buzz()`
+- 已保留 `rapid_buzz()` 作为旧命令兼容写法
 - 已实现 `gpio_worker()` 队列工作线程函数
 - 已支持：
   - `mock_mode=True` 模拟模式
@@ -125,15 +153,22 @@ project/
 - 在普通电脑上直接运行 `motor_controller.py`，Mock 模式可以正常打印：
   - `short_buzz`
   - `long_buzz`
-  - `rapid_buzz`
+  - `interval_buzz`
   - `cleanup`
 - 程序可以正常退出，软件流程没有报错
+- 真实硬件使用 `GPIO3_B3` 已测试通过
+  - sysfs 手动测试使用 `GPIO107`
+  - `python-periphery` 使用 `/dev/gpiochip3` line `11`
+- `motor_hardware_test.py` 已可作为真实硬件测试入口：
+  - `--real short`
+  - `--real long`
+  - `--real interval`
+  - `--real all`
 
-当前还没验证的事情：
+后续还需要联调的事情：
 
-- 真实开发板能否成功打开 `/dev/gpiochip0`
-- 真实接线后是否能正确驱动 MOS 模块和马达
-- 当前高电平有效假设是否与真实驱动板一致
+- 马达模块已经独立验证，后面需要接入主线程
+- 主程序里应让 `gpio_worker()` 消费 `Motor_Queue`，再和视觉判断、TTS 反馈一起联调
 
 ### 3.2 vision 模块现状
 
