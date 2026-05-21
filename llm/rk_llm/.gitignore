@@ -1,0 +1,38 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+embed_llm/
+
+# Local configuration
+.env
+*.env
+
+# Local model weights and downloaded checkpoints
+qwen2_vl_2b_instruct/
+Qwen2-VL-2B-Instruct/
+models/
+checkpoints/
+*.safetensors
+*.bin
+*.pt
+*.pth
+
+# Runtime artifacts
+pipeline/asr/*
+pipeline/llm/*
+pipeline/record_speech/*
+pipeline/runs/*
+pipeline/tts/*
+!pipeline/asr/.gitkeep
+!pipeline/llm/.gitkeep
+!pipeline/record_speech/.gitkeep
+!pipeline/runs/.gitkeep
+!pipeline/tts/.gitkeep
+
+# Audio and logs produced during local runs
+*.wav
+*.log

@@ -1,16 +1,40 @@
-﻿# Python cache
+# Python cache
 __pycache__/
 *.pyc
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+embed_llm/
 
 # IDE
 .idea/
 .vscode/
 
+# Local model weights and checkpoints
+models/
+checkpoints/
+*.safetensors
+*.bin
+*.pt
+*.pth
+
 # Runtime outputs
 prescription/docs/results/*.json
 prescription/docs/summaries/*.md
 prescription/docs/results_log.md
+llm/rk_llm/pipeline/asr/*
+llm/rk_llm/pipeline/llm/*
+llm/rk_llm/pipeline/record_speech/*
+llm/rk_llm/pipeline/runs/*
+llm/rk_llm/pipeline/tts/*
 
 # Keep empty folders with .gitkeep
 !prescription/docs/results/.gitkeep
 !prescription/docs/summaries/.gitkeep
+!llm/rk_llm/pipeline/asr/.gitkeep
+!llm/rk_llm/pipeline/llm/.gitkeep
+!llm/rk_llm/pipeline/record_speech/.gitkeep
+!llm/rk_llm/pipeline/runs/.gitkeep
+!llm/rk_llm/pipeline/tts/.gitkeep

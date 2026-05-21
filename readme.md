@@ -57,6 +57,15 @@ project/
 │       ├── _current_script.js
 │       ├── _legacy_script.js
 │       └── _tmp_record_page.js
+├── llm/
+│   └── rk_llm/
+│       ├── README.md
+│       ├── voice_qwen_core.py
+│       ├── run_pipeline.py
+│       ├── realtime_voice_qwen.py
+│       ├── stream_voice_qwen.py
+│       └── pipeline/
+│           └── test_text/
 ├── hardware/
 │   ├── docs/
 │   └── motro_control/
@@ -99,6 +108,10 @@ project/
   - 当前板端和 Windows 侧文本转语音模块目录
   - `banzi/` 存放板端播报脚本
   - `windows/` 存放 Windows 侧语音验证脚本
+- `llm/rk_llm/`
+  - 当前语音和端侧 LLM 验证模块目录
+  - 包含录音、ASR、Qwen 推理、Windows SAPI TTS 和完整语音闭环脚本
+  - 本地模型权重、虚拟环境和运行输出不进入 Git
 - `hardware/motro_control/`
   - 目前是硬件马达控制模块的主要工作目录
   - 已包含真实硬件测试脚本和上板联调文档
@@ -265,7 +278,9 @@ project/
 - `evaluate/`
   - 待建立
 - `llm/`
-  - 待建立
+  - 已建立 `llm/rk_llm/` 语音和端侧 Qwen 验证模块
+  - 已包含 ASR、LLM、TTS、实时交互和流式循环脚本
+  - 尚未和视觉评估、处方读取、硬件反馈主线程做统一联调
 - `main.py`
   - 待建立或待联调
 
@@ -325,6 +340,19 @@ project/
   - 板端文本转语音播报入口
 - `D:\rk3588\project\feedback\tts\banzi\explain.md`
   - TTS 模块说明文档
+
+### 4.6 LLM 语音反馈模块
+
+- `D:\rk3588\project\llm\rk_llm\README.md`
+  - 语音和端侧 LLM 管线说明入口
+- `D:\rk3588\project\llm\rk_llm\voice_qwen_core.py`
+  - 录音、ASR、Qwen、TTS 的公共核心逻辑
+- `D:\rk3588\project\llm\rk_llm\run_pipeline.py`
+  - 文件驱动的完整管线测试入口
+- `D:\rk3588\project\llm\rk_llm\realtime_voice_qwen.py`
+  - 单轮或多轮实时语音交互入口
+- `D:\rk3588\project\llm\rk_llm\stream_voice_qwen.py`
+  - 固定间隔流式语音交互入口
 
 ## 5. 团队分工
 
@@ -504,12 +532,13 @@ project/
 - 板端摄像头和骨骼识别的独立验证已经够用
 - 处方录入 / 读取 / 保存链路已经完成
 - TTS 也已经完成
+- `llm/rk_llm/` 已经建立语音和端侧 Qwen 验证管线
 - 但大模块还没有被主程序整合到同一个多线程框架里
 
 所以当前最适合的整体状态判断是：
 
 - 基础 demo 已经点亮
-- 处方和 TTS 主链路已完成
+- 处方、TTS 和 LLM 语音验证链路已具备独立运行入口
 - 集成主框架尚未开始或尚未完成
 
 ### 7.2 从同学 B 的任务视角看
@@ -524,7 +553,7 @@ project/
 1. `vision` 当前够用，不再作为主阻塞项
 2. `prescription/` 当前一阶段主链路已打通，先继续做结果质量优化或动作扩展
 3. 建立 `evaluate/` 模块并开始评估逻辑接入
-4. 然后推进更自然的语音与主程序框架联调
+4. 将 `llm/rk_llm/` 的 ASR、Qwen 和 TTS 输出接入主程序框架
 
 也就是说：
 
@@ -540,7 +569,7 @@ project/
 
 1. 在 `prescription/` 目录里继续优化结果质量、动作扩展和摘要输出
 2. 建立 `evaluate/` 模块，明确评估指标和接口
-3. 再推进更自然的 TTS 和模型整合
+3. 把 `llm/rk_llm/` 的语音管线接入评估结果和反馈队列
 
 ### 9.2 再接入主线程
 
