@@ -1,0 +1,49 @@
+ROM_LOW:
+  screen:
+    color: "red"
+    title: "动作不到位"
+    template: "还差 {rom_diff:.1f} 度，再抬高一点"
+  tts:
+    template: "您还差 {rom_diff:.0f} 度，再抬高一点"
+  motor:
+    pattern: "short_double"
+
+TUT_LOW:
+  screen:
+    color: "orange"
+    title: "保持时间不足"
+    template: "请再坚持 {missing_seconds:.1f} 秒"
+  tts:
+    template: "保持住，再坚持一下"
+  motor:
+    pattern: "interval"
+
+SHAPE_BAD:
+  screen:
+    color: "yellow"
+    title: "动作轨迹不标准"
+    template: "动作轨迹偏离模板，请按标准节奏完成"
+  tts:
+    template: "动作轨迹不太标准，请按示范节奏完成"
+  motor:
+    pattern: "short_once"
+
+TOO_FAST:
+  screen:
+    color: "yellow"
+    title: "动作过快"
+    template: "动作太快了，请慢一点"
+  tts:
+    template: "请放慢速度，注意控制动作"
+  motor:
+    pattern: "long_once"
+
+OK:
+  screen:
+    color: "green"
+    title: "动作完成"
+    template: "很好，这次动作比较标准"
+  tts:
+    template: "很好，这次动作完成得不错"
+  motor:
+    pattern: "success_once"
