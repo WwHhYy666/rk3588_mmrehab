@@ -1,0 +1,83 @@
+{
+  "evaluated_at": "2026-05-26T15:27:13",
+  "action_name": "屈膝",
+  "template_file": "D:\\rk3588\\project\\evaluate\\samples\\template.json",
+  "attempt_file": "D:\\rk3588\\project\\evaluate\\samples\\attempt.json",
+  "config_file": "D:\\rk3588\\project\\evaluate\\configs\\knee_flexion.yaml",
+  "fields": {
+    "template": "target_angle_smoothed",
+    "attempt": "target_angle_smoothed"
+  },
+  "keypoint_rule": {
+    "hip_index": 23,
+    "knee_index": 25,
+    "ankle_index": 27,
+    "target_joint": "left_knee"
+  },
+  "metrics": {
+    "rom": {
+      "target": 92.0,
+      "actual": 78.0,
+      "diff": 14.0,
+      "template": {
+        "min": 10.0,
+        "max": 102.0,
+        "rom": 92.0,
+        "frame_at_max": 4,
+        "frame_at_min": 0
+      },
+      "attempt": {
+        "min": 8.0,
+        "max": 86.0,
+        "rom": 78.0,
+        "frame_at_max": 4,
+        "frame_at_min": 0
+      }
+    },
+    "tut": {
+      "target": 2.565860215053763,
+      "target_source": "template",
+      "template_tut": 2.565860215053763,
+      "actual": 0.9461538461538462,
+      "ratio": 0.36874722972156193,
+      "target_range": [
+        82.0,
+        102.0
+      ],
+      "template_in_range_frames": 3,
+      "template_total_frames": 9,
+      "in_range_frames": 2,
+      "total_frames": 9,
+      "method": "linear_interpolation"
+    },
+    "dtw": {
+      "distance": 89.0,
+      "normalized_distance": 8.9,
+      "path_length": 10
+    },
+    "speed": {
+      "template_peak": 80.0,
+      "attempt_peak": 54.99999999999999,
+      "ratio": 0.6874999999999999,
+      "template_mean": 44.375,
+      "attempt_mean": 32.083333333333336
+    }
+  },
+  "errors": {
+    "all_errors": [
+      "ROM_LOW",
+      "TUT_LOW",
+      "SHAPE_BAD"
+    ],
+    "primary_error": "ROM_LOW",
+    "is_ok": false
+  },
+  "structured_feedback": {
+    "error_code": "ROM_LOW",
+    "params": {
+      "diff_angle": 14.0,
+      "target": 92.0,
+      "actual": 78.0
+    }
+  }
+}
