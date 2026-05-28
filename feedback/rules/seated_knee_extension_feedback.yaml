@@ -1,0 +1,118 @@
+ROM_LOW:
+  screen:
+    color: "red"
+    title: "动作不到位"
+    template: "再伸直一点"
+    templates:
+      - "再伸直一点"
+      - "脚尖再往前送一点"
+      - "膝盖尽量打开"
+  tts:
+    template: "再伸直一点"
+    templates:
+      - "这次还差一点，膝盖再伸直。"
+      - "脚尖再往前送一点，伸到位后再放下。"
+      - "膝盖还没有完全打开，再试一次。"
+    priority: "low"
+  motor:
+    pattern: "short_double"
+TUT_LOW:
+  screen:
+    color: "orange"
+    title: "保持时间不足"
+    template: "保持住"
+    templates:
+      - "保持住"
+      - "到位后停一下"
+      - "伸直后别急着放下"
+  tts:
+    template: "保持住"
+    templates:
+      - "到位后稍微停一下，再慢慢放下。"
+      - "伸直以后保持一会儿，这次不计数。"
+      - "不要急着放下，先稳住再回来。"
+    priority: "medium"
+  motor:
+    pattern: "interval"
+SHAPE_BAD:
+  screen:
+    color: "yellow"
+    title: "轨迹不标准"
+    template: "按示范节奏完成"
+    templates:
+      - "按示范节奏完成"
+      - "腿伸直的路线再稳一点"
+      - "身体坐稳，只动小腿"
+  tts:
+    template: "按示范节奏完成"
+    templates:
+      - "身体坐稳，只让小腿向前伸。"
+      - "路线再稳一点，按示范节奏来。"
+      - "先坐稳，再把小腿慢慢伸出去。"
+    priority: "low"
+  motor:
+    pattern: "short_once"
+TOO_FAST:
+  screen:
+    color: "yellow"
+    title: "动作过快"
+    template: "慢一点"
+    templates:
+      - "慢一点"
+      - "速度放慢"
+      - "伸和放都慢一些"
+  tts:
+    template: "慢一点"
+    templates:
+      - "速度慢一点，伸出去和放回来都要稳。"
+      - "这次太快了，下一次慢慢伸。"
+      - "放慢节奏，伸直后再回来。"
+    priority: "medium"
+  motor:
+    pattern: "long_once"
+EARLY_RETURN:
+  screen:
+    color: "red"
+    title: "提前放下"
+    template: "伸到位后再放下"
+    templates:
+      - "伸到位后再放下"
+      - "还没伸够就放下了"
+      - "先把膝盖伸开"
+  tts:
+    template: "伸到位后再放下"
+    templates:
+      - "还没伸到位就放下了，下一次先伸直。"
+      - "先把膝盖伸开，再慢慢放下。"
+      - "这次提前回来了，伸够以后再回来。"
+    priority: "low"
+  motor:
+    pattern: "short_double"
+VISIBILITY_LOW:
+  screen:
+    color: "yellow"
+    title: "关键点不可见"
+    template: "请保持髋、膝、踝可见"
+    templates:
+      - "请保持髋、膝、踝可见"
+      - "身体稍微侧对镜头"
+      - "腿不要离开画面"
+  tts:
+    template: "请保持髋、膝、踝可见"
+    templates:
+      - "关键点看不清，请身体侧对镜头。"
+      - "腿离开画面了，请保持髋膝踝可见。"
+      - "镜头没有看清动作，调整一下位置。"
+    priority: "medium"
+  motor:
+    pattern: "short_once"
+OK:
+  screen:
+    color: "green"
+    title: "动作完成"
+    template: "很好"
+  tts:
+    template: "很好"
+    priority: "low"
+  motor:
+    pattern: "success_once"
