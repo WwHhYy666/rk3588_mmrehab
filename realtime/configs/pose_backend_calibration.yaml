@@ -1,0 +1,15 @@
+mediapipe:
+  visibility_min: 0.55
+  smoothing_window: 5
+  angle_offset:
+    seated_knee_extension: 0.0
+    standing_hamstring_curl: 0.0
+    sit_to_stand: 0.0
+
+rknn:
+  visibility_min: 0.30
+  smoothing_window: 5
+  angle_offset:
+    seated_knee_extension: 0.0
+    standing_hamstring_curl: 0.0
+    sit_to_stand: 0.0
