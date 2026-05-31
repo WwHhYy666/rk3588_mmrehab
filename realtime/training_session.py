@@ -33,6 +33,19 @@ DEFAULT_FEEDBACK_RULE = PROJECT_ROOT / "feedback" / "rules" / "knee_flexion_feed
 REPORTS_DIR = PROJECT_ROOT / "evaluate" / "reports"
 PYTHON_EXE = Path("D:/anaconda/python.exe") if Path("D:/anaconda/python.exe").exists() else Path(sys.executable)
 
+ACTIVE_STATUSES = {
+    "running",
+    "paused",
+    "resting",
+    "awaiting_orientation",
+    "awaiting_return",
+    "awaiting_care_response",
+}
+
+DEFAULT_ORIENTATION_PROMPT = "请调整角度，将身体侧面对准摄像头，方便我更好的对动作标准程度进行判断哦。"
+DEFAULT_OFFSCREEN_PROMPT = "您已离开画面，请尽快回到摄像头画面中来，继续康复训练。"
+DEFAULT_CARE_PROMPT = "您是不是有些疲惫了？还需要继续吗？需不需要休息一会儿？"
+
 
 class RealtimeTrainingSession:
     def __init__(self, realtime_config_path: Path = DEFAULT_REALTIME_CONFIG) -> None:
@@ -55,6 +68,7 @@ class RealtimeTrainingSession:
         self.rep_results: list[dict[str, Any]] = []
         self.invalid_attempts: list[dict[str, Any]] = []
         self.last_invalid_attempt: dict[str, Any] | None = None
+        self.invalid_streak = 0
         self.machine: KneeFlexionRealtimeMachine | None = None
         self.active_template: dict[str, Any] | None = None
         self.selected_rule: dict[str, Any] | None = None
@@ -76,23 +90,49 @@ class RealtimeTrainingSession:
         self.playlist_reports: list[dict[str, Any]] = []
         self.rest_until: float | None = None
         self.rest_seconds = 10
+        self.rest_context: str | None = None
         self.current_action_meta: dict[str, Any] | None = None
+        self.current_realtime_config: dict[str, Any] = {}
+        self.current_targets: KneeFlexionTargets | None = None
         self._feedback_attempt_sequence = 0
+        self.pause_reason: str | None = None
+        self.orientation_required = False
+        self.orientation_ok = False
+        self.orientation_prompt = DEFAULT_ORIENTATION_PROMPT
+        self.action_intro_tts = ""
+        self.orientation_confirm_count = 0
+        self.orientation_confirm_frames = 8
+        self.offscreen_timeout_seconds = 5.0
+        self.offscreen_since: float | None = None
+        self.offscreen_seconds = 0.0
+        self.care_prompt_invalid_streak = 3
+        self.care_dialog = self._empty_care_dialog()
+        self.rest_music = {"enabled": False, "file": "", "fade_seconds": 0.0}
 
-    def start(self, patient_id: str = "patient_001", action_id: str = "knee_flexion", side_mode: str = "auto", target_reps: int | None = None) -> dict[str, Any]:
+    def start(
+        self,
+        patient_id: str = "patient_001",
+        action_id: str = "knee_flexion",
+        side_mode: str = "auto",
+        target_reps: int | None = None,
+    ) -> dict[str, Any]:
         with self.lock:
-            if self.status in {"running", "paused", "resting"}:
+            if self.status in ACTIVE_STATUSES:
                 return {"ok": False, "error": "实时训练已经在运行中。"}
 
             try:
                 demo_plan = self._load_demo_plan()
                 action_meta = self._find_plan_action(action_id, demo_plan)
-                realtime_config = self._load_yaml(self._resolve_project_path(action_meta.get("realtime_config_file") or self.realtime_config_path))
+                realtime_config = self._load_yaml(
+                    self._resolve_project_path(action_meta.get("realtime_config_file") or self.realtime_config_path)
+                )
                 active_template = self._get_active_template(action_id)
                 if not active_template:
                     return {"ok": False, "error": "请先录入医生标准动作，并保存为 active template。"}
 
-                eval_config_path = self._resolve_project_path(active_template.get("config_file") or action_meta.get("config_file") or "evaluate/configs/knee_flexion.yaml")
+                eval_config_path = self._resolve_project_path(
+                    active_template.get("config_file") or action_meta.get("config_file") or "evaluate/configs/knee_flexion.yaml"
+                )
                 template_path = self._resolve_project_path(active_template.get("template_file") or "")
                 if not template_path.exists():
                     return {"ok": False, "error": f"active template 文件不存在：{self._project_relative(template_path)}"}
@@ -104,6 +144,7 @@ class RealtimeTrainingSession:
                 targets = self._build_targets(template_path, eval_config)
                 if self.tts_worker is not None:
                     self.tts_worker.stop()
+
                 self.reset()
                 self.patient_id = str(patient_id or "patient_001").strip() or "patient_001"
                 self.action_id = str(action_id or "knee_flexion").strip() or "knee_flexion"
@@ -112,12 +153,15 @@ class RealtimeTrainingSession:
                 self.active_template = active_template
                 self.eval_config = eval_config
                 self.metric_info = self._metric_info_from_config(eval_config)
-                feedback_rule_file = action_meta.get("feedback_rule_file") or self._feedback_rule_for_action(action_id)
+                self.current_action_meta = dict(action_meta)
+                self.current_realtime_config = dict(realtime_config)
+                self.current_targets = targets
+                feedback_rule_file = action_meta.get("feedback_rule_file") or self._feedback_rule_for_action(self.action_id)
                 self.rules = load_rules(self._resolve_project_path(feedback_rule_file))
-                self.machine = KneeFlexionRealtimeMachine(realtime_config, targets)
-                self.start_time = time.time()
-                self.status = "running"
-                self.last_prompt = "请保持静止，正在校准"
+                self._load_plan_runtime_settings(demo_plan)
+                self.action_intro_tts = str(action_meta.get("action_intro_tts") or "")
+                self.orientation_required = bool(action_meta.get("require_side_view"))
+                self.orientation_prompt = str(action_meta.get("orientation_prompt_tts") or DEFAULT_ORIENTATION_PROMPT)
                 self.tts_worker = TTSWorker(
                     global_cooldown=float(realtime_config.get("tts_global_cooldown_seconds", 3.0)),
                     same_text_cooldown=float(realtime_config.get("tts_same_text_cooldown_seconds", 5.0)),
@@ -125,15 +169,25 @@ class RealtimeTrainingSession:
                     natural_tts_options=self._natural_tts_options(realtime_config),
                 )
                 self.tts_worker.start()
+                self._reset_active_motion_state()
+                if self.orientation_required:
+                    self._enter_orientation_wait(speak=True)
+                else:
+                    self._start_running_phase(prefix_text=None, reset_timing=True, include_action_guidance=True)
                 return {"ok": True, "message": "已开始实时训练。", "training": self.snapshot()}
             except Exception as exc:
                 self.status = "error"
                 self.error = str(exc)
                 return {"ok": False, "error": str(exc)}
 
-    def start_playlist(self, patient_id: str = "patient_001", side_mode: str = "auto", target_reps: int | None = None) -> dict[str, Any]:
+    def start_playlist(
+        self,
+        patient_id: str = "patient_001",
+        side_mode: str = "auto",
+        target_reps: int | None = None,
+    ) -> dict[str, Any]:
         with self.lock:
-            if self.status in {"running", "paused", "resting"}:
+            if self.status in ACTIVE_STATUSES:
                 return {"ok": False, "error": "实时训练已经在运行中。"}
             try:
                 plan = self._load_demo_plan()
@@ -150,14 +204,15 @@ class RealtimeTrainingSession:
 
                 if self.tts_worker is not None:
                     self.tts_worker.stop()
+
                 self.reset()
                 self.playlist_mode = True
                 self.playlist_actions = actions
                 self.playlist_index = 0
-                self.rest_seconds = int(plan.get("rest_seconds", 10) or 10)
                 self.patient_id = str(patient_id or "patient_001").strip() or "patient_001"
                 self.side_mode = side_mode if side_mode in {"auto", "left", "right"} else "auto"
                 self.target_reps = int(target_reps or plan.get("default_target_reps", 3) or 3)
+                self._load_plan_runtime_settings(plan)
                 self.tts_worker = TTSWorker(
                     use_real_tts=True,
                     global_cooldown=0.5,
@@ -168,7 +223,7 @@ class RealtimeTrainingSession:
                 welcome = str(plan.get("welcome_tts") or "康复训练即将开始，请坐稳并面向镜头。")
                 self.tts_worker.speak(welcome, priority="high", event_type="welcome")
                 self._start_playlist_action(0)
-                return {"ok": True, "message": "已开始完整三动作训练。", "training": self.snapshot()}
+                return {"ok": True, "message": "已开始完整训练。", "training": self.snapshot()}
             except Exception as exc:
                 self.status = "error"
                 self.error = str(exc)
@@ -188,27 +243,76 @@ class RealtimeTrainingSession:
         with self.lock:
             if self.tts_worker is not None:
                 self.tts_worker.stop()
-            if self.status in {"running", "paused", "resting"}:
+            if self.status in ACTIVE_STATUSES:
                 self.status = "idle"
+                self.pause_reason = None
+                self.care_dialog = self._empty_care_dialog()
                 self.last_prompt = "训练已停止"
+            return {"ok": True, "training": self.snapshot()}
+
+    def respond_to_care(self, needs_rest: bool) -> dict[str, Any]:
+        with self.lock:
+            if self.status != "awaiting_care_response":
+                return {"ok": False, "error": "当前没有待响应的关怀提醒。"}
+            self.care_dialog = self._empty_care_dialog()
+            self.invalid_streak = 0
+            if needs_rest:
+                self._start_rest(
+                    context="care_break",
+                    prompt_text=f"我们休息 {self.rest_seconds} 秒",
+                    tts_text=f"我们休息 {self.rest_seconds} 秒。",
+                    event_type="care",
+                )
+            else:
+                self._reset_active_motion_state()
+                self._start_running_phase(
+                    prefix_text="真棒，那我们再坚持一下，很快就做完了。",
+                    reset_timing=False,
+                    include_action_guidance=False,
+                )
             return {"ok": True, "training": self.snapshot()}
 
     def process_frame(self, frame: dict[str, Any] | None, selected_rule: dict[str, Any] | None = None) -> None:
         with self.lock:
+            now = time.time()
             if self.status == "resting":
-                if self.rest_until is not None and time.time() >= self.rest_until:
-                    self._advance_playlist_after_rest()
+                self.offscreen_seconds = 0.0
+                if self.rest_until is not None and now >= self.rest_until:
+                    self._advance_after_rest()
                 return
+
+            if self.status in {"paused", "awaiting_care_response"}:
+                return
+
+            frame_data = dict(frame or {})
+            pose_detected = bool(frame_data.get("pose_detected"))
+            if frame is not None and "pose_detected" not in frame_data:
+                pose_detected = True
+            orientation_ok = bool(frame_data.get("orientation_ok")) or not self.orientation_required
+            self.orientation_ok = orientation_ok if pose_detected else False
+            if selected_rule is not None:
+                self.selected_rule = dict(selected_rule)
+
+            self._update_offscreen_tracking(now, pose_detected)
+
+            if self.status == "awaiting_orientation":
+                self._process_orientation_gate(pose_detected, orientation_ok)
+                return
+
+            if self.status == "awaiting_return":
+                self._process_return_gate(pose_detected, orientation_ok)
+                return
+
             if self.status != "running" or self.machine is None or self.start_time is None:
                 return
 
-            now = time.time()
-            frame_data = dict(frame or {})
+            if not pose_detected and self.offscreen_seconds >= self.offscreen_timeout_seconds:
+                self._enter_offscreen_wait()
+                return
+
             frame_data["frame_index"] = self.frame_index
             frame_data["relative_time"] = now - self.start_time
             self.frame_index += 1
-            if selected_rule is not None:
-                self.selected_rule = dict(selected_rule)
 
             frame_data = self._apply_action_metric(frame_data)
             output = self.machine.process(frame_data)
@@ -265,6 +369,14 @@ class RealtimeTrainingSession:
                 "report": self.report,
                 "feedback": self.feedback,
                 "tts": self.tts_worker.snapshot() if self.tts_worker else None,
+                "pause_reason": self.pause_reason,
+                "orientation_required": self.orientation_required,
+                "orientation_ok": self.orientation_ok,
+                "orientation_prompt": self.orientation_prompt,
+                "action_intro_tts": self.action_intro_tts,
+                "offscreen_seconds": round(self.offscreen_seconds, 1),
+                "care_dialog": dict(self.care_dialog),
+                "rest_music": dict(self.rest_music),
             }
 
     def _handle_rep_done(self, rep_result: dict[str, Any]) -> None:
@@ -291,14 +403,20 @@ class RealtimeTrainingSession:
                     self.tts_worker.speak(count_text, priority="high", event_type="rep_count")
             elif self.last_tts_text:
                 self.tts_worker.speak(self.last_tts_text, priority="low", event_type="correction")
+
         if not countable:
+            self.invalid_streak += 1
             correction = str(enriched.get("screen_prompt") or "动作不到位")
             enriched["screen_prompt"] = f"{correction}，未计数"
             enriched["not_counted_reason"] = f"{self._error_reason(rep_result)}，未计数"
             self.last_prompt = enriched["screen_prompt"]
             self.last_invalid_attempt = enriched
             self.invalid_attempts.append(enriched)
+            if self.invalid_streak >= self.care_prompt_invalid_streak:
+                self._show_care_dialog()
             return
+
+        self.invalid_streak = 0
         self.rep_results.append(enriched)
         if len(self.rep_results) >= self.target_reps:
             self._complete_training()
@@ -327,19 +445,22 @@ class RealtimeTrainingSession:
                     "action_name": self.current_action_meta.get("action_name") if self.current_action_meta else self.action_id,
                     "attempt_file": self.saved_attempt_file,
                     "report_file": self.report_file,
-                    "primary_error": (self.report or {}).get("errors", {}).get("primary_error") if isinstance(self.report, dict) else None,
+                    "primary_error": (self.report or {}).get("errors", {}).get("primary_error")
+                    if isinstance(self.report, dict)
+                    else None,
                 }
             )
             if self.playlist_mode and self.playlist_index < len(self.playlist_actions) - 1:
-                self.status = "resting"
-                self.rest_until = time.time() + self.rest_seconds
-                self.last_prompt = f"本组完成，休息 {self.rest_seconds} 秒"
-                if self.tts_worker:
-                    text = str((self.current_action_meta or {}).get("set_done_tts") or "做得很好，请休息一下。")
-                    self.last_tts_text = text
-                    self.tts_worker.speak(text, priority="high", event_type="set_done")
+                text = str((self.current_action_meta or {}).get("set_done_tts") or "做得很好，请休息一下。")
+                self._start_rest(
+                    context="playlist_transition",
+                    prompt_text=f"本组完成，休息 {self.rest_seconds} 秒",
+                    tts_text=text,
+                    event_type="set_done",
+                )
                 return
             self.status = "completed"
+            self.pause_reason = None
             self.last_prompt = "全部训练完成" if self.playlist_mode else "本组训练完成"
             if self.tts_worker:
                 plan = self._load_demo_plan()
@@ -356,30 +477,36 @@ class RealtimeTrainingSession:
         if not action_id:
             raise ValueError("playlist 动作缺少 action_id")
         self.playlist_index = index
-        self.current_action_meta = action
+        self.current_action_meta = dict(action)
         self.action_id = action_id
         self.active_template = self._get_active_template(action_id)
         if not self.active_template:
             raise ValueError(f"缺少 active template: {action_id}")
 
-        realtime_config = self._load_yaml(self._resolve_project_path(action.get("realtime_config_file") or self.realtime_config_path))
-        eval_config_path = self._resolve_project_path(self.active_template.get("config_file") or action.get("config_file") or "evaluate/configs/knee_flexion.yaml")
+        realtime_config = self._load_yaml(
+            self._resolve_project_path(action.get("realtime_config_file") or self.realtime_config_path)
+        )
+        eval_config_path = self._resolve_project_path(
+            self.active_template.get("config_file") or action.get("config_file") or "evaluate/configs/knee_flexion.yaml"
+        )
         template_path = self._resolve_project_path(self.active_template.get("template_file") or "")
         eval_config = self._load_yaml(eval_config_path)
         realtime_config = self._merge_realtime_config(realtime_config, eval_config)
         targets = self._build_targets(template_path, eval_config)
         feedback_rule_file = action.get("feedback_rule_file") or self._feedback_rule_for_action(action_id)
         self.rules = load_rules(self._resolve_project_path(feedback_rule_file))
-        self.machine = KneeFlexionRealtimeMachine(realtime_config, targets)
+        self.current_realtime_config = dict(realtime_config)
+        self.current_targets = targets
         self.eval_config = eval_config
         self.metric_info = self._metric_info_from_config(eval_config)
         self.target_reps = int(self.target_reps or realtime_config.get("target_reps", 3) or 3)
-        self.start_time = time.time()
+        self.start_time = None
         self.frame_index = 0
         self.frames = []
         self.rep_results = []
         self.invalid_attempts = []
         self.last_invalid_attempt = None
+        self.invalid_streak = 0
         self.selected_rule = None
         self.last_machine_output = None
         self.metric_baseline_hip_y = None
@@ -389,23 +516,42 @@ class RealtimeTrainingSession:
         self.report = None
         self.feedback = None
         self.rest_until = None
+        self.rest_context = None
         self._feedback_attempt_sequence = 0
-        self.status = "running"
-        self.last_prompt = str(action.get("camera_prompt") or "请保持关键点可见。")
-        if self.tts_worker:
-            start_tts = str(action.get("start_tts") or f"现在开始{action.get('action_name', action_id)}。")
-            prompt = str(action.get("camera_prompt") or "")
-            text = start_tts if not prompt else f"{start_tts}{prompt}"
-            self.last_tts_text = text
-            self.tts_worker.speak(text, priority="high", event_type="action_start")
+        self.action_intro_tts = str(action.get("action_intro_tts") or "")
+        self.orientation_required = bool(action.get("require_side_view"))
+        self.orientation_prompt = str(action.get("orientation_prompt_tts") or DEFAULT_ORIENTATION_PROMPT)
+        self.care_dialog = self._empty_care_dialog()
+        self._reset_active_motion_state()
+        if self.orientation_required:
+            self._enter_orientation_wait(speak=False)
+        else:
+            self._start_running_phase(prefix_text=None, reset_timing=True, include_action_guidance=True)
 
-    def _advance_playlist_after_rest(self) -> None:
-        next_index = self.playlist_index + 1
-        if next_index >= len(self.playlist_actions):
-            self.status = "completed"
-            self.rest_until = None
+    def _advance_after_rest(self) -> None:
+        context = self.rest_context
+        self.rest_until = None
+        self.rest_context = None
+        if context == "playlist_transition":
+            next_index = self.playlist_index + 1
+            if next_index >= len(self.playlist_actions):
+                self.status = "completed"
+                self.pause_reason = None
+                self.last_prompt = "全部训练完成"
+                return
+            self._start_playlist_action(next_index)
             return
-        self._start_playlist_action(next_index)
+
+        self.invalid_streak = 0
+        self._reset_active_motion_state()
+        if self.orientation_required:
+            self._enter_orientation_wait(speak=False)
+        else:
+            self._start_running_phase(
+                prefix_text="休息结束，我们继续训练。",
+                reset_timing=False,
+                include_action_guidance=False,
+            )
 
     def _rest_remaining_seconds(self) -> int | None:
         if self.status != "resting" or self.rest_until is None:
@@ -436,6 +582,12 @@ class RealtimeTrainingSession:
         duration = 0.0
         if len(self.frames) >= 2:
             duration = float(self.frames[-1].get("relative_time", 0.0)) - float(self.frames[0].get("relative_time", 0.0))
+        pose_meta = self._pose_meta_from_frames()
+        warning = (
+            "RKNN 第一版使用 2D 图像角度，要求侧身固定机位，适合演示和趋势反馈，不属于临床级测量。"
+            if pose_meta.get("actual_backend") == "rknn"
+            else "单目 MediaPipe 角度适合演示和趋势反馈，不属于临床级测量。"
+        )
         return {
             "patient_id": self.patient_id,
             "action_id": self.action_id,
@@ -445,9 +597,10 @@ class RealtimeTrainingSession:
             "camera_instruction": "实时训练时请保持目标关节相关关键点持续可见。",
             "algorithm_note": {
                 "result_source": "realtime_training_session",
-                "warning": "单目 MediaPipe 角度适合演示和趋势反馈，不属于临床级测量。",
+                "warning": warning,
             },
             "runtime_meta": {
+                **pose_meta,
                 "result_format": "compact_v1",
                 "record_role": "patient_attempt",
                 "action_id": self.action_id,
@@ -627,6 +780,8 @@ class RealtimeTrainingSession:
             "plan_name": plan.get("plan_name"),
             "default_target_reps": plan.get("default_target_reps"),
             "count_tts": plan.get("count_tts"),
+            "rest_music_file": plan.get("rest_music_file"),
+            "rest_music_fade_seconds": plan.get("rest_music_fade_seconds"),
             "actions": [
                 {
                     "action_id": action.get("action_id"),
@@ -634,11 +789,15 @@ class RealtimeTrainingSession:
                     "camera_prompt": action.get("camera_prompt"),
                     "config_file": action.get("config_file"),
                     "feedback_rule_file": action.get("feedback_rule_file"),
+                    "require_side_view": action.get("require_side_view"),
+                    "action_intro_tts": action.get("action_intro_tts"),
                     "has_active_template": self._get_active_template(str(action.get("action_id"))) is not None,
                 }
                 for action in actions
                 if isinstance(action, dict)
-            ] if isinstance(actions, list) else [],
+            ]
+            if isinstance(actions, list)
+            else [],
         }
 
     def _missing_plan_templates(self) -> list[str]:
@@ -693,6 +852,173 @@ class RealtimeTrainingSession:
             return resolved.resolve().relative_to(PROJECT_ROOT.resolve()).as_posix()
         except ValueError:
             return str(resolved)
+
+    def _pose_meta_from_frames(self) -> dict[str, Any]:
+        for frame in self.frames:
+            backend = frame.get("actual_backend") or frame.get("pose_backend")
+            if backend:
+                return {
+                    "requested_backend": frame.get("requested_backend"),
+                    "actual_backend": backend,
+                    "pose_backend": frame.get("pose_backend") or backend,
+                    "pose_backend_version": frame.get("pose_backend_version"),
+                    "pose_keypoint_schema": frame.get("pose_keypoint_schema"),
+                    "rknn_model_path": frame.get("rknn_model_path"),
+                }
+        active_template = self.active_template if isinstance(self.active_template, dict) else {}
+        backend = active_template.get("actual_backend") or active_template.get("pose_backend")
+        return {
+            "requested_backend": active_template.get("requested_backend"),
+            "actual_backend": backend,
+            "pose_backend": active_template.get("pose_backend") or backend,
+            "pose_backend_version": active_template.get("pose_backend_version"),
+            "pose_keypoint_schema": active_template.get("pose_keypoint_schema"),
+            "rknn_model_path": active_template.get("rknn_model_path"),
+        }
+
+    def _empty_care_dialog(self) -> dict[str, Any]:
+        return {
+            "visible": False,
+            "title": "温馨提示",
+            "message": DEFAULT_CARE_PROMPT,
+            "yes_label": "是",
+            "no_label": "否",
+        }
+
+    def _load_plan_runtime_settings(self, plan: dict[str, Any]) -> None:
+        self.rest_seconds = int(plan.get("rest_seconds", 10) or 10)
+        self.offscreen_timeout_seconds = float(plan.get("offscreen_timeout_seconds", 5) or 5)
+        self.care_prompt_invalid_streak = int(plan.get("care_prompt_invalid_streak", 3) or 3)
+        self.rest_music = {
+            "enabled": True,
+            "file": str(plan.get("rest_music_file") or "/assets/rest_music.mp3"),
+            "fade_seconds": float(plan.get("rest_music_fade_seconds", 2.5) or 2.5),
+        }
+
+    def _reset_active_motion_state(self) -> None:
+        if self.current_targets is not None:
+            self.machine = KneeFlexionRealtimeMachine(self.current_realtime_config, self.current_targets)
+        self.last_machine_output = None
+        self.metric_baseline_hip_y = None
+        self.metric_baseline_torso_height = None
+        self.orientation_confirm_count = 0
+        self.offscreen_since = None
+        self.offscreen_seconds = 0.0
+
+    def _enter_orientation_wait(self, *, speak: bool) -> None:
+        self.status = "awaiting_orientation"
+        self.pause_reason = "orientation"
+        self.orientation_confirm_count = 0
+        self.last_prompt = self.orientation_prompt
+        if speak and self.tts_worker:
+            self.last_tts_text = self.orientation_prompt
+            self.tts_worker.speak(self.orientation_prompt, priority="high", event_type="orientation")
+
+    def _start_running_phase(
+        self,
+        *,
+        prefix_text: str | None,
+        reset_timing: bool,
+        include_action_guidance: bool,
+    ) -> None:
+        if self.machine is None:
+            self._reset_active_motion_state()
+        if reset_timing or self.start_time is None:
+            self.start_time = time.time()
+        self.status = "running"
+        self.pause_reason = None
+        self.care_dialog = self._empty_care_dialog()
+        self.last_prompt = "请保持静止，正在校准"
+        spoken_parts: list[str] = []
+        if prefix_text:
+            spoken_parts.append(prefix_text)
+        if include_action_guidance:
+            start_tts = str((self.current_action_meta or {}).get("start_tts") or "")
+            if start_tts:
+                spoken_parts.append(start_tts)
+            if self.action_intro_tts:
+                spoken_parts.append(self.action_intro_tts)
+        spoken_text = "".join(part for part in spoken_parts if part)
+        if spoken_text and self.tts_worker:
+            self.last_tts_text = spoken_text
+            self.tts_worker.speak(spoken_text, priority="high", event_type="action_start")
+
+    def _update_offscreen_tracking(self, now: float, pose_detected: bool) -> None:
+        if pose_detected:
+            self.offscreen_since = None
+            self.offscreen_seconds = 0.0
+            return
+        if self.offscreen_since is None:
+            self.offscreen_since = now
+        self.offscreen_seconds = now - self.offscreen_since
+
+    def _process_orientation_gate(self, pose_detected: bool, orientation_ok: bool) -> None:
+        if not pose_detected:
+            self.orientation_confirm_count = 0
+            self.last_prompt = self.orientation_prompt
+            return
+        if not orientation_ok:
+            self.orientation_confirm_count = 0
+            self.last_prompt = self.orientation_prompt
+            return
+        self.orientation_confirm_count += 1
+        self.last_prompt = "好的，请保持当前角度，马上开始训练。"
+        if self.orientation_confirm_count < self.orientation_confirm_frames:
+            return
+        self.orientation_confirm_count = 0
+        self._start_running_phase(
+            prefix_text="好的，让我们开始训练吧。",
+            reset_timing=self.start_time is None,
+            include_action_guidance=True,
+        )
+
+    def _process_return_gate(self, pose_detected: bool, orientation_ok: bool) -> None:
+        if not pose_detected:
+            self.last_prompt = DEFAULT_OFFSCREEN_PROMPT
+            return
+        if self.orientation_required and not orientation_ok:
+            self._enter_orientation_wait(speak=True)
+            return
+        self._reset_active_motion_state()
+        self._start_running_phase(
+            prefix_text="好的，回到画面中了，我们继续训练。",
+            reset_timing=False,
+            include_action_guidance=False,
+        )
+
+    def _enter_offscreen_wait(self) -> None:
+        self.status = "awaiting_return"
+        self.pause_reason = "offscreen"
+        self.last_prompt = DEFAULT_OFFSCREEN_PROMPT
+        if self.tts_worker:
+            self.last_tts_text = DEFAULT_OFFSCREEN_PROMPT
+            self.tts_worker.speak(DEFAULT_OFFSCREEN_PROMPT, priority="high", event_type="offscreen")
+
+    def _show_care_dialog(self) -> None:
+        self.status = "awaiting_care_response"
+        self.pause_reason = "care_dialog"
+        self.care_dialog = {
+            "visible": True,
+            "title": "温馨提示",
+            "message": DEFAULT_CARE_PROMPT,
+            "yes_label": "是",
+            "no_label": "否",
+        }
+        self.last_prompt = DEFAULT_CARE_PROMPT
+        if self.tts_worker:
+            self.last_tts_text = DEFAULT_CARE_PROMPT
+            self.tts_worker.speak(DEFAULT_CARE_PROMPT, priority="high", event_type="care")
+
+    def _start_rest(self, *, context: str, prompt_text: str, tts_text: str, event_type: str) -> None:
+        self.status = "resting"
+        self.pause_reason = None
+        self.rest_context = context
+        self.rest_until = time.time() + self.rest_seconds
+        self.last_prompt = prompt_text
+        self.care_dialog = self._empty_care_dialog()
+        if self.tts_worker:
+            self.last_tts_text = tts_text
+            self.tts_worker.speak(tts_text, priority="high", event_type=event_type)
 
 
 def _as_float(value: Any) -> float | None:

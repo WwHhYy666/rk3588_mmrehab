@@ -35,6 +35,11 @@ ALLOWED_EVENT_TYPES = {
     "correction",
     "set_done",
     "training_finished",
+    "orientation",
+    "offscreen",
+    "care",
+    "encouragement",
+    "resume",
 }
 
 
