@@ -1,0 +1,37 @@
+action_id: "seated_knee_extension"
+action_name: "坐姿伸膝"
+primary_metric: "knee_extension_angle"
+metric_unit: "degree"
+metric_direction: "increase"
+medical_basis:
+  - "AAOS Knee Conditioning Program: https://orthoinfo.aaos.org/en/recovery/knee-conditioning-program/"
+  - "Leeds Teaching Hospitals NHS Trust Knee Exercises: https://www.leedsth.nhs.uk/patients/resources/knee-exercises/"
+  - "OPAL / South Tees Hospitals NHS Foundation Trust Seated knee extension: https://www.opalreturntowork.nhs.uk/exercises/seated-knee-extension/"
+keypoint_rule:
+  hip_index: 23
+  knee_index: 25
+  ankle_index: 27
+  target_joint: "left_knee"
+angle_field: "target_angle_smoothed"
+angle_fields:
+  - "target_angle_smoothed"
+  - "selected_flexion_angle_smoothed"
+  - "selected_flexion_angle_raw"
+  - "flexion_angle_3d"
+  - "flexion_angle_2d"
+metric_note: "医生模板决定本患者的伸膝幅度和保持时间目标，阈值只表示允许偏离模板多少。"
+thresholds:
+  rom_diff_max: 15.0
+  tut_ratio_min: 0.8
+  dtw_normalized_max: 0.25
+  speed_ratio_max: 1.5
+tut_work_zone:
+  mode: "relative_to_max"
+  offset_low: -10.0
+  offset_high: 0.0
+realtime:
+  start_delta: 12.0
+  return_delta: 5.0
+  min_attempt_delta: 18.0
+  min_rep_seconds: 1.0
+  raise_prompt: "再伸直一点"
