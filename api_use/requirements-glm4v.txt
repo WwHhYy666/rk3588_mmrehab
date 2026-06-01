@@ -1,0 +1,4 @@
+opencv-python>=4.8.0
+numpy>=1.26.0
+sounddevice>=0.4.7
+SpeechRecognition>=3.10.0
