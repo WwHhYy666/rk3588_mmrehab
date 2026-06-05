@@ -1,0 +1,313 @@
+from __future__ import annotations
+
+from pathlib import Path
+import sys
+
+import yaml
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from realtime.feedback_runtime import load_rules, rep_feedback
+from realtime.knee_flexion import KneeFlexionRealtimeMachine, KneeFlexionTargets
+
+
+def _targets(
+    *,
+    rom_target: float,
+    tut_target: float,
+    target_range: tuple[float, float],
+    rom_diff_max: float,
+    tut_ratio_min: float,
+) -> KneeFlexionTargets:
+    return KneeFlexionTargets(
+        rom_target=rom_target,
+        tut_target=tut_target,
+        target_range=target_range,
+        template_peak_speed=0.0,
+        rom_diff_max=rom_diff_max,
+        tut_ratio_min=tut_ratio_min,
+        speed_ratio_max=1.5,
+    )
+
+
+def _machine(config: dict[str, float | bool], targets: KneeFlexionTargets) -> KneeFlexionRealtimeMachine:
+    merged = {
+        "baseline_seconds": 0.05,
+        "confirm_frames": 1,
+        "visibility_threshold": 0.55,
+        "min_rep_seconds": 1.0,
+        "strict_quality_errors": True,
+        **config,
+    }
+    return KneeFlexionRealtimeMachine(merged, targets)
+
+
+def _frame(relative_time: float, value: float) -> dict[str, float | bool]:
+    return {
+        "frame_index": int(relative_time * 100),
+        "relative_time": relative_time,
+        "target_angle_smoothed": value,
+        "visibility_min": 1.0,
+        "person_visible": True,
+    }
+
+
+def _prime_baseline(machine: KneeFlexionRealtimeMachine, baseline: float) -> None:
+    machine.process(_frame(0.0, baseline))
+    machine.process(_frame(0.1, baseline))
+    machine.process(_frame(0.2, baseline))
+
+
+def _run_values(machine: KneeFlexionRealtimeMachine, values: list[tuple[float, float]]) -> dict:
+    result = None
+    for relative_time, value in values:
+        output = machine.process(_frame(relative_time, value))
+        if isinstance(output, dict) and isinstance(output.get("rep_result"), dict):
+            result = output["rep_result"]
+    assert result is not None, "expected one rep_result"
+    return result
+
+
+def test_extension_short_rom_speaks_rom_low() -> None:
+    targets = _targets(
+        rom_target=50.0,
+        tut_target=1.0,
+        target_range=(135.0, 150.0),
+        rom_diff_max=18.0,
+        tut_ratio_min=0.55,
+    )
+    machine = _machine(
+        {
+            "start_delta": 10.0,
+            "attempt_start_delta": 4.0,
+            "return_delta": 5.0,
+            "min_attempt_delta": 3.0,
+            "count_by_peak_target": True,
+            "raise_prompt": "再伸直一点",
+        },
+        targets,
+    )
+    _prime_baseline(machine, 100.0)
+
+    result = _run_values(machine, [(0.3, 111.0), (0.6, 116.0), (1.45, 104.0)])
+
+    assert result["primary_error"] == "ROM_LOW"
+    assert result["countable"] is False
+    rules = load_rules(PROJECT_ROOT / "feedback" / "rules" / "seated_knee_extension_feedback.yaml")
+    feedback = rep_feedback({**result, "attempt_index": 1}, rules, action_id="seated_knee_extension")
+    assert feedback["tts_text"] == "腿再伸直一点"
+
+
+def test_extension_low_amplitude_attempt_speaks_rom_low() -> None:
+    targets = _targets(
+        rom_target=50.0,
+        tut_target=1.0,
+        target_range=(135.0, 150.0),
+        rom_diff_max=18.0,
+        tut_ratio_min=0.55,
+    )
+    machine = _machine(
+        {
+            "start_delta": 10.0,
+            "attempt_start_delta": 4.0,
+            "return_delta": 5.0,
+            "min_attempt_delta": 3.0,
+            "count_by_peak_target": True,
+            "raise_prompt": "再伸直一点",
+        },
+        targets,
+    )
+    _prime_baseline(machine, 100.0)
+
+    result = _run_values(machine, [(0.3, 105.0), (0.6, 108.0), (1.45, 103.0)])
+
+    assert result["primary_error"] == "ROM_LOW"
+    assert result["countable"] is False
+    rules = load_rules(PROJECT_ROOT / "feedback" / "rules" / "seated_knee_extension_feedback.yaml")
+    feedback = rep_feedback({**result, "attempt_index": 1}, rules, action_id="seated_knee_extension")
+    assert feedback["tts_text"] == "腿再伸直一点"
+
+
+def test_extension_tiny_motion_stays_silent() -> None:
+    targets = _targets(
+        rom_target=50.0,
+        tut_target=1.0,
+        target_range=(135.0, 150.0),
+        rom_diff_max=18.0,
+        tut_ratio_min=0.55,
+    )
+    machine = _machine(
+        {
+            "start_delta": 10.0,
+            "attempt_start_delta": 4.0,
+            "return_delta": 5.0,
+            "min_attempt_delta": 3.0,
+            "count_by_peak_target": True,
+            "raise_prompt": "再伸直一点",
+        },
+        targets,
+    )
+    _prime_baseline(machine, 100.0)
+
+    outputs = [machine.process(_frame(time, value)) for time, value in [(0.3, 102.0), (0.6, 103.0), (1.45, 101.0)]]
+
+    assert [output.get("state") for output in outputs if isinstance(output, dict)] == ["IDLE", "IDLE", "IDLE"]
+    assert all(isinstance(output, dict) and output.get("rep_result") is None for output in outputs)
+
+
+def test_extension_short_hold_surfaces_tut_low() -> None:
+    targets = _targets(
+        rom_target=50.0,
+        tut_target=1.0,
+        target_range=(135.0, 150.0),
+        rom_diff_max=18.0,
+        tut_ratio_min=0.55,
+    )
+    machine = _machine(
+        {
+            "start_delta": 10.0,
+            "attempt_start_delta": 4.0,
+            "return_delta": 5.0,
+            "min_attempt_delta": 3.0,
+            "count_by_peak_target": True,
+            "raise_prompt": "再伸直一点",
+        },
+        targets,
+    )
+    _prime_baseline(machine, 100.0)
+
+    result = _run_values(machine, [(0.3, 111.0), (0.4, 140.0), (0.7, 130.0), (1.5, 104.0)])
+
+    assert result["primary_error"] == "TUT_LOW"
+    assert result["all_errors"] == ["TUT_LOW"]
+    rules = load_rules(PROJECT_ROOT / "feedback" / "rules" / "seated_knee_extension_feedback.yaml")
+    feedback = rep_feedback({**result, "attempt_index": 1}, rules, action_id="seated_knee_extension")
+    assert feedback["tts_text"].startswith("再坚持 ")
+
+
+def test_raise_peak_target_can_count_even_when_rom_diff_is_large() -> None:
+    targets = _targets(
+        rom_target=0.70,
+        tut_target=0.5,
+        target_range=(0.40, 0.55),
+        rom_diff_max=0.25,
+        tut_ratio_min=0.55,
+    )
+    machine = _machine(
+        {
+            "start_delta": 0.07,
+            "attempt_start_delta": 0.03,
+            "return_delta": 0.04,
+            "min_attempt_delta": 0.02,
+            "tut_count_mode": "at_or_above_target",
+            "count_by_peak_target": True,
+            "raise_prompt": "膝盖再抬高一点",
+        },
+        targets,
+    )
+    _prime_baseline(machine, 0.20)
+
+    result = _run_values(machine, [(0.3, 0.28), (0.4, 0.62), (1.1, 0.62), (1.4, 0.22), (1.5, 0.22)])
+
+    assert result["primary_error"] == "OK"
+    assert result["countable"] is True
+    assert result["peak_ok"] is True
+    assert result["rom_ok"] is False
+    assert result["tut_count_mode"] == "at_or_above_target"
+    assert result["tut_count_range"] == [0.40, None]
+
+
+def test_raise_above_target_high_counts_tut_and_prompts_to_lower() -> None:
+    targets = _targets(
+        rom_target=0.70,
+        tut_target=1.0,
+        target_range=(0.40, 0.55),
+        rom_diff_max=0.25,
+        tut_ratio_min=0.55,
+    )
+    machine = _machine(
+        {
+            "start_delta": 0.07,
+            "attempt_start_delta": 0.03,
+            "return_delta": 0.04,
+            "min_attempt_delta": 0.02,
+            "tut_count_mode": "at_or_above_target",
+            "count_by_peak_target": True,
+            "raise_prompt": "膝盖再抬高一点",
+        },
+        targets,
+    )
+    _prime_baseline(machine, 0.20)
+
+    outputs = [
+        machine.process(_frame(0.3, 0.28)),
+        machine.process(_frame(0.4, 0.62)),
+        machine.process(_frame(1.1, 0.62)),
+    ]
+
+    assert outputs[-1]["state"] == "HOLDING"
+    assert outputs[-1]["in_tut_zone"] is True
+    assert outputs[-1]["missing_seconds"] == 0.0
+    assert outputs[-1]["prompt"] == "可以慢慢放下"
+
+
+def test_raise_peak_target_short_hold_reports_tut_low_not_rom_low() -> None:
+    targets = _targets(
+        rom_target=0.70,
+        tut_target=1.0,
+        target_range=(0.40, 0.55),
+        rom_diff_max=0.25,
+        tut_ratio_min=0.55,
+    )
+    machine = _machine(
+        {
+            "start_delta": 0.07,
+            "attempt_start_delta": 0.03,
+            "return_delta": 0.04,
+            "min_attempt_delta": 0.02,
+            "tut_count_mode": "at_or_above_target",
+            "count_by_peak_target": True,
+            "raise_prompt": "膝盖再抬高一点",
+        },
+        targets,
+    )
+    _prime_baseline(machine, 0.20)
+
+    result = _run_values(machine, [(0.3, 0.28), (0.4, 0.42), (0.55, 0.22), (1.5, 0.22)])
+
+    assert result["primary_error"] == "TUT_LOW"
+    assert "ROM_LOW" not in result["all_errors"]
+    rules = load_rules(PROJECT_ROOT / "feedback" / "rules" / "seated_knee_raise_feedback.yaml")
+    feedback = rep_feedback({**result, "attempt_index": 1}, rules, action_id="seated_knee_raise")
+    assert feedback["tts_text"].startswith("再坚持 ")
+
+
+def test_standing_hamstring_curl_thresholds_unchanged() -> None:
+    config = yaml.safe_load((PROJECT_ROOT / "evaluate" / "configs" / "standing_hamstring_curl.yaml").read_text(encoding="utf-8"))
+    realtime = config["realtime"]
+
+    assert config["thresholds"]["rom_diff_max"] == 15.0
+    assert config["thresholds"]["dtw_normalized_max"] == 0.25
+    assert realtime["start_delta"] == 12.0
+    assert realtime["return_delta"] == 5.0
+    assert realtime["min_attempt_delta"] == 18.0
+    assert realtime["tut_range_padding"] == 5.0
+    assert realtime["tut_ratio_min"] == 0.65
+    assert "attempt_start_delta" not in realtime
+    assert "tut_count_mode" not in realtime
+    assert "count_by_peak_target" not in realtime
+
+
+if __name__ == "__main__":
+    test_extension_short_rom_speaks_rom_low()
+    test_extension_low_amplitude_attempt_speaks_rom_low()
+    test_extension_tiny_motion_stays_silent()
+    test_extension_short_hold_surfaces_tut_low()
+    test_raise_peak_target_can_count_even_when_rom_diff_is_large()
+    test_raise_above_target_high_counts_tut_and_prompts_to_lower()
+    test_raise_peak_target_short_hold_reports_tut_low_not_rom_low()
+    test_standing_hamstring_curl_thresholds_unchanged()
+    print("knee_flexion realtime tests passed")
