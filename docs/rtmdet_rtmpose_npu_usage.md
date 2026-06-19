@@ -225,6 +225,24 @@ curl -s http://127.0.0.1:8082/status \
 
 如果患者出框，优先调整 `RKNN_RTMPOSE_FIXED_BBOX`，格式为 `x1,y1,x2,y2`。
 
+## 5.1 推荐：YOLO 人体框 + RTMPose 关键点路线
+
+如果你的目标不是“固定机位调试”，而是要像 MediaPipe 那样稳定给后续比对提供骨架点，优先用 `yolov8_rtmpose`：
+
+```bash
+scripts/start_8082_rknn_yolov8_rtmpose.sh
+```
+
+这个路线先用 YOLOv8 找人体框，再把人体框送入 RTMPose。它比大 fixed bbox 更适合做训练比对，因为骨架点通常会更贴近人体，`target_leg_visibility` 也更容易过。
+
+验收时同样看：
+
+- `/status` 中 `rknn_pipeline` 为 `yolov8_rtmpose`。
+- `person_box_quality_ok` 为 `true`。
+- `quality_ok` 为 `true`。
+- `rehab_keypoints` 里有完整的 `hip / knee / ankle / shoulder` 点。
+- `/train` 里的角度和 `target_angle_smoothed` 会随着动作变化。
+
 ## 6. 启动 8082 NPU 版
 
 流畅优先启动命令：
