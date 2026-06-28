@@ -1,0 +1,10 @@
+accelerate>=0.34.0
+numpy>=1.26.0
+pocketsphinx>=5.0.0
+pywin32>=306
+qwen-vl-utils>=0.0.8
+SpeechRecognition>=3.10.0
+sounddevice>=0.4.7
+torch
+torchvision
+transformers==4.45.2
