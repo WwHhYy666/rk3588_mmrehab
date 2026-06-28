@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#12254a"/>
+      <stop offset="60%" stop-color="#0b1323"/>
+      <stop offset="100%" stop-color="#060d18"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" x2="1">
+      <stop offset="0%" stop-color="#55d6ff" stop-opacity=".7"/>
+      <stop offset="100%" stop-color="#5f8dff" stop-opacity=".2"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <g opacity=".15">
+    <path d="M0 120h1280M0 240h1280M0 360h1280M0 480h1280M0 600h1280" stroke="url(#line)" stroke-width="1"/>
+    <path d="M160 0v720M320 0v720M480 0v720M640 0v720M800 0v720M960 0v720M1120 0v720" stroke="url(#line)" stroke-width="1"/>
+  </g>
+  <g transform="translate(230 130)">
+    <rect x="0" y="0" width="820" height="460" rx="28" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.12)"/>
+    <circle cx="410" cy="138" r="44" fill="none" stroke="#55d6ff" stroke-width="8"/>
+    <path d="M410 182v92m0 0-84 124m84-124 84 124m-140-212h112" fill="none" stroke="#c8e7ff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="60" y="360" fill="#edf5ff" font-size="42" font-family="Segoe UI, PingFang SC, Microsoft YaHei">Vision Preview Unavailable</text>
+    <text x="60" y="414" fill="#96adcb" font-size="26" font-family="Segoe UI, PingFang SC, Microsoft YaHei">
+      当前环境未连接摄像头或未安装视觉依赖，页面会自动降级。
+    </text>
+  </g>
+</svg>
