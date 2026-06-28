@@ -1,1 +1,0 @@
-Hello, this is an end-to-end voice pipeline test. Please introduce yourself in one sentence.
