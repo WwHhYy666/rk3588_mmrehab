@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "by_backend": {
+    "mediapipe": {
+      "seated_knee_extension": {
+        "action_id": "seated_knee_extension",
+        "template_file": "prescription/docs/doctor_templates/doctor_template_patient_001_seated_knee_extension_20260629_160344.json",
+        "config_file": "evaluate/configs/seated_knee_extension.yaml",
+        "pose_backend": "mediapipe",
+        "actual_backend": "mediapipe",
+        "backend_key": "mediapipe",
+        "updated_at": "2026-06-29T16:03:44",
+        "requested_backend": "mediapipe",
+        "pose_backend_version": "mediapipe_pose",
+        "pose_keypoint_schema": "mediapipe33_to_rehab_v1",
+        "rknn_model_path": null,
+        "rknn_pipeline": null,
+        "rknn_z_valid": null,
+        "angle_mode": "mediapipe_3d_world_then_2d",
+        "camera_pose_requirement": null
+      },
+      "standing_hamstring_curl": {
+        "action_id": "standing_hamstring_curl",
+        "template_file": "prescription/docs/doctor_templates/doctor_template_patient_001_standing_hamstring_curl_20260629_160405.json",
+        "config_file": "evaluate/configs/standing_hamstring_curl.yaml",
+        "pose_backend": "mediapipe",
+        "actual_backend": "mediapipe",
+        "backend_key": "mediapipe",
+        "updated_at": "2026-06-29T16:04:05",
+        "requested_backend": "mediapipe",
+        "pose_backend_version": "mediapipe_pose",
+        "pose_keypoint_schema": "mediapipe33_to_rehab_v1",
+        "rknn_model_path": null,
+        "rknn_pipeline": null,
+        "rknn_z_valid": null,
+        "angle_mode": "mediapipe_3d_world_then_2d",
+        "camera_pose_requirement": null
+      },
+      "seated_knee_raise": {
+        "action_id": "seated_knee_raise",
+        "template_file": "prescription/docs/doctor_templates/doctor_template_patient_001_seated_knee_raise_20260629_160759.json",
+        "config_file": "evaluate/configs/seated_knee_raise.yaml",
+        "pose_backend": "mediapipe",
+        "actual_backend": "mediapipe",
+        "backend_key": "mediapipe",
+        "updated_at": "2026-06-29T16:07:59",
+        "requested_backend": "mediapipe",
+        "pose_backend_version": "mediapipe_pose",
+        "pose_keypoint_schema": "mediapipe33_to_rehab_v1",
+        "rknn_model_path": null,
+        "rknn_pipeline": null,
+        "rknn_z_valid": null,
+        "angle_mode": "mediapipe_3d_world_then_2d",
+        "camera_pose_requirement": null
+      }
+    },
+    "rknn": {}
+  }
+}
