@@ -61,7 +61,7 @@ runtime_meta.rep_segments
 你需要为每个动作采一些样本：
 
 ```text
-seated_knee_extension
+sit_to_stand
 standing_hamstring_curl
 seated_knee_raise
 ```
@@ -88,8 +88,8 @@ seated_knee_raise
 在项目根目录执行：
 
 ```bash
-python quality_model/train.py --action-id seated_knee_extension
-python quality_model/export_onnx.py --action-id seated_knee_extension
+python quality_model/train.py --action-id sit_to_stand
+python quality_model/export_onnx.py --action-id sit_to_stand
 
 python quality_model/train.py --action-id standing_hamstring_curl
 python quality_model/export_onnx.py --action-id standing_hamstring_curl
@@ -101,8 +101,8 @@ python quality_model/export_onnx.py --action-id seated_knee_raise
 生成结果：
 
 ```text
-quality_model/models/seated_knee_extension/best.pt
-quality_model/models/seated_knee_extension/model.onnx
+quality_model/models/sit_to_stand/best.pt
+quality_model/models/sit_to_stand/model.onnx
 quality_model/models/standing_hamstring_curl/best.pt
 quality_model/models/standing_hamstring_curl/model.onnx
 quality_model/models/seated_knee_raise/best.pt
@@ -126,7 +126,7 @@ quality_model/models/seated_knee_raise/model.onnx
 转换命令：
 
 ```bash
-python quality_model/export_rknn.py --action-id seated_knee_extension
+python quality_model/export_rknn.py --action-id sit_to_stand
 python quality_model/export_rknn.py --action-id standing_hamstring_curl
 python quality_model/export_rknn.py --action-id seated_knee_raise
 ```
@@ -134,7 +134,7 @@ python quality_model/export_rknn.py --action-id seated_knee_raise
 生成结果：
 
 ```text
-quality_model/models/seated_knee_extension/model.rknn
+quality_model/models/sit_to_stand/model.rknn
 quality_model/models/standing_hamstring_curl/model.rknn
 quality_model/models/seated_knee_raise/model.rknn
 ```
@@ -146,7 +146,7 @@ quality_model/models/seated_knee_raise/model.rknn
 必传模型：
 
 ```text
-quality_model/models/seated_knee_extension/model.rknn
+quality_model/models/sit_to_stand/model.rknn
 quality_model/models/standing_hamstring_curl/model.rknn
 quality_model/models/seated_knee_raise/model.rknn
 ```
@@ -154,7 +154,7 @@ quality_model/models/seated_knee_raise/model.rknn
 可选兜底模型：
 
 ```text
-quality_model/models/seated_knee_extension/model.onnx
+quality_model/models/sit_to_stand/model.onnx
 quality_model/models/standing_hamstring_curl/model.onnx
 quality_model/models/seated_knee_raise/model.onnx
 ```
@@ -188,8 +188,8 @@ curl http://127.0.0.1:8082/status
 "quality_model": {
   "available": true,
   "backend": "rknn",
-  "action_id": "seated_knee_extension",
-  "model_path": ".../quality_model/models/seated_knee_extension/model.rknn",
+  "action_id": "sit_to_stand",
+  "model_path": ".../quality_model/models/sit_to_stand/model.rknn",
   "last_score_time_ms": 3.2,
   "queue_size": 0,
   "worker_alive": true
@@ -235,7 +235,7 @@ curl http://127.0.0.1:8082/status
 每个动作最好一个模型：
 
 ```text
-seated_knee_extension 一个模型
+sit_to_stand 一个模型
 standing_hamstring_curl 一个模型
 seated_knee_raise 一个模型
 ```
@@ -295,7 +295,7 @@ docs/npu_quality_scoring_for_beginners.md
 模型必传：
 
 ```text
-quality_model/models/seated_knee_extension/model.rknn
+quality_model/models/sit_to_stand/model.rknn
 quality_model/models/standing_hamstring_curl/model.rknn
 quality_model/models/seated_knee_raise/model.rknn
 ```
@@ -303,7 +303,7 @@ quality_model/models/seated_knee_raise/model.rknn
 模型可选兜底：
 
 ```text
-quality_model/models/seated_knee_extension/model.onnx
+quality_model/models/sit_to_stand/model.onnx
 quality_model/models/standing_hamstring_curl/model.onnx
 quality_model/models/seated_knee_raise/model.onnx
 ```
@@ -382,4 +382,6 @@ best.pt -> model.onnx -> model.rknn
 ### 完全做错为什么没有分
 
 如果完全没有形成一次可识别尝试，系统就没有骨架片段可评分。要展示错误评分，动作要“能被识别成一次尝试”，比如幅度不够或保持不够，而不是完全乱动或走出画面。
+
+
 
