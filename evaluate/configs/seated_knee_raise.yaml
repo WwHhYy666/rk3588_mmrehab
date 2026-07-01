@@ -1,0 +1,58 @@
+action_id: "seated_knee_raise"
+action_name: "坐姿抬膝"
+primary_metric: "knee_raise_height_ratio"
+metric_unit: "body_ratio"
+metric_direction: "increase"
+medical_basis:
+  - "NHS Sitting exercises: https://www.nhs.uk/live-well/exercise/sitting-exercises/"
+  - "Northern Care Alliance seated hip flexion exercise: https://www.northerncarealliance.nhs.uk/patient-information/patient-leaflets/orthopaedics-information-patients-considering-following-limb-reconstruction"
+  - "Newcastle Hospitals osteoarthritis hip and knee exercises: https://www.newcastle-hospitals.nhs.uk/services/newcastle-occupational-health-service/information-for-staff/physiotherapy/self-help-leaflets/osteoarthritis-oa-hip-and-knee/"
+keypoint_rule:
+  shoulder_index: 11
+  hip_index: 23
+  knee_index: 25
+  target_joint: "left_hip"
+angle_field: "target_angle_smoothed"
+angle_fields:
+  - "target_angle_smoothed"
+  - "selected_flexion_angle_smoothed"
+  - "selected_flexion_angle_raw"
+  - "flexion_angle_3d"
+  - "flexion_angle_2d"
+metric_note: "坐姿抬膝按膝盖相对髋部向上的高度评估，并用肩髋距离归一化；医生模板决定本患者的抬膝高度和保持时间目标。"
+thresholds:
+  rom_diff_max: 0.30
+  tut_ratio_min: 0.8
+  dtw_normalized_max: 0.12
+  speed_ratio_max: 1.5
+tut_work_zone:
+  mode: "relative_to_max"
+  offset_low: -0.12
+  offset_high: 0.0
+realtime:
+  segment_mode: "raise_lower"
+  rest_window_seconds: 0.7
+  rest_noise_max: 0.025
+  rest_velocity_max: 0.06
+  motion_start_velocity_min: 0.07
+  return_velocity_max: -0.03
+  start_delta_from_rest: 0.03
+  return_delta_from_rest: 0.08
+  stable_return_seconds: 0.10
+  max_rep_seconds: 5.0
+  return_timeout_seconds: 1.5
+  interrupt_reset_seconds: 0.4
+  start_delta: 0.07
+  attempt_start_delta: 0.03
+  return_delta: 0.08
+  min_attempt_delta: 0.02
+  min_rep_seconds: 1.0
+  tut_range_padding: 0.20
+  tut_ratio_min: 0.55
+  correction_tts_interval_seconds: 4.0
+  tut_count_mode: "at_or_above_target"
+  count_by_peak_target: true
+  raise_prompt: "膝盖再抬高一点"
+  hold_done_prompt: "可以慢慢放下"
+  returning_prompt: "慢慢放下"
+
