@@ -1,0 +1,23 @@
+mediapipe:
+  visibility_min: 0.55
+  smoothing_window: 5
+  angle_offset:
+    seated_knee_extension: 0.0
+    standing_hamstring_curl: 0.0
+    seated_knee_raise: 0.0
+    sit_to_stand: 0.0
+
+rknn:
+  visibility_min: 0.20
+  smoothing_window: 7
+  angle_offset:
+    seated_knee_extension: 0.0
+    standing_hamstring_curl: 0.0
+    seated_knee_raise: 0.0
+    sit_to_stand: 0.0
+  stabilizer:
+    alpha: 0.35
+    low_conf_alpha: 0.18
+    jump_scale: 0.35
+    max_hold_frames: 8
+    lock_confirm_frames: 4
