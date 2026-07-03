@@ -1,9 +1,0 @@
-action_id: "sit_to_stand"
-input_frames: 30
-input_channels: 51
-min_valid_frames: 6
-dtw_normalized_max: 0.10
-penalties:
-  ROM_LOW: 0.14
-  TUT_LOW: 0.10
-  SHAPE_BAD: 0.10

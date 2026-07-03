@@ -1,9 +1,0 @@
-action_id: "seated_knee_raise"
-input_frames: 30
-input_channels: 51
-min_valid_frames: 6
-dtw_normalized_max: 0.12
-penalties:
-  ROM_LOW: 0.14
-  TUT_LOW: 0.10
-  SHAPE_BAD: 0.10
