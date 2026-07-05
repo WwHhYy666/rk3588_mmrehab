@@ -1,0 +1,62 @@
+﻿plan_id: "personalized_orthopedic_rehab_demo"
+plan_name: "个性化骨科康复演示流程"
+principle: "动作类型固定，医生模板个性化；患者训练时按自己的模板比对。"
+default_target_reps: 3
+rest_seconds: 6
+offscreen_timeout_seconds: 5.0
+care_prompt_invalid_streak: 5
+action_start_guard_seconds: 2.0
+tts_action_guard_extra_seconds: 0.5
+correction_tts_interval_seconds: 4.0
+front_orientation_confirm_frames: 2
+rknn_front_orientation_confirm_frames: 2
+rknn_orientation_confirm_frames: 4
+return_confirm_frames: 3
+rknn_return_confirm_frames: 2
+return_orientation_required: false
+rest_music_file: "/assets/rest_music.wav"
+rest_music_playback: "backend"
+rest_music_fade_seconds: 1.0
+count_tts:
+  - "一"
+  - "二"
+  - "三"
+welcome_tts: "请坐稳，准备开始。"
+finished_tts: "训练完成，辛苦了。"
+actions:
+  - action_id: "sit_to_stand"
+    action_name: "坐站训练"
+    camera_prompt: "请坐在椅子上，侧对镜头，双脚踩稳，保持肩、髋、膝、踝可见。"
+    start_tts: "开始坐站训练。"
+    require_side_view: true
+    action_intro_tts: "慢慢站起，站稳后再坐下。"
+    orientation_prompt_tts: "请侧身对准镜头。"
+    set_done_tts: "很好，休息一下。"
+    config_file: "evaluate/configs/sit_to_stand.yaml"
+    feedback_rule_file: "feedback/rules/sit_to_stand_feedback.yaml"
+    realtime_config_file: "realtime/configs/knee_flexion_realtime.yaml"
+  - action_id: "standing_hamstring_curl"
+    action_name: "站姿屈膝后勾腿"
+    camera_prompt: "请站稳，侧对镜头，手扶椅背或墙面，保持髋、膝、踝可见。"
+    start_tts: "开始后勾腿。"
+    require_side_view: true
+    action_intro_tts: "慢慢后勾，再放下。"
+    orientation_prompt_tts: "请侧身对准镜头。"
+    set_done_tts: "很好，休息一下。"
+    config_file: "evaluate/configs/standing_hamstring_curl.yaml"
+    feedback_rule_file: "feedback/rules/standing_hamstring_curl_feedback.yaml"
+    realtime_config_file: "realtime/configs/knee_flexion_realtime.yaml"
+  - action_id: "seated_knee_raise"
+    action_name: "坐姿抬膝"
+    camera_prompt: "请坐稳，侧对镜头，保持肩、髋、膝可见。"
+    start_tts: "开始坐姿抬膝。"
+    require_side_view: true
+    action_intro_tts: "慢慢抬膝，保持住。"
+    orientation_prompt_tts: "请侧身对准镜头。"
+    set_done_tts: "很好，休息一下。"
+    config_file: "evaluate/configs/seated_knee_raise.yaml"
+    feedback_rule_file: "feedback/rules/seated_knee_raise_feedback.yaml"
+    realtime_config_file: "realtime/configs/knee_flexion_realtime.yaml"
+
+
+
