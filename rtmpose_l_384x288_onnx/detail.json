@@ -1,0 +1,49 @@
+{
+    "version": "1.3.1",
+    "codebase": {
+        "task": "PoseDetection",
+        "codebase": "mmpose",
+        "version": "1.3.2",
+        "pth": "/home/wwwhy/mmdeploy_pth2onnx/pretrained/rtmpose-l_simcc-body7_pt-body7_420e-384x288-3f5a1437_20230504.pth",
+        "config": "/home/wwwhy/mmdeploy_pth2onnx/mmpose/configs/body_2d_keypoint/rtmpose/body8/rtmpose-l_8xb256-420e_body8-384x288.py"
+    },
+    "codebase_config": {
+        "type": "mmpose",
+        "task": "PoseDetection",
+        "export_postprocess": false
+    },
+    "onnx_config": {
+        "type": "onnx",
+        "export_params": true,
+        "keep_initializers_as_inputs": false,
+        "opset_version": 11,
+        "save_file": "end2end.onnx",
+        "input_names": [
+            "input"
+        ],
+        "output_names": [
+            "simcc_x",
+            "simcc_y"
+        ],
+        "input_shape": [
+            192,
+            256
+        ],
+        "optimize": true,
+        "dynamic_axes": {
+            "input": {
+                "0": "batch"
+            },
+            "simcc_x": {
+                "0": "batch"
+            },
+            "simcc_y": {
+                "0": "batch"
+            }
+        }
+    },
+    "backend_config": {
+        "type": "onnxruntime"
+    },
+    "calib_config": {}
+}
