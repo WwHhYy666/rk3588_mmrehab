@@ -1,0 +1,65 @@
+plan_id: "personalized_orthopedic_rehab_npu"
+plan_name: "NPU 个性化骨科康复训练"
+principle: "YOLOv5n 检测人体，RTMPose 输出 COCO-17；医生和患者必须使用同一 NPU 后端。"
+default_target_reps: 3
+rest_seconds: 6
+offscreen_timeout_seconds: 5.0
+care_prompt_invalid_streak: 5
+action_start_guard_seconds: 2.0
+tts_action_guard_extra_seconds: 0.5
+correction_tts_interval_seconds: 4.0
+training_fixed_audio_only: true
+front_orientation_confirm_frames: 2
+rknn_front_orientation_confirm_frames: 2
+rknn_orientation_confirm_frames: 4
+return_confirm_frames: 2
+rknn_return_confirm_frames: 2
+return_orientation_required: false
+npu_presence_v2: true
+npu_presence_enter_frames: 2
+npu_presence_grace_frames: 8
+npu_return_core_points_min: 5
+npu_return_core_visibility_min: 0.12
+rest_music_file: "/assets/rest_music.wav"
+rest_music_playback: "backend"
+rest_music_fade_seconds: 1.0
+count_tts:
+  - "一"
+  - "二"
+  - "三"
+welcome_tts: "请坐稳，准备开始 NPU 康复训练。"
+finished_tts: "训练完成，姿态 NPU 已释放，现在可以向小爱提问。"
+actions:
+  - action_id: "sit_to_stand"
+    action_name: "坐站训练"
+    camera_prompt: "请坐在椅子上，侧对镜头，保持肩、髋、膝、踝完整可见。"
+    start_tts: "开始坐站训练。"
+    require_side_view: true
+    action_intro_tts: "慢慢站起，站稳后再坐下。"
+    orientation_prompt_tts: "请侧身对准镜头。"
+    set_done_tts: "很好，休息一下。"
+    config_file: "evaluation/configs/npu/sit_to_stand.yaml"
+    feedback_rule_file: "action_feedback/rules/sit_to_stand_feedback.yaml"
+    realtime_config_file: "training/configs/training_defaults_npu.yaml"
+  - action_id: "standing_hamstring_curl"
+    action_name: "站姿屈膝后勾腿"
+    camera_prompt: "请站稳并侧对镜头，保持髋、膝、踝完整可见。"
+    start_tts: "开始后勾腿。"
+    require_side_view: true
+    action_intro_tts: "慢慢后勾，再放下。"
+    orientation_prompt_tts: "请侧身对准镜头。"
+    set_done_tts: "很好，休息一下。"
+    config_file: "evaluation/configs/npu/standing_hamstring_curl.yaml"
+    feedback_rule_file: "action_feedback/rules/standing_hamstring_curl_feedback.yaml"
+    realtime_config_file: "training/configs/training_defaults_npu.yaml"
+  - action_id: "seated_knee_raise"
+    action_name: "坐姿抬膝"
+    camera_prompt: "请坐稳并侧对镜头，保持肩、髋、膝完整可见。"
+    start_tts: "开始坐姿抬膝。"
+    require_side_view: true
+    action_intro_tts: "慢慢抬膝，保持住。"
+    orientation_prompt_tts: "请侧身对准镜头。"
+    set_done_tts: "很好，休息一下。"
+    config_file: "evaluation/configs/npu/seated_knee_raise.yaml"
+    feedback_rule_file: "action_feedback/rules/seated_knee_raise_feedback.yaml"
+    realtime_config_file: "training/configs/training_defaults_npu.yaml"

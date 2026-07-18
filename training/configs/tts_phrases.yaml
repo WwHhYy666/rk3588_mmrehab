@@ -1,0 +1,113 @@
+audio_root: "rehab_app/server/static/assets/tts"
+phrases:
+  welcome:
+    text: "请坐稳，准备开始。"
+    file: "welcome.wav"
+  start_seated_knee_extension:
+    text: "开始坐姿伸膝。"
+    file: "start_seated_knee_extension.wav"
+  intro_seated_knee_extension:
+    text: "慢慢伸直，再放下。"
+    file: "intro_seated_knee_extension.wav"
+  start_sit_to_stand:
+    text: "开始坐站训练。"
+    file: "start_sit_to_stand.wav"
+  intro_sit_to_stand:
+    text: "慢慢站起，站稳后再坐下。"
+    file: "intro_sit_to_stand.wav"
+  start_standing_hamstring_curl:
+    text: "开始后勾腿。"
+    file: "start_standing_hamstring_curl.wav"
+  intro_standing_hamstring_curl:
+    text: "慢慢后勾，再放下。"
+    file: "intro_standing_hamstring_curl.wav"
+  start_seated_knee_raise:
+    text: "开始坐姿抬膝。"
+    file: "start_seated_knee_raise.wav"
+  intro_seated_knee_raise:
+    text: "慢慢抬膝，保持住。"
+    file: "intro_seated_knee_raise.wav"
+  orientation:
+    text: "请侧身对准镜头。"
+    file: "orientation.wav"
+  angle_right:
+    text: "角度正确，我们继续训练吧"
+    file: "angle_right.wav"
+  offscreen:
+    text: "请回到画面中。"
+    file: "offscreen.wav"
+  inscreen:
+    text: "请回到画面中，我们继续"
+    file: "inscreen.wav"
+  keypoints:
+    text: "请保持目标腿关键点可见。"
+    file: "keypoints.wav"
+  care:
+    text: "累了吗？要休息吗？"
+    file: "care.wav"
+  rest:
+    text: "我们休息十秒。"
+    file: "rest.wav"
+  resume:
+    text: "休息结束，我们继续训练。"
+    file: "resume.wav"
+  set_done:
+    text: "很好，休息一下。"
+    file: "set_done.wav"
+  finished:
+    text: "训练完成，辛苦了。"
+    file: "finished.wav"
+  count_1:
+    text: "一"
+    file: "count_1.wav"
+  count_2:
+    text: "二"
+    file: "count_2.wav"
+  count_3:
+    text: "三"
+    file: "count_3.wav"
+  count_4:
+    text: "四"
+    file: "count_4.wav"
+  count_5:
+    text: "五"
+    file: "count_5.wav"
+  rom_extension:
+    text: "腿再伸直一点"
+    file: "rom_extension.wav"
+  rom_curl:
+    text: "小腿再往后弯一点"
+    file: "rom_curl.wav"
+  rom_raise:
+    text: "膝盖再抬高一点"
+    file: "rom_raise.wav"
+  rom_stand:
+    text: "身体再站高一点"
+    file: "rom_stand.wav"
+  tut_1:
+    text: "再坚持一秒"
+    file: "tut_1.wav"
+  tut_2:
+    text: "再坚持两秒"
+    file: "tut_2.wav"
+  tut_3:
+    text: "再坚持三秒"
+    file: "tut_3.wav"
+  tut_4:
+    text: "再坚持四秒"
+    file: "tut_4.wav"
+  tut_5:
+    text: "再坚持五秒"
+    file: "tut_5.wav"
+  shape_extension:
+    text: "坐稳一点"
+    file: "shape_extension.wav"
+  shape_curl:
+    text: "大腿稳住"
+    file: "shape_curl.wav"
+  shape_raise:
+    text: "坐稳一点"
+    file: "shape_raise.wav"
+  shape_stand:
+    text: "站起和坐下都稳一点"
+    file: "shape_stand.wav"

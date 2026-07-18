@@ -1,0 +1,9 @@
+action_id: "knee_flexion"
+input_frames: 30
+input_channels: 51
+min_valid_frames: 6
+dtw_normalized_max: 0.25
+penalties:
+  ROM_LOW: 0.15
+  TUT_LOW: 0.10
+  SHAPE_BAD: 0.12

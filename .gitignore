@@ -1,16 +1,87 @@
-﻿# Python cache
-__pycache__/
-*.pyc
-
-# IDE
+# Operating systems and editors
+.DS_Store
+Thumbs.db
+Desktop.ini
 .idea/
 .vscode/
+*.swp
+*.swo
+*~
 
-# Runtime outputs
-prescription/docs/results/*.json
-prescription/docs/summaries/*.md
-prescription/docs/results_log.md
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.tox/
+.nox/
+build/
+dist/
+*.egg-info/
 
-# Keep empty folders with .gitkeep
-!prescription/docs/results/.gitkeep
-!prescription/docs/summaries/.gitkeep
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Local secrets and machine-specific configuration
+.env
+.env.*
+!.env.example
+runtime/llm.env
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Model weights and vendor runtimes
+*.rknn
+*.rkllm
+*.onnx
+*.pt
+*.pth
+*.tflite
+*.engine
+*.weights
+*.far
+*.so
+models/**
+!models/**/
+!models/**/README.md
+
+# Runtime state, logs and generated media
+runtime/**
+!runtime/README.md
+!runtime/.gitkeep
+output/
+outputs/
+tmp/
+logs/
+tts/runs/
+action_feedback/tts/prescription_data/
+rehab_app/server/out.png
+*.log
+*.pid
+*.tmp
+*.bak
+*.bak_*
+*.orig
+
+# Generated training data and reports
+data/**
+!data/**/
+!data/README.md
+!data/**/.gitkeep
+action_scoring/datasets/
+action_scoring/label_reviews/
+
+# Local deployment snapshots and generated documentation
+project_system/
+tmp/pdfs/

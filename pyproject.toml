@@ -1,0 +1,18 @@
+[project]
+name = "rk3588-mmrehab"
+version = "0.1.0"
+description = "RK3588 NPU rehabilitation training station on port 8085"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = [
+  "tests",
+  "evaluation/tests",
+  "action_scoring/tests",
+  "training/tests",
+  "pose_estimation/rknn_pose",
+  "speech/tests",
+]
+python_files = ["test_*.py"]

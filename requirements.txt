@@ -1,0 +1,7 @@
+# Desktop test dependencies and the Python portion of the RK3588 runtime.
+# Install Rockchip RKNNLite2 separately from the vendor-provided wheel.
+numpy>=1.24,<3
+opencv-python-headless>=4.8,<5
+Pillow>=10,<12
+PyYAML>=6,<7
+pytest>=7,<9

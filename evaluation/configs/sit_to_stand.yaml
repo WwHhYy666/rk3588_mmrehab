@@ -1,0 +1,57 @@
+action_id: "sit_to_stand"
+action_name: "坐站训练"
+primary_metric: "hip_rise_height_ratio"
+secondary_metric: "knee_extension_angle"
+metric_unit: "body_ratio"
+metric_direction: "increase"
+medical_basis:
+  - "NHS Strength exercises: https://www.nhs.uk/live-well/exercise/strength-exercises/"
+  - "NHS Forth Valley Right Decisions Super Six: https://www.rightdecisions.scot.nhs.uk/exercise-before-and-after-surgery/exercises/the-super-six/"
+  - "Newcastle Hospitals osteoarthritis hip and knee exercises: https://www.newcastle-hospitals.nhs.uk/services/newcastle-occupational-health-service/information-for-staff/physiotherapy/self-help-leaflets/osteoarthritis-oa-hip-and-knee/"
+keypoint_rule:
+  hip_index: 23
+  knee_index: 25
+  ankle_index: 27
+  target_joint: "left_knee"
+angle_field: "target_angle_smoothed"
+angle_fields:
+  - "target_angle_smoothed"
+  - "selected_flexion_angle_smoothed"
+  - "selected_flexion_angle_raw"
+  - "flexion_angle_3d"
+  - "flexion_angle_2d"
+metric_note: "坐站训练以髋部相对坐姿 baseline 的上升高度为主指标，并用膝关节伸展角做辅助判断；医生模板决定本患者的站起幅度和节奏目标。"
+thresholds:
+  rom_diff_max: 0.08
+  secondary_rom_diff_max: 15.0
+  tut_ratio_min: 0.85
+  dtw_normalized_max: 0.10
+  speed_ratio_max: 1.6
+tut_work_zone:
+  mode: "relative_to_max"
+  offset_low: -0.12
+  offset_high: 0.0
+realtime:
+  segment_mode: "sit_to_stand"
+  rest_window_seconds: 0.8
+  rest_noise_max: 0.035
+  rest_velocity_max: 0.08
+  motion_start_velocity_min: 0.1
+  return_velocity_max: -0.04
+  start_delta_from_rest: 0.1
+  return_delta_from_rest: 0.08
+  stable_return_seconds: 0.2
+  interrupt_reset_seconds: 0.4
+  start_delta: 0.10
+  return_delta: 0.05
+  return_to_start_delta: 0.08
+  max_rep_seconds: 6.0
+  return_timeout_seconds: 2.0
+  reset_on_offscreen: true
+  min_attempt_delta: 0.22
+  reentry_start_delta_multiplier: 1.5
+  reentry_min_attempt_delta: 0.24
+  reentry_start_confirm_frames: 4
+  min_rep_seconds: 1.2
+  tut_count_mode: "at_or_above_target"
+  raise_prompt: "再站起来一点"
