@@ -1,0 +1,4475 @@
+{
+  "patient_id": "唐逸远",
+  "action_name": "屈膝",
+  "created_at": "2026-05-14 07:52:00",
+  "description": "这是一次根据标准膝关节屈曲动作录制生成的个体化处方结果。",
+  "camera_instruction": "录制时请尽量侧身面对摄像头，保证髋、膝、踝三个关键点持续清晰可见；如果自动选腿不稳定，请改用左腿或右腿固定模式。",
+  "algorithm_note": {
+    "included_angle_meaning": "腿伸直时夹角接近 180 度；膝盖弯曲时夹角会变小。",
+    "flexion_angle_meaning": "屈曲角 = 180 - 夹角。腿伸直时接近 0 度；弯曲越大，数值越大。",
+    "angle_source_priority": "优先使用 MediaPipe 的 3D world landmarks，不可用时回退到 2D 图像 landmarks。",
+    "smoothing": "平滑窗口 = 5 帧。",
+    "warning": "单目 MediaPipe 角度适合演示和趋势反馈，不属于临床级测量。"
+  },
+  "runtime_meta": {
+    "camera_device": "/dev/video21",
+    "camera_backend": "cv2.CAP_V4L2",
+    "frame_width": 1280,
+    "frame_height": 720,
+    "infer_width": 640,
+    "infer_height": 360,
+    "side_mode": "auto",
+    "prefer_3d_world_angle": true,
+    "model_complexity": 1,
+    "visibility_threshold": 0.55,
+    "smooth_window_size": 5,
+    "invalid_frame_count": 0,
+    "result_format": "compact_v1"
+  },
+  "keypoint_rule": {
+    "side": "left",
+    "target_joint": "left_knee",
+    "hip_index": 23,
+    "knee_index": 25,
+    "ankle_index": 27
+  },
+  "clinical_baseline": {
+    "frame_count": 123,
+    "duration_seconds": 7.231576681137085,
+    "min_selected_included_angle": 92.71882253666797,
+    "max_selected_included_angle": 166.35667142992833,
+    "min_knee_flexion_angle": 13.714313192791753,
+    "max_knee_flexion_angle": 86.01621694598903,
+    "rom_flexion": 72.30190375319728
+  },
+  "template_frames": [
+    {
+      "frame_index": 0,
+      "relative_time": 0.04991269111633301,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8720094561576843,
+      "visibility_avg": 0.9227969249089559,
+      "selected_included_angle": 165.09014972393945,
+      "selected_flexion_angle_raw": 14.909850276060553,
+      "selected_flexion_angle_smoothed": 14.909850276060553,
+      "included_angle_2d": 176.0750739174369,
+      "flexion_angle_2d": 3.924926082563104,
+      "included_angle_3d": 165.09014972393945,
+      "flexion_angle_3d": 14.909850276060553,
+      "left_knee_angle": 165.09014972393945,
+      "keypoints": {
+        "hip": {
+          "x": 0.6420058608055115,
+          "y": 0.46279266476631165,
+          "z": -0.11631343513727188,
+          "visibility": 0.9970605373382568
+        },
+        "knee": {
+          "x": 0.6248118877410889,
+          "y": 0.714850127696991,
+          "z": -0.05019575357437134,
+          "visibility": 0.8993207812309265
+        },
+        "ankle": {
+          "x": 0.6249080300331116,
+          "y": 0.9589297771453857,
+          "z": 0.05480993911623955,
+          "visibility": 0.8720094561576843
+        }
+      }
+    },
+    {
+      "frame_index": 1,
+      "relative_time": 0.10828733444213867,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8698458075523376,
+      "visibility_avg": 0.9218665957450867,
+      "selected_included_angle": 165.15052321317592,
+      "selected_flexion_angle_raw": 14.849476786824084,
+      "selected_flexion_angle_smoothed": 14.879663531442318,
+      "included_angle_2d": 175.8584502982256,
+      "flexion_angle_2d": 4.141549701774409,
+      "included_angle_3d": 165.15052321317592,
+      "flexion_angle_3d": 14.849476786824084,
+      "left_knee_angle": 165.15052321317592,
+      "keypoints": {
+        "hip": {
+          "x": 0.6419445276260376,
+          "y": 0.4619273245334625,
+          "z": -0.11568836122751236,
+          "visibility": 0.997103750705719
+        },
+        "knee": {
+          "x": 0.6244630217552185,
+          "y": 0.7138959169387817,
+          "z": -0.05006789416074753,
+          "visibility": 0.8986502289772034
+        },
+        "ankle": {
+          "x": 0.6251991391181946,
+          "y": 0.9580487608909607,
+          "z": 0.05553797632455826,
+          "visibility": 0.8698458075523376
+        }
+      }
+    },
+    {
+      "frame_index": 2,
+      "relative_time": 0.16672301292419434,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8701385855674744,
+      "visibility_avg": 0.9227631290753683,
+      "selected_included_angle": 165.27170860233272,
+      "selected_flexion_angle_raw": 14.728291397667277,
+      "selected_flexion_angle_smoothed": 14.829206153517305,
+      "included_angle_2d": 176.0302784425557,
+      "flexion_angle_2d": 3.969721557444302,
+      "included_angle_3d": 165.27170860233272,
+      "flexion_angle_3d": 14.728291397667277,
+      "left_knee_angle": 165.27170860233272,
+      "keypoints": {
+        "hip": {
+          "x": 0.6438721418380737,
+          "y": 0.4615718424320221,
+          "z": -0.11522414535284042,
+          "visibility": 0.9971379637718201
+        },
+        "knee": {
+          "x": 0.6268200278282166,
+          "y": 0.7134708762168884,
+          "z": -0.05178406834602356,
+          "visibility": 0.9010128378868103
+        },
+        "ankle": {
+          "x": 0.6272333860397339,
+          "y": 0.9575428366661072,
+          "z": 0.0553375706076622,
+          "visibility": 0.8701385855674744
+        }
+      }
+    },
+    {
+      "frame_index": 3,
+      "relative_time": 0.22501277923583984,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8703627586364746,
+      "visibility_avg": 0.923638641834259,
+      "selected_included_angle": 165.23084893315595,
+      "selected_flexion_angle_raw": 14.769151066844046,
+      "selected_flexion_angle_smoothed": 14.81419238184899,
+      "included_angle_2d": 175.9284803811398,
+      "flexion_angle_2d": 4.071519618860208,
+      "included_angle_3d": 165.23084893315595,
+      "flexion_angle_3d": 14.769151066844046,
+      "left_knee_angle": 165.23084893315595,
+      "keypoints": {
+        "hip": {
+          "x": 0.6445959806442261,
+          "y": 0.4626997113227844,
+          "z": -0.11512484401464462,
+          "visibility": 0.9971211552619934
+        },
+        "knee": {
+          "x": 0.6273435354232788,
+          "y": 0.7147063612937927,
+          "z": -0.04999023675918579,
+          "visibility": 0.9034320116043091
+        },
+        "ankle": {
+          "x": 0.6280019283294678,
+          "y": 0.9578526616096497,
+          "z": 0.060369014739990234,
+          "visibility": 0.8703627586364746
+        }
+      }
+    },
+    {
+      "frame_index": 4,
+      "relative_time": 0.2835116386413574,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8724967837333679,
+      "visibility_avg": 0.9252326687177023,
+      "selected_included_angle": 165.1168955251547,
+      "selected_flexion_angle_raw": 14.883104474845311,
+      "selected_flexion_angle_smoothed": 14.827974800448255,
+      "included_angle_2d": 175.9064903898285,
+      "flexion_angle_2d": 4.093509610171509,
+      "included_angle_3d": 165.1168955251547,
+      "flexion_angle_3d": 14.883104474845311,
+      "left_knee_angle": 165.1168955251547,
+      "keypoints": {
+        "hip": {
+          "x": 0.644385814666748,
+          "y": 0.4652697741985321,
+          "z": -0.11520179361104965,
+          "visibility": 0.9971700310707092
+        },
+        "knee": {
+          "x": 0.6273046135902405,
+          "y": 0.7177963256835938,
+          "z": -0.04747976362705231,
+          "visibility": 0.9060311913490295
+        },
+        "ankle": {
+          "x": 0.6282427906990051,
+          "y": 0.9579290747642517,
+          "z": 0.061765797436237335,
+          "visibility": 0.8724967837333679
+        }
+      }
+    },
+    {
+      "frame_index": 5,
+      "relative_time": 0.3419961929321289,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.871738076210022,
+      "visibility_avg": 0.925121009349823,
+      "selected_included_angle": 165.1875329097129,
+      "selected_flexion_angle_raw": 14.8124670902871,
+      "selected_flexion_angle_smoothed": 14.808498163293564,
+      "included_angle_2d": 175.8304588311319,
+      "flexion_angle_2d": 4.169541168868108,
+      "included_angle_3d": 165.1875329097129,
+      "flexion_angle_3d": 14.8124670902871,
+      "left_knee_angle": 165.1875329097129,
+      "keypoints": {
+        "hip": {
+          "x": 0.6442273855209351,
+          "y": 0.46552175283432007,
+          "z": -0.11524256318807602,
+          "visibility": 0.9971827864646912
+        },
+        "knee": {
+          "x": 0.6270047426223755,
+          "y": 0.7191724181175232,
+          "z": -0.045946963131427765,
+          "visibility": 0.9064421653747559
+        },
+        "ankle": {
+          "x": 0.6281933784484863,
+          "y": 0.9579859375953674,
+          "z": 0.06564006954431534,
+          "visibility": 0.871738076210022
+        }
+      }
+    },
+    {
+      "frame_index": 6,
+      "relative_time": 0.4001450538635254,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8710038661956787,
+      "visibility_avg": 0.9250792463620504,
+      "selected_included_angle": 165.1915859862856,
+      "selected_flexion_angle_raw": 14.808414013714412,
+      "selected_flexion_angle_smoothed": 14.80028560867163,
+      "included_angle_2d": 175.82239263548357,
+      "flexion_angle_2d": 4.177607364516433,
+      "included_angle_3d": 165.1915859862856,
+      "flexion_angle_3d": 14.808414013714412,
+      "left_knee_angle": 165.1915859862856,
+      "keypoints": {
+        "hip": {
+          "x": 0.64397132396698,
+          "y": 0.4675634205341339,
+          "z": -0.11509861052036285,
+          "visibility": 0.9971705675125122
+        },
+        "knee": {
+          "x": 0.6267970204353333,
+          "y": 0.7217088341712952,
+          "z": -0.042258478701114655,
+          "visibility": 0.9070633053779602
+        },
+        "ankle": {
+          "x": 0.6280811429023743,
+          "y": 0.957805871963501,
+          "z": 0.07054334133863449,
+          "visibility": 0.8710038661956787
+        }
+      }
+    },
+    {
+      "frame_index": 7,
+      "relative_time": 0.4588456153869629,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8669177293777466,
+      "visibility_avg": 0.9228914380073547,
+      "selected_included_angle": 165.29429721428053,
+      "selected_flexion_angle_raw": 14.705702785719467,
+      "selected_flexion_angle_smoothed": 14.795767886282068,
+      "included_angle_2d": 175.8081903140174,
+      "flexion_angle_2d": 4.191809685982605,
+      "included_angle_3d": 165.29429721428053,
+      "flexion_angle_3d": 14.705702785719467,
+      "left_knee_angle": 165.29429721428053,
+      "keypoints": {
+        "hip": {
+          "x": 0.6442550420761108,
+          "y": 0.4673042297363281,
+          "z": -0.11511774361133575,
+          "visibility": 0.997151255607605
+        },
+        "knee": {
+          "x": 0.627021849155426,
+          "y": 0.7215130925178528,
+          "z": -0.043601129204034805,
+          "visibility": 0.9046053290367126
+        },
+        "ankle": {
+          "x": 0.6283160448074341,
+          "y": 0.9579810500144958,
+          "z": 0.06658388674259186,
+          "visibility": 0.8669177293777466
+        }
+      }
+    },
+    {
+      "frame_index": 8,
+      "relative_time": 0.517404317855835,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8601018190383911,
+      "visibility_avg": 0.9191205700238546,
+      "selected_included_angle": 165.81430014145732,
+      "selected_flexion_angle_raw": 14.185699858542677,
+      "selected_flexion_angle_smoothed": 14.679077644621794,
+      "included_angle_2d": 175.93630152104052,
+      "flexion_angle_2d": 4.0636984789594806,
+      "included_angle_3d": 165.81430014145732,
+      "flexion_angle_3d": 14.185699858542677,
+      "left_knee_angle": 165.81430014145732,
+      "keypoints": {
+        "hip": {
+          "x": 0.6441535353660583,
+          "y": 0.4672613739967346,
+          "z": -0.11537368595600128,
+          "visibility": 0.9971151947975159
+        },
+        "knee": {
+          "x": 0.6272391080856323,
+          "y": 0.7213879823684692,
+          "z": -0.04829742759466171,
+          "visibility": 0.9001446962356567
+        },
+        "ankle": {
+          "x": 0.6282981038093567,
+          "y": 0.9586225152015686,
+          "z": 0.05106298252940178,
+          "visibility": 0.8601018190383911
+        }
+      }
+    },
+    {
+      "frame_index": 9,
+      "relative_time": 0.5756199359893799,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8587571382522583,
+      "visibility_avg": 0.9182913104693095,
+      "selected_included_angle": 165.88141044439647,
+      "selected_flexion_angle_raw": 14.118589555603535,
+      "selected_flexion_angle_smoothed": 14.526174660773439,
+      "included_angle_2d": 176.15941221711944,
+      "flexion_angle_2d": 3.8405877828805615,
+      "included_angle_3d": 165.88141044439647,
+      "flexion_angle_3d": 14.118589555603535,
+      "left_knee_angle": 165.88141044439647,
+      "keypoints": {
+        "hip": {
+          "x": 0.6449248790740967,
+          "y": 0.46257761120796204,
+          "z": -0.11535670608282089,
+          "visibility": 0.9971413612365723
+        },
+        "knee": {
+          "x": 0.628339409828186,
+          "y": 0.7163889408111572,
+          "z": -0.051349543035030365,
+          "visibility": 0.8989754319190979
+        },
+        "ankle": {
+          "x": 0.6287697553634644,
+          "y": 0.9584260582923889,
+          "z": 0.04631378874182701,
+          "visibility": 0.8587571382522583
+        }
+      }
+    },
+    {
+      "frame_index": 10,
+      "relative_time": 0.6339530944824219,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8557682633399963,
+      "visibility_avg": 0.9162706732749939,
+      "selected_included_angle": 166.06627973109588,
+      "selected_flexion_angle_raw": 13.933720268904125,
+      "selected_flexion_angle_smoothed": 14.350425296496843,
+      "included_angle_2d": 176.16663729746955,
+      "flexion_angle_2d": 3.833362702530451,
+      "included_angle_3d": 166.06627973109588,
+      "flexion_angle_3d": 13.933720268904125,
+      "left_knee_angle": 166.06627973109588,
+      "keypoints": {
+        "hip": {
+          "x": 0.6450046896934509,
+          "y": 0.45809847116470337,
+          "z": -0.11528445780277252,
+          "visibility": 0.9971528053283691
+        },
+        "knee": {
+          "x": 0.6284440159797668,
+          "y": 0.7122027277946472,
+          "z": -0.05729501694440842,
+          "visibility": 0.8958909511566162
+        },
+        "ankle": {
+          "x": 0.6288918256759644,
+          "y": 0.9577003717422485,
+          "z": 0.036010242998600006,
+          "visibility": 0.8557682633399963
+        }
+      }
+    },
+    {
+      "frame_index": 11,
+      "relative_time": 0.6924660205841064,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8544448018074036,
+      "visibility_avg": 0.9155707955360413,
+      "selected_included_angle": 166.28345659280134,
+      "selected_flexion_angle_raw": 13.716543407198657,
+      "selected_flexion_angle_smoothed": 14.132051175193691,
+      "included_angle_2d": 176.03979343271752,
+      "flexion_angle_2d": 3.9602065672824835,
+      "included_angle_3d": 166.28345659280134,
+      "flexion_angle_3d": 13.716543407198657,
+      "left_knee_angle": 166.28345659280134,
+      "keypoints": {
+        "hip": {
+          "x": 0.6452949047088623,
+          "y": 0.4547015428543091,
+          "z": -0.11522586643695831,
+          "visibility": 0.9971712827682495
+        },
+        "knee": {
+          "x": 0.6285011172294617,
+          "y": 0.710885763168335,
+          "z": -0.05793541669845581,
+          "visibility": 0.8950963020324707
+        },
+        "ankle": {
+          "x": 0.629403293132782,
+          "y": 0.9574654698371887,
+          "z": 0.036680202931165695,
+          "visibility": 0.8544448018074036
+        }
+      }
+    },
+    {
+      "frame_index": 12,
+      "relative_time": 0.7507791519165039,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8553192019462585,
+      "visibility_avg": 0.9164632757504781,
+      "selected_included_angle": 166.0640241704705,
+      "selected_flexion_angle_raw": 13.935975829529497,
+      "selected_flexion_angle_smoothed": 13.978105783955698,
+      "included_angle_2d": 176.0710867793469,
+      "flexion_angle_2d": 3.928913220653101,
+      "included_angle_3d": 166.0640241704705,
+      "flexion_angle_3d": 13.935975829529497,
+      "left_knee_angle": 166.0640241704705,
+      "keypoints": {
+        "hip": {
+          "x": 0.6453328132629395,
+          "y": 0.45983174443244934,
+          "z": -0.11600206047296524,
+          "visibility": 0.9971799254417419
+        },
+        "knee": {
+          "x": 0.6287607550621033,
+          "y": 0.7178599238395691,
+          "z": -0.04444850608706474,
+          "visibility": 0.8968906998634338
+        },
+        "ankle": {
+          "x": 0.6298245787620544,
+          "y": 0.957739531993866,
+          "z": 0.07220584154129028,
+          "visibility": 0.8553192019462585
+        }
+      }
+    },
+    {
+      "frame_index": 13,
+      "relative_time": 0.809119462966919,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8555160164833069,
+      "visibility_avg": 0.9166685740152994,
+      "selected_included_angle": 166.0888974196633,
+      "selected_flexion_angle_raw": 13.911102580336689,
+      "selected_flexion_angle_smoothed": 13.9231863283145,
+      "included_angle_2d": 175.99494173689055,
+      "flexion_angle_2d": 4.005058263109447,
+      "included_angle_3d": 166.0888974196633,
+      "flexion_angle_3d": 13.911102580336689,
+      "left_knee_angle": 166.0888974196633,
+      "keypoints": {
+        "hip": {
+          "x": 0.6452881097793579,
+          "y": 0.45988819003105164,
+          "z": -0.11618582159280777,
+          "visibility": 0.9971883296966553
+        },
+        "knee": {
+          "x": 0.6287066340446472,
+          "y": 0.7184105515480042,
+          "z": -0.043177179992198944,
+          "visibility": 0.8973013758659363
+        },
+        "ankle": {
+          "x": 0.6301067471504211,
+          "y": 0.9577530026435852,
+          "z": 0.06930260360240936,
+          "visibility": 0.8555160164833069
+        }
+      }
+    },
+    {
+      "frame_index": 14,
+      "relative_time": 0.8675141334533691,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8561469316482544,
+      "visibility_avg": 0.9174394607543945,
+      "selected_included_angle": 166.0016955970628,
+      "selected_flexion_angle_raw": 13.998304402937208,
+      "selected_flexion_angle_smoothed": 13.899129297781235,
+      "included_angle_2d": 175.86267481535393,
+      "flexion_angle_2d": 4.137325184646073,
+      "included_angle_3d": 166.0016955970628,
+      "flexion_angle_3d": 13.998304402937208,
+      "left_knee_angle": 166.0016955970628,
+      "keypoints": {
+        "hip": {
+          "x": 0.6452733278274536,
+          "y": 0.46104803681373596,
+          "z": -0.11766346544027328,
+          "visibility": 0.997135579586029
+        },
+        "knee": {
+          "x": 0.6284197568893433,
+          "y": 0.720463216304779,
+          "z": -0.04162320867180824,
+          "visibility": 0.8990358710289001
+        },
+        "ankle": {
+          "x": 0.6301599144935608,
+          "y": 0.9577457904815674,
+          "z": 0.07618753612041473,
+          "visibility": 0.8561469316482544
+        }
+      }
+    },
+    {
+      "frame_index": 15,
+      "relative_time": 0.9258425235748291,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8560035824775696,
+      "visibility_avg": 0.9178151488304138,
+      "selected_included_angle": 166.1630939665574,
+      "selected_flexion_angle_raw": 13.836906033442602,
+      "selected_flexion_angle_smoothed": 13.87976645068893,
+      "included_angle_2d": 175.56002731606856,
+      "flexion_angle_2d": 4.439972683931444,
+      "included_angle_3d": 166.1630939665574,
+      "flexion_angle_3d": 13.836906033442602,
+      "left_knee_angle": 166.1630939665574,
+      "keypoints": {
+        "hip": {
+          "x": 0.6452425718307495,
+          "y": 0.4617835283279419,
+          "z": -0.11875402927398682,
+          "visibility": 0.9971064329147339
+        },
+        "knee": {
+          "x": 0.6278194189071655,
+          "y": 0.7209886908531189,
+          "z": -0.047365184873342514,
+          "visibility": 0.900335431098938
+        },
+        "ankle": {
+          "x": 0.6302774548530579,
+          "y": 0.9578881859779358,
+          "z": 0.06025096774101257,
+          "visibility": 0.8560035824775696
+        }
+      }
+    },
+    {
+      "frame_index": 16,
+      "relative_time": 0.9845466613769531,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8555999994277954,
+      "visibility_avg": 0.9179759621620178,
+      "selected_included_angle": 166.22412006232852,
+      "selected_flexion_angle_raw": 13.775879937671476,
+      "selected_flexion_angle_smoothed": 13.891633756783495,
+      "included_angle_2d": 175.38181669253072,
+      "flexion_angle_2d": 4.61818330746928,
+      "included_angle_3d": 166.22412006232852,
+      "flexion_angle_3d": 13.775879937671476,
+      "left_knee_angle": 166.22412006232852,
+      "keypoints": {
+        "hip": {
+          "x": 0.6452337503433228,
+          "y": 0.4617839455604553,
+          "z": -0.11872948706150055,
+          "visibility": 0.9970796704292297
+        },
+        "knee": {
+          "x": 0.6275911331176758,
+          "y": 0.721156656742096,
+          "z": -0.04744081199169159,
+          "visibility": 0.9012482166290283
+        },
+        "ankle": {
+          "x": 0.6305946111679077,
+          "y": 0.9578845500946045,
+          "z": 0.06034288927912712,
+          "visibility": 0.8555999994277954
+        }
+      }
+    },
+    {
+      "frame_index": 17,
+      "relative_time": 1.0429842472076416,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8549497723579407,
+      "visibility_avg": 0.9180490970611572,
+      "selected_included_angle": 166.27436892717708,
+      "selected_flexion_angle_raw": 13.725631072822921,
+      "selected_flexion_angle_smoothed": 13.84956480544218,
+      "included_angle_2d": 175.2506949060909,
+      "flexion_angle_2d": 4.749305093909101,
+      "included_angle_3d": 166.27436892717708,
+      "flexion_angle_3d": 13.725631072822921,
+      "left_knee_angle": 166.27436892717708,
+      "keypoints": {
+        "hip": {
+          "x": 0.6452682018280029,
+          "y": 0.4618382751941681,
+          "z": -0.11874666064977646,
+          "visibility": 0.9970302581787109
+        },
+        "knee": {
+          "x": 0.6273454427719116,
+          "y": 0.7213799953460693,
+          "z": -0.0479845255613327,
+          "visibility": 0.9021672606468201
+        },
+        "ankle": {
+          "x": 0.6306424736976624,
+          "y": 0.957794725894928,
+          "z": 0.060276102274656296,
+          "visibility": 0.8549497723579407
+        }
+      }
+    },
+    {
+      "frame_index": 18,
+      "relative_time": 1.1014599800109863,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8520633578300476,
+      "visibility_avg": 0.9165450930595398,
+      "selected_included_angle": 166.30558861203394,
+      "selected_flexion_angle_raw": 13.694411387966056,
+      "selected_flexion_angle_smoothed": 13.806226566968054,
+      "included_angle_2d": 175.38077964843444,
+      "flexion_angle_2d": 4.619220351565559,
+      "included_angle_3d": 166.30558861203394,
+      "flexion_angle_3d": 13.694411387966056,
+      "left_knee_angle": 166.30558861203394,
+      "keypoints": {
+        "hip": {
+          "x": 0.6452561020851135,
+          "y": 0.4618638753890991,
+          "z": -0.11896596848964691,
+          "visibility": 0.9969704747200012
+        },
+        "knee": {
+          "x": 0.6276518702507019,
+          "y": 0.721347451210022,
+          "z": -0.04894493520259857,
+          "visibility": 0.9006014466285706
+        },
+        "ankle": {
+          "x": 0.6306976675987244,
+          "y": 0.9577897191047668,
+          "z": 0.05780266597867012,
+          "visibility": 0.8520633578300476
+        }
+      }
+    },
+    {
+      "frame_index": 19,
+      "relative_time": 1.1594898700714111,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8494464159011841,
+      "visibility_avg": 0.9151809215545654,
+      "selected_included_angle": 166.19352323026357,
+      "selected_flexion_angle_raw": 13.806476769736435,
+      "selected_flexion_angle_smoothed": 13.767861040327897,
+      "included_angle_2d": 175.5664850771338,
+      "flexion_angle_2d": 4.433514922866209,
+      "included_angle_3d": 166.19352323026357,
+      "flexion_angle_3d": 13.806476769736435,
+      "left_knee_angle": 166.19352323026357,
+      "keypoints": {
+        "hip": {
+          "x": 0.6452518105506897,
+          "y": 0.4625386595726013,
+          "z": -0.11903361976146698,
+          "visibility": 0.9969623684883118
+        },
+        "knee": {
+          "x": 0.6280843615531921,
+          "y": 0.7213032841682434,
+          "z": -0.043287985026836395,
+          "visibility": 0.8991339802742004
+        },
+        "ankle": {
+          "x": 0.6307171583175659,
+          "y": 0.9577870965003967,
+          "z": 0.07166416943073273,
+          "visibility": 0.8494464159011841
+        }
+      }
+    },
+    {
+      "frame_index": 20,
+      "relative_time": 1.2182033061981201,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8484727740287781,
+      "visibility_avg": 0.9148914217948914,
+      "selected_included_angle": 166.07699892885978,
+      "selected_flexion_angle_raw": 13.92300107114022,
+      "selected_flexion_angle_smoothed": 13.785080047867421,
+      "included_angle_2d": 175.6455011679554,
+      "flexion_angle_2d": 4.354498832044612,
+      "included_angle_3d": 166.07699892885978,
+      "flexion_angle_3d": 13.92300107114022,
+      "left_knee_angle": 166.07699892885978,
+      "keypoints": {
+        "hip": {
+          "x": 0.646564781665802,
+          "y": 0.4628959596157074,
+          "z": -0.11909280717372894,
+          "visibility": 0.9969413876533508
+        },
+        "knee": {
+          "x": 0.6293885707855225,
+          "y": 0.721268892288208,
+          "z": -0.03778539225459099,
+          "visibility": 0.8992601037025452
+        },
+        "ankle": {
+          "x": 0.6316613554954529,
+          "y": 0.9575265049934387,
+          "z": 0.08407445251941681,
+          "visibility": 0.8484727740287781
+        }
+      }
+    },
+    {
+      "frame_index": 21,
+      "relative_time": 1.2768125534057617,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8433434367179871,
+      "visibility_avg": 0.9127299388249716,
+      "selected_included_angle": 166.31534674289603,
+      "selected_flexion_angle_raw": 13.684653257103975,
+      "selected_flexion_angle_smoothed": 13.766834711753921,
+      "included_angle_2d": 175.4186594308393,
+      "flexion_angle_2d": 4.581340569160687,
+      "included_angle_3d": 166.31534674289603,
+      "flexion_angle_3d": 13.684653257103975,
+      "left_knee_angle": 166.31534674289603,
+      "keypoints": {
+        "hip": {
+          "x": 0.6474646925926208,
+          "y": 0.46292030811309814,
+          "z": -0.1190878301858902,
+          "visibility": 0.9968391060829163
+        },
+        "knee": {
+          "x": 0.6293537020683289,
+          "y": 0.7210598587989807,
+          "z": -0.03819577023386955,
+          "visibility": 0.8980072736740112
+        },
+        "ankle": {
+          "x": 0.6316976547241211,
+          "y": 0.9574671387672424,
+          "z": 0.08039047569036484,
+          "visibility": 0.8433434367179871
+        }
+      }
+    },
+    {
+      "frame_index": 22,
+      "relative_time": 1.373267412185669,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8412308096885681,
+      "visibility_avg": 0.9118950764338175,
+      "selected_included_angle": 166.3181246479059,
+      "selected_flexion_angle_raw": 13.681875352094096,
+      "selected_flexion_angle_smoothed": 13.758083567608157,
+      "included_angle_2d": 175.35675301434136,
+      "flexion_angle_2d": 4.643246985658635,
+      "included_angle_3d": 166.3181246479059,
+      "flexion_angle_3d": 13.681875352094096,
+      "left_knee_angle": 166.3181246479059,
+      "keypoints": {
+        "hip": {
+          "x": 0.648318886756897,
+          "y": 0.4631272554397583,
+          "z": -0.11942978948354721,
+          "visibility": 0.9967966079711914
+        },
+        "knee": {
+          "x": 0.6299765706062317,
+          "y": 0.721079409122467,
+          "z": -0.03915059566497803,
+          "visibility": 0.8976578116416931
+        },
+        "ankle": {
+          "x": 0.6323567628860474,
+          "y": 0.957859456539154,
+          "z": 0.07720861583948135,
+          "visibility": 0.8412308096885681
+        }
+      }
+    },
+    {
+      "frame_index": 23,
+      "relative_time": 1.431725025177002,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8387084603309631,
+      "visibility_avg": 0.9110679626464844,
+      "selected_included_angle": 166.20803935597291,
+      "selected_flexion_angle_raw": 13.791960644027085,
+      "selected_flexion_angle_smoothed": 13.777593418820363,
+      "included_angle_2d": 175.01963360284518,
+      "flexion_angle_2d": 4.980366397154825,
+      "included_angle_3d": 166.20803935597291,
+      "flexion_angle_3d": 13.791960644027085,
+      "left_knee_angle": 166.20803935597291,
+      "keypoints": {
+        "hip": {
+          "x": 0.6505522727966309,
+          "y": 0.46388787031173706,
+          "z": -0.11941777169704437,
+          "visibility": 0.996735155582428
+        },
+        "knee": {
+          "x": 0.6311948299407959,
+          "y": 0.721002459526062,
+          "z": -0.037675581872463226,
+          "visibility": 0.897760272026062
+        },
+        "ankle": {
+          "x": 0.6339848637580872,
+          "y": 0.9578699469566345,
+          "z": 0.0809168741106987,
+          "visibility": 0.8387084603309631
+        }
+      }
+    },
+    {
+      "frame_index": 24,
+      "relative_time": 1.489884376525879,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8366771936416626,
+      "visibility_avg": 0.9096688628196716,
+      "selected_included_angle": 166.0890088088278,
+      "selected_flexion_angle_raw": 13.9109911911722,
+      "selected_flexion_angle_smoothed": 13.798496303107516,
+      "included_angle_2d": 174.69611388267262,
+      "flexion_angle_2d": 5.30388611732738,
+      "included_angle_3d": 166.0890088088278,
+      "flexion_angle_3d": 13.9109911911722,
+      "left_knee_angle": 166.0890088088278,
+      "keypoints": {
+        "hip": {
+          "x": 0.6524876952171326,
+          "y": 0.4645293354988098,
+          "z": -0.11872975528240204,
+          "visibility": 0.9966160655021667
+        },
+        "knee": {
+          "x": 0.6317394971847534,
+          "y": 0.7190931439399719,
+          "z": -0.0354614295065403,
+          "visibility": 0.8957133293151855
+        },
+        "ankle": {
+          "x": 0.6344243288040161,
+          "y": 0.9578379392623901,
+          "z": 0.08599652349948883,
+          "visibility": 0.8366771936416626
+        }
+      }
+    },
+    {
+      "frame_index": 25,
+      "relative_time": 1.5478606224060059,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8411287665367126,
+      "visibility_avg": 0.9119187196095785,
+      "selected_included_angle": 165.66551213660472,
+      "selected_flexion_angle_raw": 14.334487863395282,
+      "selected_flexion_angle_smoothed": 13.880793661558528,
+      "included_angle_2d": 174.45816988913757,
+      "flexion_angle_2d": 5.541830110862435,
+      "included_angle_3d": 165.66551213660472,
+      "flexion_angle_3d": 14.334487863395282,
+      "left_knee_angle": 165.66551213660472,
+      "keypoints": {
+        "hip": {
+          "x": 0.6531009078025818,
+          "y": 0.46513885259628296,
+          "z": -0.1175541877746582,
+          "visibility": 0.9966578483581543
+        },
+        "knee": {
+          "x": 0.6318547129631042,
+          "y": 0.7193797826766968,
+          "z": -0.02964119240641594,
+          "visibility": 0.8979695439338684
+        },
+        "ankle": {
+          "x": 0.6350486278533936,
+          "y": 0.9586149454116821,
+          "z": 0.09331243485212326,
+          "visibility": 0.8411287665367126
+        }
+      }
+    },
+    {
+      "frame_index": 26,
+      "relative_time": 1.6059489250183105,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8423589468002319,
+      "visibility_avg": 0.9119674364725748,
+      "selected_included_angle": 165.28865293574222,
+      "selected_flexion_angle_raw": 14.71134706425778,
+      "selected_flexion_angle_smoothed": 14.086132422989289,
+      "included_angle_2d": 174.26465976022732,
+      "flexion_angle_2d": 5.7353402397726825,
+      "included_angle_3d": 165.28865293574222,
+      "flexion_angle_3d": 14.71134706425778,
+      "left_knee_angle": 165.28865293574222,
+      "keypoints": {
+        "hip": {
+          "x": 0.653744101524353,
+          "y": 0.465152770280838,
+          "z": -0.11686696112155914,
+          "visibility": 0.9966552257537842
+        },
+        "knee": {
+          "x": 0.6322572231292725,
+          "y": 0.7187336683273315,
+          "z": -0.031323108822107315,
+          "visibility": 0.8968881368637085
+        },
+        "ankle": {
+          "x": 0.6359970569610596,
+          "y": 0.9589295983314514,
+          "z": 0.09193499386310577,
+          "visibility": 0.8423589468002319
+        }
+      }
+    },
+    {
+      "frame_index": 27,
+      "relative_time": 1.664313793182373,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8466942310333252,
+      "visibility_avg": 0.9140594800313314,
+      "selected_included_angle": 164.47922370051583,
+      "selected_flexion_angle_raw": 15.520776299484169,
+      "selected_flexion_angle_smoothed": 14.453912612467303,
+      "included_angle_2d": 174.1222409246631,
+      "flexion_angle_2d": 5.877759075336911,
+      "included_angle_3d": 164.47922370051583,
+      "flexion_angle_3d": 15.520776299484169,
+      "left_knee_angle": 164.47922370051583,
+      "keypoints": {
+        "hip": {
+          "x": 0.6534948945045471,
+          "y": 0.4674385190010071,
+          "z": -0.1168753057718277,
+          "visibility": 0.9967406392097473
+        },
+        "knee": {
+          "x": 0.6320576071739197,
+          "y": 0.7188236713409424,
+          "z": -0.031785137951374054,
+          "visibility": 0.8987435698509216
+        },
+        "ankle": {
+          "x": 0.6362922191619873,
+          "y": 0.9605640172958374,
+          "z": 0.08096832036972046,
+          "visibility": 0.8466942310333252
+        }
+      }
+    },
+    {
+      "frame_index": 28,
+      "relative_time": 1.7226803302764893,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8519447445869446,
+      "visibility_avg": 0.9166088700294495,
+      "selected_included_angle": 163.67471649190088,
+      "selected_flexion_angle_raw": 16.32528350809912,
+      "selected_flexion_angle_smoothed": 14.96057718528171,
+      "included_angle_2d": 173.9516686193599,
+      "flexion_angle_2d": 6.048331380640093,
+      "included_angle_3d": 163.67471649190088,
+      "flexion_angle_3d": 16.32528350809912,
+      "left_knee_angle": 163.67471649190088,
+      "keypoints": {
+        "hip": {
+          "x": 0.6533094644546509,
+          "y": 0.47078078985214233,
+          "z": -0.1170310229063034,
+          "visibility": 0.9968344569206238
+        },
+        "knee": {
+          "x": 0.6320247650146484,
+          "y": 0.7199466228485107,
+          "z": -0.03193329647183418,
+          "visibility": 0.90104740858078
+        },
+        "ankle": {
+          "x": 0.6369207501411438,
+          "y": 0.960545539855957,
+          "z": 0.08166702836751938,
+          "visibility": 0.8519447445869446
+        }
+      }
+    },
+    {
+      "frame_index": 29,
+      "relative_time": 1.7809929847717285,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8566966652870178,
+      "visibility_avg": 0.9186129967371622,
+      "selected_included_angle": 162.6257048407206,
+      "selected_flexion_angle_raw": 17.3742951592794,
+      "selected_flexion_angle_smoothed": 15.65323797890315,
+      "included_angle_2d": 173.79452971955425,
+      "flexion_angle_2d": 6.205470280445752,
+      "included_angle_3d": 162.6257048407206,
+      "flexion_angle_3d": 17.3742951592794,
+      "left_knee_angle": 162.6257048407206,
+      "keypoints": {
+        "hip": {
+          "x": 0.653211772441864,
+          "y": 0.4731171429157257,
+          "z": -0.1165681853890419,
+          "visibility": 0.9968891143798828
+        },
+        "knee": {
+          "x": 0.6320366859436035,
+          "y": 0.7205557227134705,
+          "z": -0.025225277990102768,
+          "visibility": 0.9022532105445862
+        },
+        "ankle": {
+          "x": 0.6375428438186646,
+          "y": 0.9605720639228821,
+          "z": 0.09895241260528564,
+          "visibility": 0.8566966652870178
+        }
+      }
+    },
+    {
+      "frame_index": 30,
+      "relative_time": 1.839388370513916,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8603694438934326,
+      "visibility_avg": 0.9202187458674113,
+      "selected_included_angle": 162.31324141901078,
+      "selected_flexion_angle_raw": 17.68675858098922,
+      "selected_flexion_angle_smoothed": 16.32369212242194,
+      "included_angle_2d": 173.80483020223525,
+      "flexion_angle_2d": 6.195169797764748,
+      "included_angle_3d": 162.31324141901078,
+      "flexion_angle_3d": 17.68675858098922,
+      "left_knee_angle": 162.31324141901078,
+      "keypoints": {
+        "hip": {
+          "x": 0.6530458331108093,
+          "y": 0.4744828939437866,
+          "z": -0.11657656729221344,
+          "visibility": 0.9969627261161804
+        },
+        "knee": {
+          "x": 0.632006824016571,
+          "y": 0.7207611203193665,
+          "z": -0.024206476286053658,
+          "visibility": 0.9033240675926208
+        },
+        "ankle": {
+          "x": 0.6375088095664978,
+          "y": 0.960925817489624,
+          "z": 0.09956793487071991,
+          "visibility": 0.8603694438934326
+        }
+      }
+    },
+    {
+      "frame_index": 31,
+      "relative_time": 1.8977530002593994,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8629613518714905,
+      "visibility_avg": 0.921577533086141,
+      "selected_included_angle": 162.16843396498032,
+      "selected_flexion_angle_raw": 17.831566035019677,
+      "selected_flexion_angle_smoothed": 16.947735916574317,
+      "included_angle_2d": 173.04660648943465,
+      "flexion_angle_2d": 6.953393510565348,
+      "included_angle_3d": 162.16843396498032,
+      "flexion_angle_3d": 17.831566035019677,
+      "left_knee_angle": 162.16843396498032,
+      "keypoints": {
+        "hip": {
+          "x": 0.6515566110610962,
+          "y": 0.47578272223472595,
+          "z": -0.1168079525232315,
+          "visibility": 0.9969990849494934
+        },
+        "knee": {
+          "x": 0.6295479536056519,
+          "y": 0.7210745811462402,
+          "z": -0.023684896528720856,
+          "visibility": 0.904772162437439
+        },
+        "ankle": {
+          "x": 0.6371857523918152,
+          "y": 0.9606117010116577,
+          "z": 0.10109023749828339,
+          "visibility": 0.8629613518714905
+        }
+      }
+    },
+    {
+      "frame_index": 32,
+      "relative_time": 1.9558601379394531,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8605108261108398,
+      "visibility_avg": 0.9196852644284567,
+      "selected_included_angle": 162.29971662760477,
+      "selected_flexion_angle_raw": 17.700283372395234,
+      "selected_flexion_angle_smoothed": 17.383637331156528,
+      "included_angle_2d": 171.391230926486,
+      "flexion_angle_2d": 8.608769073513997,
+      "included_angle_3d": 162.29971662760477,
+      "flexion_angle_3d": 17.700283372395234,
+      "left_knee_angle": 162.29971662760477,
+      "keypoints": {
+        "hip": {
+          "x": 0.6467540264129639,
+          "y": 0.47538185119628906,
+          "z": -0.12115007638931274,
+          "visibility": 0.9969891905784607
+        },
+        "knee": {
+          "x": 0.6208389401435852,
+          "y": 0.7210760116577148,
+          "z": -0.039779916405677795,
+          "visibility": 0.9015557765960693
+        },
+        "ankle": {
+          "x": 0.6316633224487305,
+          "y": 0.9605871438980103,
+          "z": 0.06771625578403473,
+          "visibility": 0.8605108261108398
+        }
+      }
+    },
+    {
+      "frame_index": 33,
+      "relative_time": 2.014153480529785,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8586007952690125,
+      "visibility_avg": 0.9196621775627136,
+      "selected_included_angle": 161.96305779198045,
+      "selected_flexion_angle_raw": 18.036942208019553,
+      "selected_flexion_angle_smoothed": 17.725969071140618,
+      "included_angle_2d": 168.33823603065915,
+      "flexion_angle_2d": 11.661763969340853,
+      "included_angle_3d": 161.96305779198045,
+      "flexion_angle_3d": 18.036942208019553,
+      "left_knee_angle": 161.96305779198045,
+      "keypoints": {
+        "hip": {
+          "x": 0.6431711316108704,
+          "y": 0.4745536744594574,
+          "z": -0.12447124719619751,
+          "visibility": 0.9969003796577454
+        },
+        "knee": {
+          "x": 0.608944833278656,
+          "y": 0.721038281917572,
+          "z": -0.05678775906562805,
+          "visibility": 0.9034853577613831
+        },
+        "ankle": {
+          "x": 0.6246432065963745,
+          "y": 0.9601430296897888,
+          "z": 0.04088722914457321,
+          "visibility": 0.8586007952690125
+        }
+      }
+    },
+    {
+      "frame_index": 34,
+      "relative_time": 2.0728633403778076,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8527629375457764,
+      "visibility_avg": 0.9187576373418173,
+      "selected_included_angle": 159.81665303962816,
+      "selected_flexion_angle_raw": 20.183346960371836,
+      "selected_flexion_angle_smoothed": 18.287779431359105,
+      "included_angle_2d": 165.7758503618565,
+      "flexion_angle_2d": 14.224149638143501,
+      "included_angle_3d": 159.81665303962816,
+      "flexion_angle_3d": 20.183346960371836,
+      "left_knee_angle": 159.81665303962816,
+      "keypoints": {
+        "hip": {
+          "x": 0.641943097114563,
+          "y": 0.47376877069473267,
+          "z": -0.12524881958961487,
+          "visibility": 0.9967382550239563
+        },
+        "knee": {
+          "x": 0.6004733443260193,
+          "y": 0.7192754745483398,
+          "z": -0.06543128192424774,
+          "visibility": 0.906771719455719
+        },
+        "ankle": {
+          "x": 0.6198914647102356,
+          "y": 0.9587098956108093,
+          "z": 0.03073810413479805,
+          "visibility": 0.8527629375457764
+        }
+      }
+    },
+    {
+      "frame_index": 35,
+      "relative_time": 2.135141372680664,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8539906740188599,
+      "visibility_avg": 0.9219110012054443,
+      "selected_included_angle": 160.24121021389277,
+      "selected_flexion_angle_raw": 19.75878978610723,
+      "selected_flexion_angle_smoothed": 18.702185672382704,
+      "included_angle_2d": 162.563606569922,
+      "flexion_angle_2d": 17.436393430078,
+      "included_angle_3d": 160.24121021389277,
+      "flexion_angle_3d": 19.75878978610723,
+      "left_knee_angle": 160.24121021389277,
+      "keypoints": {
+        "hip": {
+          "x": 0.6410813331604004,
+          "y": 0.47169142961502075,
+          "z": -0.12486730515956879,
+          "visibility": 0.9966235756874084
+        },
+        "knee": {
+          "x": 0.5892511010169983,
+          "y": 0.7119095921516418,
+          "z": -0.07680220901966095,
+          "visibility": 0.9151187539100647
+        },
+        "ankle": {
+          "x": 0.6117466688156128,
+          "y": 0.9562251567840576,
+          "z": 0.0025761679280549288,
+          "visibility": 0.8539906740188599
+        }
+      }
+    },
+    {
+      "frame_index": 36,
+      "relative_time": 2.1935579776763916,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8479135632514954,
+      "visibility_avg": 0.9222071170806885,
+      "selected_included_angle": 160.18396245866634,
+      "selected_flexion_angle_raw": 19.816037541333657,
+      "selected_flexion_angle_smoothed": 19.0990799736455,
+      "included_angle_2d": 162.52555087938404,
+      "flexion_angle_2d": 17.474449120615958,
+      "included_angle_3d": 160.18396245866634,
+      "flexion_angle_3d": 19.816037541333657,
+      "left_knee_angle": 160.18396245866634,
+      "keypoints": {
+        "hip": {
+          "x": 0.6415048241615295,
+          "y": 0.46951115131378174,
+          "z": -0.12455365806818008,
+          "visibility": 0.9965671300888062
+        },
+        "knee": {
+          "x": 0.586418092250824,
+          "y": 0.7043721675872803,
+          "z": -0.08357276022434235,
+          "visibility": 0.9221406579017639
+        },
+        "ankle": {
+          "x": 0.6050878763198853,
+          "y": 0.9541699886322021,
+          "z": 0.001984579022973776,
+          "visibility": 0.8479135632514954
+        }
+      }
+    },
+    {
+      "frame_index": 37,
+      "relative_time": 2.252161979675293,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8467708230018616,
+      "visibility_avg": 0.9241206645965576,
+      "selected_included_angle": 158.2422802702356,
+      "selected_flexion_angle_raw": 21.757719729764403,
+      "selected_flexion_angle_smoothed": 19.910567245119335,
+      "included_angle_2d": 160.88951651051755,
+      "flexion_angle_2d": 19.110483489482448,
+      "included_angle_3d": 158.2422802702356,
+      "flexion_angle_3d": 21.757719729764403,
+      "left_knee_angle": 158.2422802702356,
+      "keypoints": {
+        "hip": {
+          "x": 0.6409944891929626,
+          "y": 0.46842145919799805,
+          "z": -0.12457642704248428,
+          "visibility": 0.9966950416564941
+        },
+        "knee": {
+          "x": 0.5774918794631958,
+          "y": 0.699640154838562,
+          "z": -0.10095493495464325,
+          "visibility": 0.9288961291313171
+        },
+        "ankle": {
+          "x": 0.5940125584602356,
+          "y": 0.9514783024787903,
+          "z": -0.030818413943052292,
+          "visibility": 0.8467708230018616
+        }
+      }
+    },
+    {
+      "frame_index": 38,
+      "relative_time": 2.3109824657440186,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8388219475746155,
+      "visibility_avg": 0.9235095183054606,
+      "selected_included_angle": 147.9002257716877,
+      "selected_flexion_angle_raw": 32.0997742283123,
+      "selected_flexion_angle_smoothed": 22.723133649177885,
+      "included_angle_2d": 157.3780690099101,
+      "flexion_angle_2d": 22.621930990089908,
+      "included_angle_3d": 147.9002257716877,
+      "flexion_angle_3d": 32.0997742283123,
+      "left_knee_angle": 147.9002257716877,
+      "keypoints": {
+        "hip": {
+          "x": 0.6394026279449463,
+          "y": 0.46653664112091064,
+          "z": -0.12464699894189835,
+          "visibility": 0.9968903660774231
+        },
+        "knee": {
+          "x": 0.5660948753356934,
+          "y": 0.6908582448959351,
+          "z": -0.11013567447662354,
+          "visibility": 0.9348162412643433
+        },
+        "ankle": {
+          "x": 0.586136519908905,
+          "y": 0.944117546081543,
+          "z": -0.02702937461435795,
+          "visibility": 0.8388219475746155
+        }
+      }
+    },
+    {
+      "frame_index": 39,
+      "relative_time": 2.3732452392578125,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8406775593757629,
+      "visibility_avg": 0.9259696006774902,
+      "selected_included_angle": 143.41192006554817,
+      "selected_flexion_angle_raw": 36.58807993445183,
+      "selected_flexion_angle_smoothed": 26.004080243993883,
+      "included_angle_2d": 155.1382552785184,
+      "flexion_angle_2d": 24.861744721481614,
+      "included_angle_3d": 143.41192006554817,
+      "flexion_angle_3d": 36.58807993445183,
+      "left_knee_angle": 143.41192006554817,
+      "keypoints": {
+        "hip": {
+          "x": 0.6389724016189575,
+          "y": 0.4661214053630829,
+          "z": -0.12500563263893127,
+          "visibility": 0.9971093535423279
+        },
+        "knee": {
+          "x": 0.560064435005188,
+          "y": 0.6797071695327759,
+          "z": -0.11211973428726196,
+          "visibility": 0.9401218891143799
+        },
+        "ankle": {
+          "x": 0.5808663964271545,
+          "y": 0.9390836954116821,
+          "z": -0.032866429537534714,
+          "visibility": 0.8406775593757629
+        }
+      }
+    },
+    {
+      "frame_index": 40,
+      "relative_time": 2.43169903755188,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8396908640861511,
+      "visibility_avg": 0.9275052547454834,
+      "selected_included_angle": 133.28478986362407,
+      "selected_flexion_angle_raw": 46.71521013637593,
+      "selected_flexion_angle_smoothed": 31.395364314047622,
+      "included_angle_2d": 150.8875906402004,
+      "flexion_angle_2d": 29.112409359799614,
+      "included_angle_3d": 133.28478986362407,
+      "flexion_angle_3d": 46.71521013637593,
+      "left_knee_angle": 133.28478986362407,
+      "keypoints": {
+        "hip": {
+          "x": 0.6390736699104309,
+          "y": 0.4643028676509857,
+          "z": -0.12438814342021942,
+          "visibility": 0.9973272681236267
+        },
+        "knee": {
+          "x": 0.5496178865432739,
+          "y": 0.6626529097557068,
+          "z": -0.12155777215957642,
+          "visibility": 0.9454976320266724
+        },
+        "ankle": {
+          "x": 0.5716920495033264,
+          "y": 0.9235038161277771,
+          "z": -0.02333948388695717,
+          "visibility": 0.8396908640861511
+        }
+      }
+    },
+    {
+      "frame_index": 41,
+      "relative_time": 2.490170478820801,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.849249541759491,
+      "visibility_avg": 0.9324453274408976,
+      "selected_included_angle": 131.50816023587663,
+      "selected_flexion_angle_raw": 48.49183976412337,
+      "selected_flexion_angle_smoothed": 37.13052475860557,
+      "included_angle_2d": 149.663968145668,
+      "flexion_angle_2d": 30.336031854331992,
+      "included_angle_3d": 131.50816023587663,
+      "flexion_angle_3d": 48.49183976412337,
+      "left_knee_angle": 131.50816023587663,
+      "keypoints": {
+        "hip": {
+          "x": 0.639335036277771,
+          "y": 0.4633950889110565,
+          "z": -0.12320814281702042,
+          "visibility": 0.9975278973579407
+        },
+        "knee": {
+          "x": 0.5446109771728516,
+          "y": 0.6539438366889954,
+          "z": -0.12035229057073593,
+          "visibility": 0.9505585432052612
+        },
+        "ankle": {
+          "x": 0.5620723962783813,
+          "y": 0.9098460078239441,
+          "z": -0.017611777409911156,
+          "visibility": 0.849249541759491
+        }
+      }
+    },
+    {
+      "frame_index": 42,
+      "relative_time": 2.5487782955169678,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8604530096054077,
+      "visibility_avg": 0.9377383788426717,
+      "selected_included_angle": 131.01304392573527,
+      "selected_flexion_angle_raw": 48.986956074264725,
+      "selected_flexion_angle_smoothed": 42.57637202750563,
+      "included_angle_2d": 146.1608222416056,
+      "flexion_angle_2d": 33.83917775839441,
+      "included_angle_3d": 131.01304392573527,
+      "flexion_angle_3d": 48.986956074264725,
+      "left_knee_angle": 131.01304392573527,
+      "keypoints": {
+        "hip": {
+          "x": 0.6388007402420044,
+          "y": 0.4633790850639343,
+          "z": -0.12375198304653168,
+          "visibility": 0.9977192878723145
+        },
+        "knee": {
+          "x": 0.5356084108352661,
+          "y": 0.637833297252655,
+          "z": -0.11629857867956161,
+          "visibility": 0.955042839050293
+        },
+        "ankle": {
+          "x": 0.550044059753418,
+          "y": 0.8932965397834778,
+          "z": -0.01564568467438221,
+          "visibility": 0.8604530096054077
+        }
+      }
+    },
+    {
+      "frame_index": 43,
+      "relative_time": 2.6076111793518066,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8697828650474548,
+      "visibility_avg": 0.9422386884689331,
+      "selected_included_angle": 129.64741720518305,
+      "selected_flexion_angle_raw": 50.35258279481695,
+      "selected_flexion_angle_smoothed": 46.22693374080656,
+      "included_angle_2d": 143.86070985057054,
+      "flexion_angle_2d": 36.139290149429456,
+      "included_angle_3d": 129.64741720518305,
+      "flexion_angle_3d": 50.35258279481695,
+      "left_knee_angle": 129.64741720518305,
+      "keypoints": {
+        "hip": {
+          "x": 0.636886477470398,
+          "y": 0.4634036719799042,
+          "z": -0.12378980219364166,
+          "visibility": 0.9978829622268677
+        },
+        "knee": {
+          "x": 0.5289835929870605,
+          "y": 0.6295357346534729,
+          "z": -0.11828622967004776,
+          "visibility": 0.9590502381324768
+        },
+        "ankle": {
+          "x": 0.5430589914321899,
+          "y": 0.8864789605140686,
+          "z": -0.01913769356906414,
+          "visibility": 0.8697828650474548
+        }
+      }
+    },
+    {
+      "frame_index": 44,
+      "relative_time": 2.666046142578125,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8788752555847168,
+      "visibility_avg": 0.9465580383936564,
+      "selected_included_angle": 127.33514158583132,
+      "selected_flexion_angle_raw": 52.66485841416868,
+      "selected_flexion_angle_smoothed": 49.44228943674993,
+      "included_angle_2d": 141.46735239105897,
+      "flexion_angle_2d": 38.53264760894103,
+      "included_angle_3d": 127.33514158583132,
+      "flexion_angle_3d": 52.66485841416868,
+      "left_knee_angle": 127.33514158583132,
+      "keypoints": {
+        "hip": {
+          "x": 0.636896550655365,
+          "y": 0.4627232551574707,
+          "z": -0.12341537326574326,
+          "visibility": 0.9980291724205017
+        },
+        "knee": {
+          "x": 0.5257765650749207,
+          "y": 0.6173781752586365,
+          "z": -0.1168273538351059,
+          "visibility": 0.9627696871757507
+        },
+        "ankle": {
+          "x": 0.5385004878044128,
+          "y": 0.8742936253547668,
+          "z": -0.01727086491882801,
+          "visibility": 0.8788752555847168
+        }
+      }
+    },
+    {
+      "frame_index": 45,
+      "relative_time": 2.7244439125061035,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.888206958770752,
+      "visibility_avg": 0.9508114258448283,
+      "selected_included_angle": 127.64457693710787,
+      "selected_flexion_angle_raw": 52.35542306289213,
+      "selected_flexion_angle_smoothed": 50.570332022053165,
+      "included_angle_2d": 140.09478737212666,
+      "flexion_angle_2d": 39.90521262787334,
+      "included_angle_3d": 127.64457693710787,
+      "flexion_angle_3d": 52.35542306289213,
+      "left_knee_angle": 127.64457693710787,
+      "keypoints": {
+        "hip": {
+          "x": 0.6370061635971069,
+          "y": 0.4622274935245514,
+          "z": -0.12304656207561493,
+          "visibility": 0.9981688857078552
+        },
+        "knee": {
+          "x": 0.5238722562789917,
+          "y": 0.6065046787261963,
+          "z": -0.11661233007907867,
+          "visibility": 0.9660584330558777
+        },
+        "ankle": {
+          "x": 0.5319708585739136,
+          "y": 0.8636771440505981,
+          "z": -0.020721230655908585,
+          "visibility": 0.888206958770752
+        }
+      }
+    },
+    {
+      "frame_index": 46,
+      "relative_time": 2.7830162048339844,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8962599039077759,
+      "visibility_avg": 0.9544567863146464,
+      "selected_included_angle": 122.20569443675967,
+      "selected_flexion_angle_raw": 57.79430556324033,
+      "selected_flexion_angle_smoothed": 52.43082518187656,
+      "included_angle_2d": 135.33084010824297,
+      "flexion_angle_2d": 44.66915989175703,
+      "included_angle_3d": 122.20569443675967,
+      "flexion_angle_3d": 57.79430556324033,
+      "left_knee_angle": 122.20569443675967,
+      "keypoints": {
+        "hip": {
+          "x": 0.6367424726486206,
+          "y": 0.4618305265903473,
+          "z": -0.12234753370285034,
+          "visibility": 0.9982975721359253
+        },
+        "knee": {
+          "x": 0.5177903175354004,
+          "y": 0.593181312084198,
+          "z": -0.11476528644561768,
+          "visibility": 0.968812882900238
+        },
+        "ankle": {
+          "x": 0.5289937257766724,
+          "y": 0.8492728471755981,
+          "z": -0.006899998988956213,
+          "visibility": 0.8962599039077759
+        }
+      }
+    },
+    {
+      "frame_index": 47,
+      "relative_time": 2.8416900634765625,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9038982391357422,
+      "visibility_avg": 0.9577882091204325,
+      "selected_included_angle": 120.10483852738496,
+      "selected_flexion_angle_raw": 59.895161472615044,
+      "selected_flexion_angle_smoothed": 54.61246626154663,
+      "included_angle_2d": 132.6418723760649,
+      "flexion_angle_2d": 47.358127623935104,
+      "included_angle_3d": 120.10483852738496,
+      "flexion_angle_3d": 59.895161472615044,
+      "left_knee_angle": 120.10483852738496,
+      "keypoints": {
+        "hip": {
+          "x": 0.636766791343689,
+          "y": 0.46169260144233704,
+          "z": -0.12163925170898438,
+          "visibility": 0.9983999133110046
+        },
+        "knee": {
+          "x": 0.515630841255188,
+          "y": 0.5835832953453064,
+          "z": -0.09973982721567154,
+          "visibility": 0.9710664749145508
+        },
+        "ankle": {
+          "x": 0.5269700288772583,
+          "y": 0.839595377445221,
+          "z": 0.017675044015049934,
+          "visibility": 0.9038982391357422
+        }
+      }
+    },
+    {
+      "frame_index": 48,
+      "relative_time": 2.9004387855529785,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9105225205421448,
+      "visibility_avg": 0.9604759613672892,
+      "selected_included_angle": 114.88984814487736,
+      "selected_flexion_angle_raw": 65.11015185512264,
+      "selected_flexion_angle_smoothed": 57.563980073607766,
+      "included_angle_2d": 128.7657454819436,
+      "flexion_angle_2d": 51.23425451805639,
+      "included_angle_3d": 114.88984814487736,
+      "flexion_angle_3d": 65.11015185512264,
+      "left_knee_angle": 114.88984814487736,
+      "keypoints": {
+        "hip": {
+          "x": 0.6368519067764282,
+          "y": 0.46053391695022583,
+          "z": -0.11968575417995453,
+          "visibility": 0.9984951615333557
+        },
+        "knee": {
+          "x": 0.5125764012336731,
+          "y": 0.5702448487281799,
+          "z": -0.08819235861301422,
+          "visibility": 0.9724102020263672
+        },
+        "ankle": {
+          "x": 0.524507999420166,
+          "y": 0.825865626335144,
+          "z": 0.032619766891002655,
+          "visibility": 0.9105225205421448
+        }
+      }
+    },
+    {
+      "frame_index": 49,
+      "relative_time": 2.959075689315796,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9165236353874207,
+      "visibility_avg": 0.9630031585693359,
+      "selected_included_angle": 109.07032150930824,
+      "selected_flexion_angle_raw": 70.92967849069176,
+      "selected_flexion_angle_smoothed": 61.21694408891237,
+      "included_angle_2d": 124.32572231385124,
+      "flexion_angle_2d": 55.674277686148756,
+      "included_angle_3d": 109.07032150930824,
+      "flexion_angle_3d": 70.92967849069176,
+      "left_knee_angle": 109.07032150930824,
+      "keypoints": {
+        "hip": {
+          "x": 0.6397899985313416,
+          "y": 0.45874327421188354,
+          "z": -0.11951335519552231,
+          "visibility": 0.9985957145690918
+        },
+        "knee": {
+          "x": 0.5108853578567505,
+          "y": 0.5536211133003235,
+          "z": -0.09097997844219208,
+          "visibility": 0.9738901257514954
+        },
+        "ankle": {
+          "x": 0.5201137065887451,
+          "y": 0.8141697645187378,
+          "z": 0.026022037491202354,
+          "visibility": 0.9165236353874207
+        }
+      }
+    },
+    {
+      "frame_index": 50,
+      "relative_time": 3.0177643299102783,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9218719005584717,
+      "visibility_avg": 0.9652243653933207,
+      "selected_included_angle": 106.89235182246983,
+      "selected_flexion_angle_raw": 73.10764817753017,
+      "selected_flexion_angle_smoothed": 65.36738911183998,
+      "included_angle_2d": 121.66242296929182,
+      "flexion_angle_2d": 58.337577030708175,
+      "included_angle_3d": 106.89235182246983,
+      "flexion_angle_3d": 73.10764817753017,
+      "left_knee_angle": 106.89235182246983,
+      "keypoints": {
+        "hip": {
+          "x": 0.6406634449958801,
+          "y": 0.4553811252117157,
+          "z": -0.11907888948917389,
+          "visibility": 0.9986935257911682
+        },
+        "knee": {
+          "x": 0.5103967785835266,
+          "y": 0.5410570502281189,
+          "z": -0.09193268418312073,
+          "visibility": 0.9751076698303223
+        },
+        "ankle": {
+          "x": 0.5179508328437805,
+          "y": 0.8000994920730591,
+          "z": 0.022003520280122757,
+          "visibility": 0.9218719005584717
+        }
+      }
+    },
+    {
+      "frame_index": 51,
+      "relative_time": 3.076540231704712,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9268632531166077,
+      "visibility_avg": 0.9672290881474813,
+      "selected_included_angle": 107.74395242560075,
+      "selected_flexion_angle_raw": 72.25604757439925,
+      "selected_flexion_angle_smoothed": 68.25973751407176,
+      "included_angle_2d": 120.22421603833406,
+      "flexion_angle_2d": 59.77578396166594,
+      "included_angle_3d": 107.74395242560075,
+      "flexion_angle_3d": 72.25604757439925,
+      "left_knee_angle": 107.74395242560075,
+      "keypoints": {
+        "hip": {
+          "x": 0.6419599652290344,
+          "y": 0.45394036173820496,
+          "z": -0.11961852014064789,
+          "visibility": 0.9987797737121582
+        },
+        "knee": {
+          "x": 0.5106900930404663,
+          "y": 0.5338402390480042,
+          "z": -0.0931139811873436,
+          "visibility": 0.976044237613678
+        },
+        "ankle": {
+          "x": 0.5156896710395813,
+          "y": 0.7934297323226929,
+          "z": 0.022606713697314262,
+          "visibility": 0.9268632531166077
+        }
+      }
+    },
+    {
+      "frame_index": 52,
+      "relative_time": 3.135277509689331,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.931869626045227,
+      "visibility_avg": 0.969265898068746,
+      "selected_included_angle": 104.73754124801965,
+      "selected_flexion_angle_raw": 75.26245875198035,
+      "selected_flexion_angle_smoothed": 71.33319696994484,
+      "included_angle_2d": 115.28153956764558,
+      "flexion_angle_2d": 64.71846043235442,
+      "included_angle_3d": 104.73754124801965,
+      "flexion_angle_3d": 75.26245875198035,
+      "left_knee_angle": 104.73754124801965,
+      "keypoints": {
+        "hip": {
+          "x": 0.6435673236846924,
+          "y": 0.45414695143699646,
+          "z": -0.12234053760766983,
+          "visibility": 0.9988611936569214
+        },
+        "knee": {
+          "x": 0.509506106376648,
+          "y": 0.5210700035095215,
+          "z": -0.10281181335449219,
+          "visibility": 0.9770668745040894
+        },
+        "ankle": {
+          "x": 0.5152441263198853,
+          "y": 0.7847306728363037,
+          "z": 0.01806958019733429,
+          "visibility": 0.931869626045227
+        }
+      }
+    },
+    {
+      "frame_index": 53,
+      "relative_time": 3.1939141750335693,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9368765950202942,
+      "visibility_avg": 0.9713308413823446,
+      "selected_included_angle": 102.46357636858735,
+      "selected_flexion_angle_raw": 77.53642363141265,
+      "selected_flexion_angle_smoothed": 73.81845132520282,
+      "included_angle_2d": 111.8138978555397,
+      "flexion_angle_2d": 68.1861021444603,
+      "included_angle_3d": 102.46357636858735,
+      "flexion_angle_3d": 77.53642363141265,
+      "left_knee_angle": 102.46357636858735,
+      "keypoints": {
+        "hip": {
+          "x": 0.6447798013687134,
+          "y": 0.4540187418460846,
+          "z": -0.12573476135730743,
+          "visibility": 0.9989409446716309
+        },
+        "knee": {
+          "x": 0.5097483992576599,
+          "y": 0.5110040307044983,
+          "z": -0.10676486790180206,
+          "visibility": 0.9781749844551086
+        },
+        "ankle": {
+          "x": 0.5146815180778503,
+          "y": 0.7759762406349182,
+          "z": 0.015258911065757275,
+          "visibility": 0.9368765950202942
+        }
+      }
+    },
+    {
+      "frame_index": 54,
+      "relative_time": 3.252526044845581,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9414903521537781,
+      "visibility_avg": 0.9732283155123392,
+      "selected_included_angle": 100.93922266697098,
+      "selected_flexion_angle_raw": 79.06077733302902,
+      "selected_flexion_angle_smoothed": 75.44467109367028,
+      "included_angle_2d": 107.16440263689644,
+      "flexion_angle_2d": 72.83559736310356,
+      "included_angle_3d": 100.93922266697098,
+      "flexion_angle_3d": 79.06077733302902,
+      "left_knee_angle": 100.93922266697098,
+      "keypoints": {
+        "hip": {
+          "x": 0.6474862694740295,
+          "y": 0.4537788927555084,
+          "z": -0.12697376310825348,
+          "visibility": 0.9990084767341614
+        },
+        "knee": {
+          "x": 0.5096616148948669,
+          "y": 0.4990735352039337,
+          "z": -0.10633493959903717,
+          "visibility": 0.9791861176490784
+        },
+        "ankle": {
+          "x": 0.5144298672676086,
+          "y": 0.7647606730461121,
+          "z": 0.017311766743659973,
+          "visibility": 0.9414903521537781
+        }
+      }
+    },
+    {
+      "frame_index": 55,
+      "relative_time": 3.3111982345581055,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9456273317337036,
+      "visibility_avg": 0.9749242862065634,
+      "selected_included_angle": 102.4529635060539,
+      "selected_flexion_angle_raw": 77.5470364939461,
+      "selected_flexion_angle_smoothed": 76.33254875695347,
+      "included_angle_2d": 104.55666550930046,
+      "flexion_angle_2d": 75.44333449069954,
+      "included_angle_3d": 102.4529635060539,
+      "flexion_angle_3d": 77.5470364939461,
+      "left_knee_angle": 102.4529635060539,
+      "keypoints": {
+        "hip": {
+          "x": 0.6484985947608948,
+          "y": 0.4533797800540924,
+          "z": -0.126662015914917,
+          "visibility": 0.9990672469139099
+        },
+        "knee": {
+          "x": 0.5080522298812866,
+          "y": 0.4925551414489746,
+          "z": -0.10515560209751129,
+          "visibility": 0.9800782799720764
+        },
+        "ankle": {
+          "x": 0.5128167271614075,
+          "y": 0.7578279376029968,
+          "z": 0.018914997577667236,
+          "visibility": 0.9456273317337036
+        }
+      }
+    },
+    {
+      "frame_index": 56,
+      "relative_time": 3.369802236557007,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9495766758918762,
+      "visibility_avg": 0.9765841166178385,
+      "selected_included_angle": 99.78267972943618,
+      "selected_flexion_angle_raw": 80.21732027056382,
+      "selected_flexion_angle_smoothed": 77.92480329618638,
+      "included_angle_2d": 99.53479904564163,
+      "flexion_angle_2d": 80.46520095435837,
+      "included_angle_3d": 99.78267972943618,
+      "flexion_angle_3d": 80.21732027056382,
+      "left_knee_angle": 99.78267972943618,
+      "keypoints": {
+        "hip": {
+          "x": 0.6488096714019775,
+          "y": 0.45295634865760803,
+          "z": -0.12720659375190735,
+          "visibility": 0.9991224408149719
+        },
+        "knee": {
+          "x": 0.5065991282463074,
+          "y": 0.48003628849983215,
+          "z": -0.10507689416408539,
+          "visibility": 0.9810532331466675
+        },
+        "ankle": {
+          "x": 0.5123973488807678,
+          "y": 0.7465171217918396,
+          "z": 0.01907016895711422,
+          "visibility": 0.9495766758918762
+        }
+      }
+    },
+    {
+      "frame_index": 57,
+      "relative_time": 3.42840838432312,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9532178640365601,
+      "visibility_avg": 0.9781331817309061,
+      "selected_included_angle": 96.36520894117106,
+      "selected_flexion_angle_raw": 83.63479105882894,
+      "selected_flexion_angle_smoothed": 79.59926975755609,
+      "included_angle_2d": 94.76433150420524,
+      "flexion_angle_2d": 85.23566849579476,
+      "included_angle_3d": 96.36520894117106,
+      "flexion_angle_3d": 83.63479105882894,
+      "left_knee_angle": 96.36520894117106,
+      "keypoints": {
+        "hip": {
+          "x": 0.6488548517227173,
+          "y": 0.45293569564819336,
+          "z": -0.1273813396692276,
+          "visibility": 0.999180018901825
+        },
+        "knee": {
+          "x": 0.5060995817184448,
+          "y": 0.46775564551353455,
+          "z": -0.09940533339977264,
+          "visibility": 0.9820016622543335
+        },
+        "ankle": {
+          "x": 0.511542558670044,
+          "y": 0.7359797954559326,
+          "z": 0.03533312678337097,
+          "visibility": 0.9532178640365601
+        }
+      }
+    },
+    {
+      "frame_index": 58,
+      "relative_time": 3.4867985248565674,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9567182064056396,
+      "visibility_avg": 0.9796286424001058,
+      "selected_included_angle": 95.89593452197292,
+      "selected_flexion_angle_raw": 84.10406547802708,
+      "selected_flexion_angle_smoothed": 80.91279812687898,
+      "included_angle_2d": 92.05553736290678,
+      "flexion_angle_2d": 87.94446263709322,
+      "included_angle_3d": 95.89593452197292,
+      "flexion_angle_3d": 84.10406547802708,
+      "left_knee_angle": 95.89593452197292,
+      "keypoints": {
+        "hip": {
+          "x": 0.6489694714546204,
+          "y": 0.4529739320278168,
+          "z": -0.1278316080570221,
+          "visibility": 0.9992320537567139
+        },
+        "knee": {
+          "x": 0.5064210295677185,
+          "y": 0.46037524938583374,
+          "z": -0.09980187565088272,
+          "visibility": 0.9829356670379639
+        },
+        "ankle": {
+          "x": 0.5107158422470093,
+          "y": 0.7287958860397339,
+          "z": 0.030753517523407936,
+          "visibility": 0.9567182064056396
+        }
+      }
+    },
+    {
+      "frame_index": 59,
+      "relative_time": 3.5453498363494873,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9594799280166626,
+      "visibility_avg": 0.9807997941970825,
+      "selected_included_angle": 97.24631549539197,
+      "selected_flexion_angle_raw": 82.75368450460803,
+      "selected_flexion_angle_smoothed": 81.65137956119479,
+      "included_angle_2d": 91.22907865990769,
+      "flexion_angle_2d": 88.77092134009231,
+      "included_angle_3d": 97.24631549539197,
+      "flexion_angle_3d": 82.75368450460803,
+      "left_knee_angle": 97.24631549539197,
+      "keypoints": {
+        "hip": {
+          "x": 0.6490832567214966,
+          "y": 0.45277947187423706,
+          "z": -0.12773531675338745,
+          "visibility": 0.9992715120315552
+        },
+        "knee": {
+          "x": 0.5070639848709106,
+          "y": 0.45674651861190796,
+          "z": -0.09984664618968964,
+          "visibility": 0.9836479425430298
+        },
+        "ankle": {
+          "x": 0.508808434009552,
+          "y": 0.7261795997619629,
+          "z": 0.030452582985162735,
+          "visibility": 0.9594799280166626
+        }
+      }
+    },
+    {
+      "frame_index": 60,
+      "relative_time": 3.6037487983703613,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9619680643081665,
+      "visibility_avg": 0.9818594654401144,
+      "selected_included_angle": 95.45336295160949,
+      "selected_flexion_angle_raw": 84.54663704839051,
+      "selected_flexion_angle_smoothed": 83.05129967208367,
+      "included_angle_2d": 91.02717055779233,
+      "flexion_angle_2d": 88.97282944220767,
+      "included_angle_3d": 95.45336295160949,
+      "flexion_angle_3d": 84.54663704839051,
+      "left_knee_angle": 95.45336295160949,
+      "keypoints": {
+        "hip": {
+          "x": 0.6504300832748413,
+          "y": 0.4527006447315216,
+          "z": -0.12815843522548676,
+          "visibility": 0.9993101358413696
+        },
+        "knee": {
+          "x": 0.5075019598007202,
+          "y": 0.4553721845149994,
+          "z": -0.10173541307449341,
+          "visibility": 0.9843001961708069
+        },
+        "ankle": {
+          "x": 0.5077061057090759,
+          "y": 0.723348081111908,
+          "z": 0.027525316923856735,
+          "visibility": 0.9619680643081665
+        }
+      }
+    },
+    {
+      "frame_index": 61,
+      "relative_time": 3.6662282943725586,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9641703963279724,
+      "visibility_avg": 0.9828076561292013,
+      "selected_included_angle": 93.98847530011024,
+      "selected_flexion_angle_raw": 86.01152469988976,
+      "selected_flexion_angle_smoothed": 84.21014055794886,
+      "included_angle_2d": 89.53771143681966,
+      "flexion_angle_2d": 90.46228856318034,
+      "included_angle_3d": 93.98847530011024,
+      "flexion_angle_3d": 86.01152469988976,
+      "left_knee_angle": 93.98847530011024,
+      "keypoints": {
+        "hip": {
+          "x": 0.6505259871482849,
+          "y": 0.4526768922805786,
+          "z": -0.12817451357841492,
+          "visibility": 0.9993466734886169
+        },
+        "knee": {
+          "x": 0.5076324939727783,
+          "y": 0.45162269473075867,
+          "z": -0.10481361299753189,
+          "visibility": 0.9849058985710144
+        },
+        "ankle": {
+          "x": 0.5078178644180298,
+          "y": 0.719853401184082,
+          "z": 0.018949495628476143,
+          "visibility": 0.9641703963279724
+        }
+      }
+    },
+    {
+      "frame_index": 62,
+      "relative_time": 3.7247586250305176,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9660717844963074,
+      "visibility_avg": 0.983603815237681,
+      "selected_included_angle": 93.78108000987507,
+      "selected_flexion_angle_raw": 86.21891999012493,
+      "selected_flexion_angle_smoothed": 84.72696634420807,
+      "included_angle_2d": 89.56203755733357,
+      "flexion_angle_2d": 90.43796244266643,
+      "included_angle_3d": 93.78108000987507,
+      "flexion_angle_3d": 86.21891999012493,
+      "left_knee_angle": 93.78108000987507,
+      "keypoints": {
+        "hip": {
+          "x": 0.6506462097167969,
+          "y": 0.4526263475418091,
+          "z": -0.1280573159456253,
+          "visibility": 0.9993834495544434
+        },
+        "knee": {
+          "x": 0.5078213810920715,
+          "y": 0.4507896304130554,
+          "z": -0.10572769492864609,
+          "visibility": 0.9853562116622925
+        },
+        "ankle": {
+          "x": 0.5064323544502258,
+          "y": 0.7171223759651184,
+          "z": 0.014579038135707378,
+          "visibility": 0.9660717844963074
+        }
+      }
+    },
+    {
+      "frame_index": 63,
+      "relative_time": 3.783416986465454,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9671509265899658,
+      "visibility_avg": 0.9839994112650553,
+      "selected_included_angle": 95.54269683816696,
+      "selected_flexion_angle_raw": 84.45730316183304,
+      "selected_flexion_angle_smoothed": 84.79761388096924,
+      "included_angle_2d": 89.0944400794952,
+      "flexion_angle_2d": 90.9055599205048,
+      "included_angle_3d": 95.54269683816696,
+      "flexion_angle_3d": 84.45730316183304,
+      "left_knee_angle": 95.54269683816696,
+      "keypoints": {
+        "hip": {
+          "x": 0.6506821513175964,
+          "y": 0.4522942304611206,
+          "z": -0.12709957361221313,
+          "visibility": 0.9994125962257385
+        },
+        "knee": {
+          "x": 0.5079614520072937,
+          "y": 0.44829851388931274,
+          "z": -0.10559816658496857,
+          "visibility": 0.9854347109794617
+        },
+        "ankle": {
+          "x": 0.5046811103820801,
+          "y": 0.7175089716911316,
+          "z": 0.011383695527911186,
+          "visibility": 0.9671509265899658
+        }
+      }
+    },
+    {
+      "frame_index": 64,
+      "relative_time": 3.841902732849121,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9682679772377014,
+      "visibility_avg": 0.9844200213750204,
+      "selected_included_angle": 96.00079332832372,
+      "selected_flexion_angle_raw": 83.99920667167628,
+      "selected_flexion_angle_smoothed": 85.0467183143829,
+      "included_angle_2d": 88.99508481630926,
+      "flexion_angle_2d": 91.00491518369074,
+      "included_angle_3d": 96.00079332832372,
+      "flexion_angle_3d": 83.99920667167628,
+      "left_knee_angle": 96.00079332832372,
+      "keypoints": {
+        "hip": {
+          "x": 0.6506726741790771,
+          "y": 0.45219776034355164,
+          "z": -0.127079039812088,
+          "visibility": 0.999439537525177
+        },
+        "knee": {
+          "x": 0.5080629587173462,
+          "y": 0.4472200572490692,
+          "z": -0.10556526482105255,
+          "visibility": 0.9855525493621826
+        },
+        "ankle": {
+          "x": 0.5033918619155884,
+          "y": 0.7164029479026794,
+          "z": 0.011852804571390152,
+          "visibility": 0.9682679772377014
+        }
+      }
+    },
+    {
+      "frame_index": 65,
+      "relative_time": 3.9003891944885254,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9691421389579773,
+      "visibility_avg": 0.9847579598426819,
+      "selected_included_angle": 95.48362773037086,
+      "selected_flexion_angle_raw": 84.51637226962914,
+      "selected_flexion_angle_smoothed": 85.04066535863062,
+      "included_angle_2d": 89.36692795059867,
+      "flexion_angle_2d": 90.63307204940133,
+      "included_angle_3d": 95.48362773037086,
+      "flexion_angle_3d": 84.51637226962914,
+      "left_knee_angle": 95.48362773037086,
+      "keypoints": {
+        "hip": {
+          "x": 0.650781512260437,
+          "y": 0.4521520435810089,
+          "z": -0.1263190656900406,
+          "visibility": 0.9994610548019409
+        },
+        "knee": {
+          "x": 0.5081747770309448,
+          "y": 0.447640985250473,
+          "z": -0.10552886873483658,
+          "visibility": 0.9856706857681274
+        },
+        "ankle": {
+          "x": 0.5026374459266663,
+          "y": 0.7167567014694214,
+          "z": 0.009512665681540966,
+          "visibility": 0.9691421389579773
+        }
+      }
+    },
+    {
+      "frame_index": 66,
+      "relative_time": 3.9594337940216064,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9700707197189331,
+      "visibility_avg": 0.9851213494936625,
+      "selected_included_angle": 95.14074259056692,
+      "selected_flexion_angle_raw": 84.85925740943308,
+      "selected_flexion_angle_smoothed": 84.8102119005393,
+      "included_angle_2d": 89.87865239981943,
+      "flexion_angle_2d": 90.12134760018057,
+      "included_angle_3d": 95.14074259056692,
+      "flexion_angle_3d": 84.85925740943308,
+      "left_knee_angle": 95.14074259056692,
+      "keypoints": {
+        "hip": {
+          "x": 0.6512831449508667,
+          "y": 0.45406851172447205,
+          "z": -0.12630878388881683,
+          "visibility": 0.9994792342185974
+        },
+        "knee": {
+          "x": 0.5082371830940247,
+          "y": 0.4507935345172882,
+          "z": -0.10630208253860474,
+          "visibility": 0.985814094543457
+        },
+        "ankle": {
+          "x": 0.5026665925979614,
+          "y": 0.7189242243766785,
+          "z": 0.006604363676160574,
+          "visibility": 0.9700707197189331
+        }
+      }
+    },
+    {
+      "frame_index": 67,
+      "relative_time": 4.018115043640137,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9713599681854248,
+      "visibility_avg": 0.9856917460759481,
+      "selected_included_angle": 94.23961711364619,
+      "selected_flexion_angle_raw": 85.76038288635381,
+      "selected_flexion_angle_smoothed": 84.71850447978507,
+      "included_angle_2d": 89.49834727678939,
+      "flexion_angle_2d": 90.50165272321061,
+      "included_angle_3d": 94.23961711364619,
+      "flexion_angle_3d": 85.76038288635381,
+      "left_knee_angle": 94.23961711364619,
+      "keypoints": {
+        "hip": {
+          "x": 0.6514976620674133,
+          "y": 0.4571759104728699,
+          "z": -0.12691602110862732,
+          "visibility": 0.999504566192627
+        },
+        "knee": {
+          "x": 0.5082948207855225,
+          "y": 0.45282334089279175,
+          "z": -0.10697481781244278,
+          "visibility": 0.9862107038497925
+        },
+        "ankle": {
+          "x": 0.5025028586387634,
+          "y": 0.720561146736145,
+          "z": 0.008000635541975498,
+          "visibility": 0.9713599681854248
+        }
+      }
+    },
+    {
+      "frame_index": 68,
+      "relative_time": 4.076854705810547,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9729564189910889,
+      "visibility_avg": 0.9864228566487631,
+      "selected_included_angle": 92.71882253666797,
+      "selected_flexion_angle_raw": 87.28117746333203,
+      "selected_flexion_angle_smoothed": 85.28327934008487,
+      "included_angle_2d": 88.97057515923149,
+      "flexion_angle_2d": 91.02942484076851,
+      "included_angle_3d": 92.71882253666797,
+      "flexion_angle_3d": 87.28117746333203,
+      "left_knee_angle": 92.71882253666797,
+      "keypoints": {
+        "hip": {
+          "x": 0.6516289114952087,
+          "y": 0.45936721563339233,
+          "z": -0.1270977109670639,
+          "visibility": 0.999529242515564
+        },
+        "knee": {
+          "x": 0.5089694261550903,
+          "y": 0.45337235927581787,
+          "z": -0.11077006906270981,
+          "visibility": 0.9867829084396362
+        },
+        "ankle": {
+          "x": 0.5025343298912048,
+          "y": 0.7211086750030518,
+          "z": 0.005308173596858978,
+          "visibility": 0.9729564189910889
+        }
+      }
+    },
+    {
+      "frame_index": 69,
+      "relative_time": 4.135419130325317,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9741714596748352,
+      "visibility_avg": 0.9869677424430847,
+      "selected_included_angle": 93.2966415616255,
+      "selected_flexion_angle_raw": 86.7033584383745,
+      "selected_flexion_angle_smoothed": 85.8241096934245,
+      "included_angle_2d": 89.42963723160656,
+      "flexion_angle_2d": 90.57036276839344,
+      "included_angle_3d": 93.2966415616255,
+      "flexion_angle_3d": 86.7033584383745,
+      "left_knee_angle": 93.2966415616255,
+      "keypoints": {
+        "hip": {
+          "x": 0.6516400575637817,
+          "y": 0.4602246582508087,
+          "z": -0.12708476185798645,
+          "visibility": 0.9995437860488892
+        },
+        "knee": {
+          "x": 0.5090177655220032,
+          "y": 0.45534616708755493,
+          "z": -0.11033588647842407,
+          "visibility": 0.9871879816055298
+        },
+        "ankle": {
+          "x": 0.5024814009666443,
+          "y": 0.7249717116355896,
+          "z": 0.0057246205396950245,
+          "visibility": 0.9741714596748352
+        }
+      }
+    },
+    {
+      "frame_index": 70,
+      "relative_time": 4.194170951843262,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9754796028137207,
+      "visibility_avg": 0.9875180919965109,
+      "selected_included_angle": 94.52309146754827,
+      "selected_flexion_angle_raw": 85.47690853245173,
+      "selected_flexion_angle_smoothed": 86.01621694598903,
+      "included_angle_2d": 91.39935299426936,
+      "flexion_angle_2d": 88.60064700573064,
+      "included_angle_3d": 94.52309146754827,
+      "flexion_angle_3d": 85.47690853245173,
+      "left_knee_angle": 94.52309146754827,
+      "keypoints": {
+        "hip": {
+          "x": 0.652574896812439,
+          "y": 0.46144142746925354,
+          "z": -0.1287238448858261,
+          "visibility": 0.9995582699775696
+        },
+        "knee": {
+          "x": 0.5093107223510742,
+          "y": 0.46129876375198364,
+          "z": -0.10868804156780243,
+          "visibility": 0.9875164031982422
+        },
+        "ankle": {
+          "x": 0.502454400062561,
+          "y": 0.7309715151786804,
+          "z": 0.01339265238493681,
+          "visibility": 0.9754796028137207
+        }
+      }
+    },
+    {
+      "frame_index": 71,
+      "relative_time": 4.252774953842163,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9767284393310547,
+      "visibility_avg": 0.988085130850474,
+      "selected_included_angle": 96.16470590508933,
+      "selected_flexion_angle_raw": 83.83529409491067,
+      "selected_flexion_angle_smoothed": 85.81142428308453,
+      "included_angle_2d": 94.86169166040047,
+      "flexion_angle_2d": 85.13830833959953,
+      "included_angle_3d": 96.16470590508933,
+      "flexion_angle_3d": 83.83529409491067,
+      "left_knee_angle": 96.16470590508933,
+      "keypoints": {
+        "hip": {
+          "x": 0.6525869369506836,
+          "y": 0.46163269877433777,
+          "z": -0.12701673805713654,
+          "visibility": 0.9995707273483276
+        },
+        "knee": {
+          "x": 0.5093339681625366,
+          "y": 0.47015002369880676,
+          "z": -0.10393868386745453,
+          "visibility": 0.9879562258720398
+        },
+        "ankle": {
+          "x": 0.5025126934051514,
+          "y": 0.7379512190818787,
+          "z": 0.014389611780643463,
+          "visibility": 0.9767284393310547
+        }
+      }
+    },
+    {
+      "frame_index": 72,
+      "relative_time": 4.311534404754639,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9779149293899536,
+      "visibility_avg": 0.9886264204978943,
+      "selected_included_angle": 97.37903627211513,
+      "selected_flexion_angle_raw": 82.62096372788487,
+      "selected_flexion_angle_smoothed": 85.18354045139075,
+      "included_angle_2d": 96.65166193489361,
+      "flexion_angle_2d": 83.34833806510639,
+      "included_angle_3d": 97.37903627211513,
+      "flexion_angle_3d": 82.62096372788487,
+      "left_knee_angle": 97.37903627211513,
+      "keypoints": {
+        "hip": {
+          "x": 0.6529768705368042,
+          "y": 0.4621810019016266,
+          "z": -0.12666122615337372,
+          "visibility": 0.9995807409286499
+        },
+        "knee": {
+          "x": 0.5095869898796082,
+          "y": 0.475125789642334,
+          "z": -0.09934461861848831,
+          "visibility": 0.9883835911750793
+        },
+        "ankle": {
+          "x": 0.502625584602356,
+          "y": 0.7421890497207642,
+          "z": 0.018120678141713142,
+          "visibility": 0.9779149293899536
+        }
+      }
+    },
+    {
+      "frame_index": 73,
+      "relative_time": 4.370090961456299,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9788329601287842,
+      "visibility_avg": 0.9890568852424622,
+      "selected_included_angle": 97.96100295845321,
+      "selected_flexion_angle_raw": 82.03899704154679,
+      "selected_flexion_angle_smoothed": 84.1351043670337,
+      "included_angle_2d": 99.56458450950909,
+      "flexion_angle_2d": 80.43541549049091,
+      "included_angle_3d": 97.96100295845321,
+      "flexion_angle_3d": 82.03899704154679,
+      "left_knee_angle": 97.96100295845321,
+      "keypoints": {
+        "hip": {
+          "x": 0.6542857885360718,
+          "y": 0.4627050757408142,
+          "z": -0.1266603171825409,
+          "visibility": 0.9995949864387512
+        },
+        "knee": {
+          "x": 0.5106265544891357,
+          "y": 0.4833659827709198,
+          "z": -0.09738443046808243,
+          "visibility": 0.9887427091598511
+        },
+        "ankle": {
+          "x": 0.5042117834091187,
+          "y": 0.7495529055595398,
+          "z": 0.02686598338186741,
+          "visibility": 0.9788329601287842
+        }
+      }
+    },
+    {
+      "frame_index": 74,
+      "relative_time": 4.428531169891357,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9795516133308411,
+      "visibility_avg": 0.9893806974093119,
+      "selected_included_angle": 100.53463270960698,
+      "selected_flexion_angle_raw": 79.46536729039302,
+      "selected_flexion_angle_smoothed": 82.68750613743742,
+      "included_angle_2d": 103.03577408756551,
+      "flexion_angle_2d": 76.96422591243449,
+      "included_angle_3d": 100.53463270960698,
+      "flexion_angle_3d": 79.46536729039302,
+      "left_knee_angle": 100.53463270960698,
+      "keypoints": {
+        "hip": {
+          "x": 0.6527451276779175,
+          "y": 0.46269509196281433,
+          "z": -0.123152956366539,
+          "visibility": 0.9996024370193481
+        },
+        "knee": {
+          "x": 0.5107523798942566,
+          "y": 0.49374422430992126,
+          "z": -0.09339671581983566,
+          "visibility": 0.9889880418777466
+        },
+        "ankle": {
+          "x": 0.5074659585952759,
+          "y": 0.7622586488723755,
+          "z": 0.028047118335962296,
+          "visibility": 0.9795516133308411
+        }
+      }
+    },
+    {
+      "frame_index": 75,
+      "relative_time": 4.487281560897827,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9800626635551453,
+      "visibility_avg": 0.989611824353536,
+      "selected_included_angle": 103.0910298727631,
+      "selected_flexion_angle_raw": 76.9089701272369,
+      "selected_flexion_angle_smoothed": 80.97391845639444,
+      "included_angle_2d": 106.76385522496105,
+      "flexion_angle_2d": 73.23614477503895,
+      "included_angle_3d": 103.0910298727631,
+      "flexion_angle_3d": 76.9089701272369,
+      "left_knee_angle": 103.0910298727631,
+      "keypoints": {
+        "hip": {
+          "x": 0.6514410972595215,
+          "y": 0.46266788244247437,
+          "z": -0.12177509069442749,
+          "visibility": 0.9996089935302734
+        },
+        "knee": {
+          "x": 0.5108802914619446,
+          "y": 0.5041826963424683,
+          "z": -0.09432248771190643,
+          "visibility": 0.9891638159751892
+        },
+        "ankle": {
+          "x": 0.5094331502914429,
+          "y": 0.7722688317298889,
+          "z": 0.027034441009163857,
+          "visibility": 0.9800626635551453
+        }
+      }
+    },
+    {
+      "frame_index": 76,
+      "relative_time": 4.586359739303589,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9803627133369446,
+      "visibility_avg": 0.9897425770759583,
+      "selected_included_angle": 105.43098013432117,
+      "selected_flexion_angle_raw": 74.56901986567883,
+      "selected_flexion_angle_smoothed": 79.12066361054808,
+      "included_angle_2d": 110.77820890832642,
+      "flexion_angle_2d": 69.22179109167358,
+      "included_angle_3d": 105.43098013432117,
+      "flexion_angle_3d": 74.56901986567883,
+      "left_knee_angle": 105.43098013432117,
+      "keypoints": {
+        "hip": {
+          "x": 0.6492986083030701,
+          "y": 0.4642542600631714,
+          "z": -0.12193658202886581,
+          "visibility": 0.9996032118797302
+        },
+        "knee": {
+          "x": 0.5110786557197571,
+          "y": 0.5169874429702759,
+          "z": -0.09289692342281342,
+          "visibility": 0.9892618060112
+        },
+        "ankle": {
+          "x": 0.5115715861320496,
+          "y": 0.7873420119285583,
+          "z": 0.0320582315325737,
+          "visibility": 0.9803627133369446
+        }
+      }
+    },
+    {
+      "frame_index": 77,
+      "relative_time": 4.644942045211792,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9805457592010498,
+      "visibility_avg": 0.9898568193117777,
+      "selected_included_angle": 105.90497883120307,
+      "selected_flexion_angle_raw": 74.09502116879693,
+      "selected_flexion_angle_smoothed": 77.41547509873051,
+      "included_angle_2d": 113.6200031111262,
+      "flexion_angle_2d": 66.3799968888738,
+      "included_angle_3d": 105.90497883120307,
+      "flexion_angle_3d": 74.09502116879693,
+      "left_knee_angle": 105.90497883120307,
+      "keypoints": {
+        "hip": {
+          "x": 0.6470181345939636,
+          "y": 0.4659600555896759,
+          "z": -0.12111882865428925,
+          "visibility": 0.9995996356010437
+        },
+        "knee": {
+          "x": 0.5111585259437561,
+          "y": 0.5256203413009644,
+          "z": -0.08704691380262375,
+          "visibility": 0.9894250631332397
+        },
+        "ankle": {
+          "x": 0.5115668773651123,
+          "y": 0.7920796871185303,
+          "z": 0.04337074235081673,
+          "visibility": 0.9805457592010498
+        }
+      }
+    },
+    {
+      "frame_index": 78,
+      "relative_time": 4.7034337520599365,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.980077862739563,
+      "visibility_avg": 0.9896841645240784,
+      "selected_included_angle": 109.0388846857583,
+      "selected_flexion_angle_raw": 70.9611153142417,
+      "selected_flexion_angle_smoothed": 75.19989875326948,
+      "included_angle_2d": 119.21236895157317,
+      "flexion_angle_2d": 60.78763104842683,
+      "included_angle_3d": 109.0388846857583,
+      "flexion_angle_3d": 70.9611153142417,
+      "left_knee_angle": 109.0388846857583,
+      "keypoints": {
+        "hip": {
+          "x": 0.6467205882072449,
+          "y": 0.46847623586654663,
+          "z": -0.11920227110385895,
+          "visibility": 0.9995877742767334
+        },
+        "knee": {
+          "x": 0.5112349987030029,
+          "y": 0.5451198220252991,
+          "z": -0.07795767486095428,
+          "visibility": 0.9893868565559387
+        },
+        "ankle": {
+          "x": 0.512528121471405,
+          "y": 0.8057461977005005,
+          "z": 0.05572225898504257,
+          "visibility": 0.980077862739563
+        }
+      }
+    },
+    {
+      "frame_index": 79,
+      "relative_time": 4.762306213378906,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9792913794517517,
+      "visibility_avg": 0.9892915089925131,
+      "selected_included_angle": 112.66626191078873,
+      "selected_flexion_angle_raw": 67.33373808921127,
+      "selected_flexion_angle_smoothed": 72.77357291303312,
+      "included_angle_2d": 123.08689254705834,
+      "flexion_angle_2d": 56.91310745294166,
+      "included_angle_3d": 112.66626191078873,
+      "flexion_angle_3d": 67.33373808921127,
+      "left_knee_angle": 112.66626191078873,
+      "keypoints": {
+        "hip": {
+          "x": 0.6468426585197449,
+          "y": 0.46833327412605286,
+          "z": -0.11935006082057953,
+          "visibility": 0.9995805025100708
+        },
+        "knee": {
+          "x": 0.5125530958175659,
+          "y": 0.5583776235580444,
+          "z": -0.0941433236002922,
+          "visibility": 0.9890026450157166
+        },
+        "ankle": {
+          "x": 0.5159980654716492,
+          "y": 0.8194841146469116,
+          "z": 0.019939444959163666,
+          "visibility": 0.9792913794517517
+        }
+      }
+    },
+    {
+      "frame_index": 80,
+      "relative_time": 4.8212831020355225,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9789862632751465,
+      "visibility_avg": 0.9890857338905334,
+      "selected_included_angle": 115.2938604487137,
+      "selected_flexion_angle_raw": 64.7061395512863,
+      "selected_flexion_angle_smoothed": 70.33300679784301,
+      "included_angle_2d": 125.26207988020273,
+      "flexion_angle_2d": 54.737920119797266,
+      "included_angle_3d": 115.2938604487137,
+      "flexion_angle_3d": 64.7061395512863,
+      "left_knee_angle": 115.2938604487137,
+      "keypoints": {
+        "hip": {
+          "x": 0.6459630131721497,
+          "y": 0.4687553942203522,
+          "z": -0.11958785355091095,
+          "visibility": 0.9995765089988708
+        },
+        "knee": {
+          "x": 0.5125652551651001,
+          "y": 0.5695207118988037,
+          "z": -0.09417810291051865,
+          "visibility": 0.988694429397583
+        },
+        "ankle": {
+          "x": 0.52068030834198,
+          "y": 0.8271152973175049,
+          "z": 0.021339045837521553,
+          "visibility": 0.9789862632751465
+        }
+      }
+    },
+    {
+      "frame_index": 81,
+      "relative_time": 4.879790306091309,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9788012504577637,
+      "visibility_avg": 0.9891499876976013,
+      "selected_included_angle": 115.76058268086214,
+      "selected_flexion_angle_raw": 64.23941731913786,
+      "selected_flexion_angle_smoothed": 68.2670862885348,
+      "included_angle_2d": 127.42938919691963,
+      "flexion_angle_2d": 52.57061080308037,
+      "included_angle_3d": 115.76058268086214,
+      "flexion_angle_3d": 64.23941731913786,
+      "left_knee_angle": 115.76058268086214,
+      "keypoints": {
+        "hip": {
+          "x": 0.645875871181488,
+          "y": 0.46968066692352295,
+          "z": -0.12114324420690536,
+          "visibility": 0.9995715022087097
+        },
+        "knee": {
+          "x": 0.5136013627052307,
+          "y": 0.5828181505203247,
+          "z": -0.1055280789732933,
+          "visibility": 0.9890772104263306
+        },
+        "ankle": {
+          "x": 0.5277205109596252,
+          "y": 0.8425338864326477,
+          "z": 0.0031803667079657316,
+          "visibility": 0.9788012504577637
+        }
+      }
+    },
+    {
+      "frame_index": 82,
+      "relative_time": 4.93813157081604,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9784712195396423,
+      "visibility_avg": 0.9892008900642395,
+      "selected_included_angle": 116.15206447725451,
+      "selected_flexion_angle_raw": 63.84793552274549,
+      "selected_flexion_angle_smoothed": 66.21766915932453,
+      "included_angle_2d": 130.93326149641123,
+      "flexion_angle_2d": 49.066738503588766,
+      "included_angle_3d": 116.15206447725451,
+      "flexion_angle_3d": 63.84793552274549,
+      "left_knee_angle": 116.15206447725451,
+      "keypoints": {
+        "hip": {
+          "x": 0.6453901529312134,
+          "y": 0.47122764587402344,
+          "z": -0.12273737043142319,
+          "visibility": 0.9995589852333069
+        },
+        "knee": {
+          "x": 0.5162416696548462,
+          "y": 0.5974379777908325,
+          "z": -0.11069144308567047,
+          "visibility": 0.9895724654197693
+        },
+        "ankle": {
+          "x": 0.5318175554275513,
+          "y": 0.8590297102928162,
+          "z": -0.004378463141620159,
+          "visibility": 0.9784712195396423
+        }
+      }
+    },
+    {
+      "frame_index": 83,
+      "relative_time": 4.996681451797485,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9786571860313416,
+      "visibility_avg": 0.989446759223938,
+      "selected_included_angle": 117.38966722280061,
+      "selected_flexion_angle_raw": 62.61033277719939,
+      "selected_flexion_angle_smoothed": 64.54751265191607,
+      "included_angle_2d": 134.31705264811868,
+      "flexion_angle_2d": 45.682947351881324,
+      "included_angle_3d": 117.38966722280061,
+      "flexion_angle_3d": 62.61033277719939,
+      "left_knee_angle": 117.38966722280061,
+      "keypoints": {
+        "hip": {
+          "x": 0.6449191570281982,
+          "y": 0.473626971244812,
+          "z": -0.1227383017539978,
+          "visibility": 0.9995533227920532
+        },
+        "knee": {
+          "x": 0.5203070044517517,
+          "y": 0.6134538650512695,
+          "z": -0.1086510643362999,
+          "visibility": 0.9901297688484192
+        },
+        "ankle": {
+          "x": 0.5383459329605103,
+          "y": 0.8729925155639648,
+          "z": -0.0038035206962376833,
+          "visibility": 0.9786571860313416
+        }
+      }
+    },
+    {
+      "frame_index": 84,
+      "relative_time": 5.055236577987671,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9786689281463623,
+      "visibility_avg": 0.9896654287974039,
+      "selected_included_angle": 117.95824216224048,
+      "selected_flexion_angle_raw": 62.04175783775952,
+      "selected_flexion_angle_smoothed": 63.48911660162571,
+      "included_angle_2d": 137.52519570770616,
+      "flexion_angle_2d": 42.47480429229384,
+      "included_angle_3d": 117.95824216224048,
+      "flexion_angle_3d": 62.04175783775952,
+      "left_knee_angle": 117.95824216224048,
+      "keypoints": {
+        "hip": {
+          "x": 0.643766462802887,
+          "y": 0.4779108166694641,
+          "z": -0.12700651586055756,
+          "visibility": 0.9995437264442444
+        },
+        "knee": {
+          "x": 0.5245367288589478,
+          "y": 0.6289506554603577,
+          "z": -0.11711309105157852,
+          "visibility": 0.9907836318016052
+        },
+        "ankle": {
+          "x": 0.5440031886100769,
+          "y": 0.8948273658752441,
+          "z": -0.011287626810371876,
+          "visibility": 0.9786689281463623
+        }
+      }
+    },
+    {
+      "frame_index": 85,
+      "relative_time": 5.113590955734253,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9777543544769287,
+      "visibility_avg": 0.9895483056704203,
+      "selected_included_angle": 120.38383564877218,
+      "selected_flexion_angle_raw": 59.61616435122782,
+      "selected_flexion_angle_smoothed": 62.47112156161402,
+      "included_angle_2d": 140.54855312269504,
+      "flexion_angle_2d": 39.45144687730496,
+      "included_angle_3d": 120.38383564877218,
+      "flexion_angle_3d": 59.61616435122782,
+      "left_knee_angle": 120.38383564877218,
+      "keypoints": {
+        "hip": {
+          "x": 0.6425140500068665,
+          "y": 0.47962111234664917,
+          "z": -0.12612813711166382,
+          "visibility": 0.9995389580726624
+        },
+        "knee": {
+          "x": 0.5298525094985962,
+          "y": 0.6435019969940186,
+          "z": -0.12032435834407806,
+          "visibility": 0.9913516044616699
+        },
+        "ankle": {
+          "x": 0.5527253150939941,
+          "y": 0.9078896641731262,
+          "z": -0.019671006128191948,
+          "visibility": 0.9777543544769287
+        }
+      }
+    },
+    {
+      "frame_index": 86,
+      "relative_time": 5.172186613082886,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.97596275806427,
+      "visibility_avg": 0.9890709718068441,
+      "selected_included_angle": 123.1605091786587,
+      "selected_flexion_angle_raw": 56.8394908213413,
+      "selected_flexion_angle_smoothed": 60.9911362620547,
+      "included_angle_2d": 142.606993252596,
+      "flexion_angle_2d": 37.393006747404,
+      "included_angle_3d": 123.1605091786587,
+      "flexion_angle_3d": 56.8394908213413,
+      "left_knee_angle": 123.1605091786587,
+      "keypoints": {
+        "hip": {
+          "x": 0.641680121421814,
+          "y": 0.48034706711769104,
+          "z": -0.12474898248910904,
+          "visibility": 0.999531626701355
+        },
+        "knee": {
+          "x": 0.5344527363777161,
+          "y": 0.6527490615844727,
+          "z": -0.11827205121517181,
+          "visibility": 0.9917185306549072
+        },
+        "ankle": {
+          "x": 0.5598529577255249,
+          "y": 0.9159150719642639,
+          "z": -0.020328886806964874,
+          "visibility": 0.97596275806427
+        }
+      }
+    },
+    {
+      "frame_index": 87,
+      "relative_time": 5.230855703353882,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9670535326004028,
+      "visibility_avg": 0.9861274162928263,
+      "selected_included_angle": 124.56880937503531,
+      "selected_flexion_angle_raw": 55.431190624964685,
+      "selected_flexion_angle_smoothed": 59.307787282498545,
+      "included_angle_2d": 145.05357772316216,
+      "flexion_angle_2d": 34.946422276837836,
+      "included_angle_3d": 124.56880937503531,
+      "flexion_angle_3d": 55.431190624964685,
+      "left_knee_angle": 124.56880937503531,
+      "keypoints": {
+        "hip": {
+          "x": 0.6410373449325562,
+          "y": 0.48371946811676025,
+          "z": -0.12481357157230377,
+          "visibility": 0.9994958639144897
+        },
+        "knee": {
+          "x": 0.5436795353889465,
+          "y": 0.6688166260719299,
+          "z": -0.12129586935043335,
+          "visibility": 0.9918328523635864
+        },
+        "ankle": {
+          "x": 0.5771592259407043,
+          "y": 0.9337296485900879,
+          "z": -0.02570093236863613,
+          "visibility": 0.9670535326004028
+        }
+      }
+    },
+    {
+      "frame_index": 88,
+      "relative_time": 5.289728879928589,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9432992339134216,
+      "visibility_avg": 0.9778991937637329,
+      "selected_included_angle": 130.1361618323096,
+      "selected_flexion_angle_raw": 49.8638381676904,
+      "selected_flexion_angle_smoothed": 56.75848836059674,
+      "included_angle_2d": 148.90244395716027,
+      "flexion_angle_2d": 31.097556042839727,
+      "included_angle_3d": 130.1361618323096,
+      "flexion_angle_3d": 49.8638381676904,
+      "left_knee_angle": 130.1361618323096,
+      "keypoints": {
+        "hip": {
+          "x": 0.640612006187439,
+          "y": 0.4830668270587921,
+          "z": -0.11750872433185577,
+          "visibility": 0.9994391202926636
+        },
+        "knee": {
+          "x": 0.5532144904136658,
+          "y": 0.686502993106842,
+          "z": -0.1199781522154808,
+          "visibility": 0.9909592270851135
+        },
+        "ankle": {
+          "x": 0.5872015953063965,
+          "y": 0.9330505132675171,
+          "z": -0.03703129291534424,
+          "visibility": 0.9432992339134216
+        }
+      }
+    },
+    {
+      "frame_index": 89,
+      "relative_time": 5.34872579574585,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9310863018035889,
+      "visibility_avg": 0.9732431968053182,
+      "selected_included_angle": 142.11076190571342,
+      "selected_flexion_angle_raw": 37.88923809428658,
+      "selected_flexion_angle_smoothed": 51.92798441190216,
+      "included_angle_2d": 153.4320264540896,
+      "flexion_angle_2d": 26.567973545910405,
+      "included_angle_3d": 142.11076190571342,
+      "flexion_angle_3d": 37.88923809428658,
+      "left_knee_angle": 142.11076190571342,
+      "keypoints": {
+        "hip": {
+          "x": 0.6412017941474915,
+          "y": 0.4826025664806366,
+          "z": -0.11920443922281265,
+          "visibility": 0.9993834495544434
+        },
+        "knee": {
+          "x": 0.5651125907897949,
+          "y": 0.6945870518684387,
+          "z": -0.11438772827386856,
+          "visibility": 0.9892598390579224
+        },
+        "ankle": {
+          "x": 0.5951762199401855,
+          "y": 0.9458501935005188,
+          "z": -0.031597115099430084,
+          "visibility": 0.9310863018035889
+        }
+      }
+    },
+    {
+      "frame_index": 90,
+      "relative_time": 5.40737509727478,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.9162269234657288,
+      "visibility_avg": 0.9677747289339701,
+      "selected_included_angle": 142.14603527635003,
+      "selected_flexion_angle_raw": 37.853964723649966,
+      "selected_flexion_angle_smoothed": 47.57554448638659,
+      "included_angle_2d": 154.42682461191046,
+      "flexion_angle_2d": 25.57317538808954,
+      "included_angle_3d": 142.14603527635003,
+      "flexion_angle_3d": 37.853964723649966,
+      "left_knee_angle": 142.14603527635003,
+      "keypoints": {
+        "hip": {
+          "x": 0.6416622996330261,
+          "y": 0.4822663962841034,
+          "z": -0.11946430057287216,
+          "visibility": 0.9993340373039246
+        },
+        "knee": {
+          "x": 0.571517825126648,
+          "y": 0.6976296305656433,
+          "z": -0.107078418135643,
+          "visibility": 0.9877632260322571
+        },
+        "ankle": {
+          "x": 0.6043401956558228,
+          "y": 0.9458493590354919,
+          "z": -0.02654813602566719,
+          "visibility": 0.9162269234657288
+        }
+      }
+    },
+    {
+      "frame_index": 91,
+      "relative_time": 5.465728759765625,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.894661545753479,
+      "visibility_avg": 0.9592048525810242,
+      "selected_included_angle": 145.6703494669395,
+      "selected_flexion_angle_raw": 34.32965053306049,
+      "selected_flexion_angle_smoothed": 43.07357642873042,
+      "included_angle_2d": 158.85158889674955,
+      "flexion_angle_2d": 21.148411103250453,
+      "included_angle_3d": 145.6703494669395,
+      "flexion_angle_3d": 34.32965053306049,
+      "left_knee_angle": 145.6703494669395,
+      "keypoints": {
+        "hip": {
+          "x": 0.6416827440261841,
+          "y": 0.4819045960903168,
+          "z": -0.1209491714835167,
+          "visibility": 0.9992254972457886
+        },
+        "knee": {
+          "x": 0.5872946977615356,
+          "y": 0.7066231369972229,
+          "z": -0.10605131089687347,
+          "visibility": 0.9837275147438049
+        },
+        "ankle": {
+          "x": 0.6204288005828857,
+          "y": 0.9568539261817932,
+          "z": -0.024988528341054916,
+          "visibility": 0.894661545753479
+        }
+      }
+    },
+    {
+      "frame_index": 92,
+      "relative_time": 5.524358510971069,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8776422739028931,
+      "visibility_avg": 0.9529706438382467,
+      "selected_included_angle": 147.56709771786308,
+      "selected_flexion_angle_raw": 32.43290228213692,
+      "selected_flexion_angle_smoothed": 38.47391876016487,
+      "included_angle_2d": 159.9177391762217,
+      "flexion_angle_2d": 20.082260823778313,
+      "included_angle_3d": 147.56709771786308,
+      "flexion_angle_3d": 32.43290228213692,
+      "left_knee_angle": 147.56709771786308,
+      "keypoints": {
+        "hip": {
+          "x": 0.641765832901001,
+          "y": 0.48123157024383545,
+          "z": -0.1213470846414566,
+          "visibility": 0.9991592168807983
+        },
+        "knee": {
+          "x": 0.5901820063591003,
+          "y": 0.7098217606544495,
+          "z": -0.10621324926614761,
+          "visibility": 0.9821104407310486
+        },
+        "ankle": {
+          "x": 0.6217607259750366,
+          "y": 0.9541043043136597,
+          "z": -0.027056535705924034,
+          "visibility": 0.8776422739028931
+        }
+      }
+    },
+    {
+      "frame_index": 93,
+      "relative_time": 5.582771301269531,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8587440252304077,
+      "visibility_avg": 0.9401898582776388,
+      "selected_included_angle": 151.31348784520367,
+      "selected_flexion_angle_raw": 28.686512154796333,
+      "selected_flexion_angle_smoothed": 34.238453557586055,
+      "included_angle_2d": 164.11268385742807,
+      "flexion_angle_2d": 15.887316142571933,
+      "included_angle_3d": 151.31348784520367,
+      "flexion_angle_3d": 28.686512154796333,
+      "left_knee_angle": 151.31348784520367,
+      "keypoints": {
+        "hip": {
+          "x": 0.6438902616500854,
+          "y": 0.48123031854629517,
+          "z": -0.12156510353088379,
+          "visibility": 0.9989792704582214
+        },
+        "knee": {
+          "x": 0.6033573746681213,
+          "y": 0.7200103998184204,
+          "z": -0.08846785128116608,
+          "visibility": 0.9628462791442871
+        },
+        "ankle": {
+          "x": 0.6298975944519043,
+          "y": 0.9622223973274231,
+          "z": 0.0042967828921973705,
+          "visibility": 0.8587440252304077
+        }
+      }
+    },
+    {
+      "frame_index": 94,
+      "relative_time": 5.641373872756958,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.837187647819519,
+      "visibility_avg": 0.9262906710306803,
+      "selected_included_angle": 154.95586818435706,
+      "selected_flexion_angle_raw": 25.04413181564294,
+      "selected_flexion_angle_smoothed": 31.66943230185733,
+      "included_angle_2d": 167.19783574018527,
+      "flexion_angle_2d": 12.802164259814731,
+      "included_angle_3d": 154.95586818435706,
+      "flexion_angle_3d": 25.04413181564294,
+      "left_knee_angle": 154.95586818435706,
+      "keypoints": {
+        "hip": {
+          "x": 0.6461946368217468,
+          "y": 0.48206910490989685,
+          "z": -0.12088550627231598,
+          "visibility": 0.9987265467643738
+        },
+        "knee": {
+          "x": 0.6130999326705933,
+          "y": 0.7262265682220459,
+          "z": -0.07116598635911942,
+          "visibility": 0.9429578185081482
+        },
+        "ankle": {
+          "x": 0.6343268156051636,
+          "y": 0.9648705124855042,
+          "z": 0.032165493816137314,
+          "visibility": 0.837187647819519
+        }
+      }
+    },
+    {
+      "frame_index": 95,
+      "relative_time": 5.6997809410095215,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8310909271240234,
+      "visibility_avg": 0.92046191294988,
+      "selected_included_angle": 159.9847951513396,
+      "selected_flexion_angle_raw": 20.015204848660403,
+      "selected_flexion_angle_smoothed": 28.101680326859416,
+      "included_angle_2d": 168.98354168441713,
+      "flexion_angle_2d": 11.016458315582867,
+      "included_angle_3d": 159.9847951513396,
+      "flexion_angle_3d": 20.015204848660403,
+      "left_knee_angle": 159.9847951513396,
+      "keypoints": {
+        "hip": {
+          "x": 0.6482700109481812,
+          "y": 0.4849485158920288,
+          "z": -0.12260089814662933,
+          "visibility": 0.9982928037643433
+        },
+        "knee": {
+          "x": 0.6194701790809631,
+          "y": 0.7322905659675598,
+          "z": -0.055948443710803986,
+          "visibility": 0.9320020079612732
+        },
+        "ankle": {
+          "x": 0.6377419233322144,
+          "y": 0.9711152911186218,
+          "z": 0.055198442190885544,
+          "visibility": 0.8310909271240234
+        }
+      }
+    },
+    {
+      "frame_index": 96,
+      "relative_time": 5.758125066757202,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8266078233718872,
+      "visibility_avg": 0.916647752126058,
+      "selected_included_angle": 162.2190771649985,
+      "selected_flexion_angle_raw": 17.78092283500149,
+      "selected_flexion_angle_smoothed": 24.79193478724762,
+      "included_angle_2d": 171.04362076051746,
+      "flexion_angle_2d": 8.956379239482544,
+      "included_angle_3d": 162.2190771649985,
+      "flexion_angle_3d": 17.78092283500149,
+      "left_knee_angle": 162.2190771649985,
+      "keypoints": {
+        "hip": {
+          "x": 0.6523380875587463,
+          "y": 0.48494410514831543,
+          "z": -0.12361512333154678,
+          "visibility": 0.9979661107063293
+        },
+        "knee": {
+          "x": 0.6255308389663696,
+          "y": 0.7356489300727844,
+          "z": -0.066647969186306,
+          "visibility": 0.9253693222999573
+        },
+        "ankle": {
+          "x": 0.6375123262405396,
+          "y": 0.9760637879371643,
+          "z": 0.03256724402308464,
+          "visibility": 0.8266078233718872
+        }
+      }
+    },
+    {
+      "frame_index": 97,
+      "relative_time": 5.816667795181274,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.829538106918335,
+      "visibility_avg": 0.9173352718353271,
+      "selected_included_angle": 163.0054049949056,
+      "selected_flexion_angle_raw": 16.994595005094396,
+      "selected_flexion_angle_smoothed": 21.70427333183911,
+      "included_angle_2d": 171.3890788172627,
+      "flexion_angle_2d": 8.610921182737286,
+      "included_angle_3d": 163.0054049949056,
+      "flexion_angle_3d": 16.994595005094396,
+      "left_knee_angle": 163.0054049949056,
+      "keypoints": {
+        "hip": {
+          "x": 0.6547988653182983,
+          "y": 0.48480984568595886,
+          "z": -0.12368036806583405,
+          "visibility": 0.9975759983062744
+        },
+        "knee": {
+          "x": 0.6290527582168579,
+          "y": 0.7343878149986267,
+          "z": -0.06043513864278793,
+          "visibility": 0.9248917102813721
+        },
+        "ankle": {
+          "x": 0.6403789520263672,
+          "y": 0.9726849794387817,
+          "z": 0.041619814932346344,
+          "visibility": 0.829538106918335
+        }
+      }
+    },
+    {
+      "frame_index": 98,
+      "relative_time": 5.875142812728882,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8317280411720276,
+      "visibility_avg": 0.9172001878420512,
+      "selected_included_angle": 162.49609581435732,
+      "selected_flexion_angle_raw": 17.503904185642682,
+      "selected_flexion_angle_smoothed": 19.46775173800838,
+      "included_angle_2d": 171.66277344446758,
+      "flexion_angle_2d": 8.337226555532425,
+      "included_angle_3d": 162.49609581435732,
+      "flexion_angle_3d": 17.503904185642682,
+      "left_knee_angle": 162.49609581435732,
+      "keypoints": {
+        "hip": {
+          "x": 0.6570392847061157,
+          "y": 0.4861528277397156,
+          "z": -0.12224707752466202,
+          "visibility": 0.9973633289337158
+        },
+        "knee": {
+          "x": 0.6340879797935486,
+          "y": 0.740699827671051,
+          "z": -0.051781825721263885,
+          "visibility": 0.9225091934204102
+        },
+        "ankle": {
+          "x": 0.6470900774002075,
+          "y": 0.9743519425392151,
+          "z": 0.055752284824848175,
+          "visibility": 0.8317280411720276
+        }
+      }
+    },
+    {
+      "frame_index": 99,
+      "relative_time": 5.933747291564941,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8313551545143127,
+      "visibility_avg": 0.916581392288208,
+      "selected_included_angle": 163.72503850588188,
+      "selected_flexion_angle_raw": 16.274961494118116,
+      "selected_flexion_angle_smoothed": 17.713917673703417,
+      "included_angle_2d": 172.65142283988598,
+      "flexion_angle_2d": 7.348577160114019,
+      "included_angle_3d": 163.72503850588188,
+      "flexion_angle_3d": 16.274961494118116,
+      "left_knee_angle": 163.72503850588188,
+      "keypoints": {
+        "hip": {
+          "x": 0.6580137014389038,
+          "y": 0.48825395107269287,
+          "z": -0.12210969626903534,
+          "visibility": 0.997249186038971
+        },
+        "knee": {
+          "x": 0.63787442445755,
+          "y": 0.7490760087966919,
+          "z": -0.05320268124341965,
+          "visibility": 0.9211398363113403
+        },
+        "ankle": {
+          "x": 0.6495595574378967,
+          "y": 0.9771234393119812,
+          "z": 0.05252282693982124,
+          "visibility": 0.8313551545143127
+        }
+      }
+    },
+    {
+      "frame_index": 100,
+      "relative_time": 5.992159128189087,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8314287662506104,
+      "visibility_avg": 0.916086753209432,
+      "selected_included_angle": 164.33671460794213,
+      "selected_flexion_angle_raw": 15.663285392057873,
+      "selected_flexion_angle_smoothed": 16.843533782382913,
+      "included_angle_2d": 173.95155581922572,
+      "flexion_angle_2d": 6.048444180774283,
+      "included_angle_3d": 164.33671460794213,
+      "flexion_angle_3d": 15.663285392057873,
+      "left_knee_angle": 164.33671460794213,
+      "keypoints": {
+        "hip": {
+          "x": 0.6577445268630981,
+          "y": 0.48801833391189575,
+          "z": -0.12218679487705231,
+          "visibility": 0.997232973575592
+        },
+        "knee": {
+          "x": 0.64255690574646,
+          "y": 0.7516019940376282,
+          "z": -0.05618702620267868,
+          "visibility": 0.9195985198020935
+        },
+        "ankle": {
+          "x": 0.6535507440567017,
+          "y": 0.9804205894470215,
+          "z": 0.04511918127536774,
+          "visibility": 0.8314287662506104
+        }
+      }
+    },
+    {
+      "frame_index": 101,
+      "relative_time": 6.050416469573975,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8280614018440247,
+      "visibility_avg": 0.9146915674209595,
+      "selected_included_angle": 164.98457316042845,
+      "selected_flexion_angle_raw": 15.015426839571546,
+      "selected_flexion_angle_smoothed": 16.29043458329692,
+      "included_angle_2d": 174.9240740674514,
+      "flexion_angle_2d": 5.075925932548614,
+      "included_angle_3d": 164.98457316042845,
+      "flexion_angle_3d": 15.015426839571546,
+      "left_knee_angle": 164.98457316042845,
+      "keypoints": {
+        "hip": {
+          "x": 0.6587772369384766,
+          "y": 0.48794877529144287,
+          "z": -0.12206755578517914,
+          "visibility": 0.9972235560417175
+        },
+        "knee": {
+          "x": 0.6473336219787598,
+          "y": 0.7491973042488098,
+          "z": -0.05668402463197708,
+          "visibility": 0.9187897443771362
+        },
+        "ankle": {
+          "x": 0.6575917601585388,
+          "y": 0.9779383540153503,
+          "z": 0.04734857752919197,
+          "visibility": 0.8280614018440247
+        }
+      }
+    },
+    {
+      "frame_index": 102,
+      "relative_time": 6.108643531799316,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8181219696998596,
+      "visibility_avg": 0.9096108078956604,
+      "selected_included_angle": 165.72444104712577,
+      "selected_flexion_angle_raw": 14.275558952874235,
+      "selected_flexion_angle_smoothed": 15.74662737285289,
+      "included_angle_2d": 174.79761067285241,
+      "flexion_angle_2d": 5.202389327147586,
+      "included_angle_3d": 165.72444104712577,
+      "flexion_angle_3d": 14.275558952874235,
+      "left_knee_angle": 165.72444104712577,
+      "keypoints": {
+        "hip": {
+          "x": 0.6587837338447571,
+          "y": 0.4878131151199341,
+          "z": -0.12198002636432648,
+          "visibility": 0.9971679449081421
+        },
+        "knee": {
+          "x": 0.6472346186637878,
+          "y": 0.7477183938026428,
+          "z": -0.04937054216861725,
+          "visibility": 0.9135425090789795
+        },
+        "ankle": {
+          "x": 0.6578477621078491,
+          "y": 0.9763243794441223,
+          "z": 0.06651972979307175,
+          "visibility": 0.8181219696998596
+        }
+      }
+    },
+    {
+      "frame_index": 103,
+      "relative_time": 6.167001247406006,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8203009963035583,
+      "visibility_avg": 0.9114954670270284,
+      "selected_included_angle": 165.70945202926004,
+      "selected_flexion_angle_raw": 14.290547970739965,
+      "selected_flexion_angle_smoothed": 15.103956129872348,
+      "included_angle_2d": 175.85585816608855,
+      "flexion_angle_2d": 4.144141833911448,
+      "included_angle_3d": 165.70945202926004,
+      "flexion_angle_3d": 14.290547970739965,
+      "left_knee_angle": 165.70945202926004,
+      "keypoints": {
+        "hip": {
+          "x": 0.6592921018600464,
+          "y": 0.48767077922821045,
+          "z": -0.12243831157684326,
+          "visibility": 0.997212290763855
+        },
+        "knee": {
+          "x": 0.6509202718734741,
+          "y": 0.7524459958076477,
+          "z": -0.05294625833630562,
+          "visibility": 0.9169731140136719
+        },
+        "ankle": {
+          "x": 0.660127580165863,
+          "y": 0.9784291386604309,
+          "z": 0.05659414082765579,
+          "visibility": 0.8203009963035583
+        }
+      }
+    },
+    {
+      "frame_index": 104,
+      "relative_time": 6.225404262542725,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8213451504707336,
+      "visibility_avg": 0.9131151835123698,
+      "selected_included_angle": 166.15741313610485,
+      "selected_flexion_angle_raw": 13.84258686389515,
+      "selected_flexion_angle_smoothed": 14.617481203827754,
+      "included_angle_2d": 176.13999702374056,
+      "flexion_angle_2d": 3.8600029762594374,
+      "included_angle_3d": 166.15741313610485,
+      "flexion_angle_3d": 13.84258686389515,
+      "left_knee_angle": 166.15741313610485,
+      "keypoints": {
+        "hip": {
+          "x": 0.660122811794281,
+          "y": 0.48758092522621155,
+          "z": -0.12243951857089996,
+          "visibility": 0.9972732067108154
+        },
+        "knee": {
+          "x": 0.6538214087486267,
+          "y": 0.7536337375640869,
+          "z": -0.05412093922495842,
+          "visibility": 0.9207271933555603
+        },
+        "ankle": {
+          "x": 0.6636618971824646,
+          "y": 0.9787278175354004,
+          "z": 0.04685031995177269,
+          "visibility": 0.8213451504707336
+        }
+      }
+    },
+    {
+      "frame_index": 105,
+      "relative_time": 6.283759117126465,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.824651837348938,
+      "visibility_avg": 0.9153453310330709,
+      "selected_included_angle": 166.09415983921397,
+      "selected_flexion_angle_raw": 13.905840160786028,
+      "selected_flexion_angle_smoothed": 14.265992157573384,
+      "included_angle_2d": 176.05404289427193,
+      "flexion_angle_2d": 3.94595710572807,
+      "included_angle_3d": 166.09415983921397,
+      "flexion_angle_3d": 13.905840160786028,
+      "left_knee_angle": 166.09415983921397,
+      "keypoints": {
+        "hip": {
+          "x": 0.6613093614578247,
+          "y": 0.48723483085632324,
+          "z": -0.12225258350372314,
+          "visibility": 0.9973279237747192
+        },
+        "knee": {
+          "x": 0.6549829244613647,
+          "y": 0.7530873417854309,
+          "z": -0.055528610944747925,
+          "visibility": 0.9240562319755554
+        },
+        "ankle": {
+          "x": 0.665145993232727,
+          "y": 0.9783915877342224,
+          "z": 0.043603233993053436,
+          "visibility": 0.824651837348938
+        }
+      }
+    },
+    {
+      "frame_index": 106,
+      "relative_time": 6.342302322387695,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.830348789691925,
+      "visibility_avg": 0.9186659455299377,
+      "selected_included_angle": 166.15340693585134,
+      "selected_flexion_angle_raw": 13.846593064148664,
+      "selected_flexion_angle_smoothed": 14.032225402488809,
+      "included_angle_2d": 175.74973502021695,
+      "flexion_angle_2d": 4.250264979783054,
+      "included_angle_3d": 166.15340693585134,
+      "flexion_angle_3d": 13.846593064148664,
+      "left_knee_angle": 166.15340693585134,
+      "keypoints": {
+        "hip": {
+          "x": 0.6621766090393066,
+          "y": 0.4869483411312103,
+          "z": -0.12216730415821075,
+          "visibility": 0.9973980188369751
+        },
+        "knee": {
+          "x": 0.6559647917747498,
+          "y": 0.753207802772522,
+          "z": -0.058498285710811615,
+          "visibility": 0.9282510280609131
+        },
+        "ankle": {
+          "x": 0.6673988103866577,
+          "y": 0.9778478145599365,
+          "z": 0.034090545028448105,
+          "visibility": 0.830348789691925
+        }
+      }
+    },
+    {
+      "frame_index": 107,
+      "relative_time": 6.40120792388916,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8332919478416443,
+      "visibility_avg": 0.9207151532173157,
+      "selected_included_angle": 166.13422838551756,
+      "selected_flexion_angle_raw": 13.86577161448244,
+      "selected_flexion_angle_smoothed": 13.95026793481045,
+      "included_angle_2d": 175.9258333621829,
+      "flexion_angle_2d": 4.074166637817086,
+      "included_angle_3d": 166.13422838551756,
+      "flexion_angle_3d": 13.86577161448244,
+      "left_knee_angle": 166.13422838551756,
+      "keypoints": {
+        "hip": {
+          "x": 0.6621770262718201,
+          "y": 0.4861953854560852,
+          "z": -0.12215615808963776,
+          "visibility": 0.9974643588066101
+        },
+        "knee": {
+          "x": 0.6565007567405701,
+          "y": 0.7522512078285217,
+          "z": -0.06339515745639801,
+          "visibility": 0.9313891530036926
+        },
+        "ankle": {
+          "x": 0.6677189469337463,
+          "y": 0.9774386286735535,
+          "z": 0.023301981389522552,
+          "visibility": 0.8332919478416443
+        }
+      }
+    },
+    {
+      "frame_index": 108,
+      "relative_time": 6.459585428237915,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.835995078086853,
+      "visibility_avg": 0.9224684039751688,
+      "selected_included_angle": 165.52189083388774,
+      "selected_flexion_angle_raw": 14.478109166112262,
+      "selected_flexion_angle_smoothed": 13.987780173884909,
+      "included_angle_2d": 175.92775303012553,
+      "flexion_angle_2d": 4.07224696987447,
+      "included_angle_3d": 165.52189083388774,
+      "flexion_angle_3d": 14.478109166112262,
+      "left_knee_angle": 165.52189083388774,
+      "keypoints": {
+        "hip": {
+          "x": 0.6620397567749023,
+          "y": 0.48613280057907104,
+          "z": -0.12252253293991089,
+          "visibility": 0.9975152015686035
+        },
+        "knee": {
+          "x": 0.6565221548080444,
+          "y": 0.7515712380409241,
+          "z": -0.07430176436901093,
+          "visibility": 0.93389493227005
+        },
+        "ankle": {
+          "x": 0.6678760051727295,
+          "y": 0.9771468043327332,
+          "z": 0.0015056126285344362,
+          "visibility": 0.835995078086853
+        }
+      }
+    },
+    {
+      "frame_index": 109,
+      "relative_time": 6.5177905559539795,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8355268836021423,
+      "visibility_avg": 0.922704299290975,
+      "selected_included_angle": 165.62888180195444,
+      "selected_flexion_angle_raw": 14.371118198045565,
+      "selected_flexion_angle_smoothed": 14.093486440714992,
+      "included_angle_2d": 175.91815013819064,
+      "flexion_angle_2d": 4.08184986180936,
+      "included_angle_3d": 165.62888180195444,
+      "flexion_angle_3d": 14.371118198045565,
+      "left_knee_angle": 165.62888180195444,
+      "keypoints": {
+        "hip": {
+          "x": 0.6619895100593567,
+          "y": 0.48549479246139526,
+          "z": -0.12138901650905609,
+          "visibility": 0.9975001215934753
+        },
+        "knee": {
+          "x": 0.6558952927589417,
+          "y": 0.7510345578193665,
+          "z": -0.06565983593463898,
+          "visibility": 0.9350858926773071
+        },
+        "ankle": {
+          "x": 0.6667517423629761,
+          "y": 0.9756521582603455,
+          "z": 0.02301889844238758,
+          "visibility": 0.8355268836021423
+        }
+      }
+    },
+    {
+      "frame_index": 110,
+      "relative_time": 6.57615327835083,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8364649415016174,
+      "visibility_avg": 0.9238869945208231,
+      "selected_included_angle": 165.96452504402959,
+      "selected_flexion_angle_raw": 14.035474955970415,
+      "selected_flexion_angle_smoothed": 14.119413399751869,
+      "included_angle_2d": 176.09788727698353,
+      "flexion_angle_2d": 3.9021127230164723,
+      "included_angle_3d": 165.96452504402959,
+      "flexion_angle_3d": 14.035474955970415,
+      "left_knee_angle": 165.96452504402959,
+      "keypoints": {
+        "hip": {
+          "x": 0.6624431014060974,
+          "y": 0.4854600131511688,
+          "z": -0.12086421251296997,
+          "visibility": 0.9974842071533203
+        },
+        "knee": {
+          "x": 0.6565548777580261,
+          "y": 0.7519041299819946,
+          "z": -0.0656600072979927,
+          "visibility": 0.9377118349075317
+        },
+        "ankle": {
+          "x": 0.6668511629104614,
+          "y": 0.9755345582962036,
+          "z": 0.023770373314619064,
+          "visibility": 0.8364649415016174
+        }
+      }
+    },
+    {
+      "frame_index": 111,
+      "relative_time": 6.634572744369507,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8343347311019897,
+      "visibility_avg": 0.9235086441040039,
+      "selected_included_angle": 166.0571945897193,
+      "selected_flexion_angle_raw": 13.942805410280698,
+      "selected_flexion_angle_smoothed": 14.138655868978276,
+      "included_angle_2d": 175.91162839197122,
+      "flexion_angle_2d": 4.08837160802878,
+      "included_angle_3d": 166.0571945897193,
+      "flexion_angle_3d": 13.942805410280698,
+      "left_knee_angle": 166.0571945897193,
+      "keypoints": {
+        "hip": {
+          "x": 0.6623510122299194,
+          "y": 0.48418107628822327,
+          "z": -0.11995486170053482,
+          "visibility": 0.9974741339683533
+        },
+        "knee": {
+          "x": 0.655945360660553,
+          "y": 0.7505416870117188,
+          "z": -0.06339741498231888,
+          "visibility": 0.9387170672416687
+        },
+        "ankle": {
+          "x": 0.6664482355117798,
+          "y": 0.9723706841468811,
+          "z": 0.03234570473432541,
+          "visibility": 0.8343347311019897
+        }
+      }
+    },
+    {
+      "frame_index": 112,
+      "relative_time": 6.693209886550903,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8333918452262878,
+      "visibility_avg": 0.9234610994656881,
+      "selected_included_angle": 165.665194013464,
+      "selected_flexion_angle_raw": 14.334805986535997,
+      "selected_flexion_angle_smoothed": 14.232462743388988,
+      "included_angle_2d": 175.92349150232948,
+      "flexion_angle_2d": 4.076508497670517,
+      "included_angle_3d": 165.665194013464,
+      "flexion_angle_3d": 14.334805986535997,
+      "left_knee_angle": 165.665194013464,
+      "keypoints": {
+        "hip": {
+          "x": 0.6623297333717346,
+          "y": 0.48390552401542664,
+          "z": -0.1198701485991478,
+          "visibility": 0.997524082660675
+        },
+        "knee": {
+          "x": 0.6558787822723389,
+          "y": 0.7503002882003784,
+          "z": -0.051408130675554276,
+          "visibility": 0.9394673705101013
+        },
+        "ankle": {
+          "x": 0.6662061214447021,
+          "y": 0.970162034034729,
+          "z": 0.0586472824215889,
+          "visibility": 0.8333918452262878
+        }
+      }
+    },
+    {
+      "frame_index": 113,
+      "relative_time": 6.751619100570679,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8301633596420288,
+      "visibility_avg": 0.9219305316607157,
+      "selected_included_angle": 165.85780112908458,
+      "selected_flexion_angle_raw": 14.142198870915422,
+      "selected_flexion_angle_smoothed": 14.16528068434962,
+      "included_angle_2d": 176.12876041739773,
+      "flexion_angle_2d": 3.8712395826022714,
+      "included_angle_3d": 165.85780112908458,
+      "flexion_angle_3d": 14.142198870915422,
+      "left_knee_angle": 165.85780112908458,
+      "keypoints": {
+        "hip": {
+          "x": 0.6620446443557739,
+          "y": 0.4839067757129669,
+          "z": -0.12077955156564713,
+          "visibility": 0.9975441694259644
+        },
+        "knee": {
+          "x": 0.6559708714485168,
+          "y": 0.7521650791168213,
+          "z": -0.05303230136632919,
+          "visibility": 0.938084065914154
+        },
+        "ankle": {
+          "x": 0.665810763835907,
+          "y": 0.9710312485694885,
+          "z": 0.05141442269086838,
+          "visibility": 0.8301633596420288
+        }
+      }
+    },
+    {
+      "frame_index": 114,
+      "relative_time": 6.810096025466919,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8301796317100525,
+      "visibility_avg": 0.9220492045084635,
+      "selected_included_angle": 166.00132882526728,
+      "selected_flexion_angle_raw": 13.99867117473272,
+      "selected_flexion_angle_smoothed": 14.09079127968705,
+      "included_angle_2d": 176.27865169964494,
+      "flexion_angle_2d": 3.7213483003550607,
+      "included_angle_3d": 166.00132882526728,
+      "flexion_angle_3d": 13.99867117473272,
+      "left_knee_angle": 166.00132882526728,
+      "keypoints": {
+        "hip": {
+          "x": 0.6620175242424011,
+          "y": 0.4841293394565582,
+          "z": -0.12074333429336548,
+          "visibility": 0.9975869655609131
+        },
+        "knee": {
+          "x": 0.6563643217086792,
+          "y": 0.7535111904144287,
+          "z": -0.05933789536356926,
+          "visibility": 0.938381016254425
+        },
+        "ankle": {
+          "x": 0.6660072207450867,
+          "y": 0.972690999507904,
+          "z": 0.03603630140423775,
+          "visibility": 0.8301796317100525
+        }
+      }
+    },
+    {
+      "frame_index": 115,
+      "relative_time": 6.868563413619995,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8276731371879578,
+      "visibility_avg": 0.9210918545722961,
+      "selected_included_angle": 165.9486062082895,
+      "selected_flexion_angle_raw": 14.051393791710495,
+      "selected_flexion_angle_smoothed": 14.093975046835066,
+      "included_angle_2d": 176.76522245452887,
+      "flexion_angle_2d": 3.2347775454711325,
+      "included_angle_3d": 165.9486062082895,
+      "flexion_angle_3d": 14.051393791710495,
+      "left_knee_angle": 165.9486062082895,
+      "keypoints": {
+        "hip": {
+          "x": 0.660019040107727,
+          "y": 0.4840432107448578,
+          "z": -0.12074606120586395,
+          "visibility": 0.9975808262825012
+        },
+        "knee": {
+          "x": 0.656291127204895,
+          "y": 0.7532830238342285,
+          "z": -0.055699389427900314,
+          "visibility": 0.9380216002464294
+        },
+        "ankle": {
+          "x": 0.6656514406204224,
+          "y": 0.9728121161460876,
+          "z": 0.049272093921899796,
+          "visibility": 0.8276731371879578
+        }
+      }
+    },
+    {
+      "frame_index": 116,
+      "relative_time": 6.927261114120483,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8250237107276917,
+      "visibility_avg": 0.9203183253606161,
+      "selected_included_angle": 166.00954863855458,
+      "selected_flexion_angle_raw": 13.990451361445423,
+      "selected_flexion_angle_smoothed": 14.103504237068012,
+      "included_angle_2d": 176.81685559497635,
+      "flexion_angle_2d": 3.183144405023654,
+      "included_angle_3d": 166.00954863855458,
+      "flexion_angle_3d": 13.990451361445423,
+      "left_knee_angle": 166.00954863855458,
+      "keypoints": {
+        "hip": {
+          "x": 0.6589323282241821,
+          "y": 0.48400193452835083,
+          "z": -0.12105722725391388,
+          "visibility": 0.997560441493988
+        },
+        "knee": {
+          "x": 0.6555984616279602,
+          "y": 0.7533263564109802,
+          "z": -0.059514064341783524,
+          "visibility": 0.9383708238601685
+        },
+        "ankle": {
+          "x": 0.665093719959259,
+          "y": 0.9730975031852722,
+          "z": 0.038438089191913605,
+          "visibility": 0.8250237107276917
+        }
+      }
+    },
+    {
+      "frame_index": 117,
+      "relative_time": 6.985672473907471,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8278313279151917,
+      "visibility_avg": 0.9221892158190409,
+      "selected_included_angle": 166.06962803816634,
+      "selected_flexion_angle_raw": 13.930371961833657,
+      "selected_flexion_angle_smoothed": 14.022617432127543,
+      "included_angle_2d": 176.7976134023235,
+      "flexion_angle_2d": 3.202386597676508,
+      "included_angle_3d": 166.06962803816634,
+      "flexion_angle_3d": 13.930371961833657,
+      "left_knee_angle": 166.06962803816634,
+      "keypoints": {
+        "hip": {
+          "x": 0.6582313179969788,
+          "y": 0.48376795649528503,
+          "z": -0.12200722843408585,
+          "visibility": 0.9976035952568054
+        },
+        "knee": {
+          "x": 0.6553691625595093,
+          "y": 0.7535179853439331,
+          "z": -0.07235865294933319,
+          "visibility": 0.9411327242851257
+        },
+        "ankle": {
+          "x": 0.6654523611068726,
+          "y": 0.9760404825210571,
+          "z": 0.009847027249634266,
+          "visibility": 0.8278313279151917
+        }
+      }
+    },
+    {
+      "frame_index": 118,
+      "relative_time": 7.044100761413574,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8258333206176758,
+      "visibility_avg": 0.9219277103741964,
+      "selected_included_angle": 166.16072539629332,
+      "selected_flexion_angle_raw": 13.839274603706684,
+      "selected_flexion_angle_smoothed": 13.962032578685797,
+      "included_angle_2d": 176.91575910617345,
+      "flexion_angle_2d": 3.0842408938265464,
+      "included_angle_3d": 166.16072539629332,
+      "flexion_angle_3d": 13.839274603706684,
+      "left_knee_angle": 166.16072539629332,
+      "keypoints": {
+        "hip": {
+          "x": 0.6575879454612732,
+          "y": 0.4835784435272217,
+          "z": -0.12245247513055801,
+          "visibility": 0.9975976943969727
+        },
+        "knee": {
+          "x": 0.6550182104110718,
+          "y": 0.7534462213516235,
+          "z": -0.07359784096479416,
+          "visibility": 0.9423521161079407
+        },
+        "ankle": {
+          "x": 0.6649028062820435,
+          "y": 0.9763872623443604,
+          "z": 0.01250002533197403,
+          "visibility": 0.8258333206176758
+        }
+      }
+    },
+    {
+      "frame_index": 119,
+      "relative_time": 7.102525949478149,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8282163739204407,
+      "visibility_avg": 0.9234098196029663,
+      "selected_included_angle": 166.21562463774012,
+      "selected_flexion_angle_raw": 13.78437536225988,
+      "selected_flexion_angle_smoothed": 13.919173416191228,
+      "included_angle_2d": 176.83719641271935,
+      "flexion_angle_2d": 3.1628035872806493,
+      "included_angle_3d": 166.21562463774012,
+      "flexion_angle_3d": 13.78437536225988,
+      "left_knee_angle": 166.21562463774012,
+      "keypoints": {
+        "hip": {
+          "x": 0.657580554485321,
+          "y": 0.48355844616889954,
+          "z": -0.12243052572011948,
+          "visibility": 0.9976274967193604
+        },
+        "knee": {
+          "x": 0.6548760533332825,
+          "y": 0.753374457359314,
+          "z": -0.07363547384738922,
+          "visibility": 0.9443855881690979
+        },
+        "ankle": {
+          "x": 0.6649835109710693,
+          "y": 0.9769465923309326,
+          "z": 0.01116696186363697,
+          "visibility": 0.8282163739204407
+        }
+      }
+    },
+    {
+      "frame_index": 120,
+      "relative_time": 7.161077976226807,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8259952068328857,
+      "visibility_avg": 0.922471841176351,
+      "selected_included_angle": 166.35667142992833,
+      "selected_flexion_angle_raw": 13.643328570071674,
+      "selected_flexion_angle_smoothed": 13.837560371863464,
+      "included_angle_2d": 176.82932231524077,
+      "flexion_angle_2d": 3.1706776847592266,
+      "included_angle_3d": 166.35667142992833,
+      "flexion_angle_3d": 13.643328570071674,
+      "left_knee_angle": 166.35667142992833,
+      "keypoints": {
+        "hip": {
+          "x": 0.6576151847839355,
+          "y": 0.4832322895526886,
+          "z": -0.12242748588323593,
+          "visibility": 0.9976236820220947
+        },
+        "knee": {
+          "x": 0.6547694802284241,
+          "y": 0.7527768611907959,
+          "z": -0.07210511714220047,
+          "visibility": 0.9437966346740723
+        },
+        "ankle": {
+          "x": 0.6648136377334595,
+          "y": 0.9769184589385986,
+          "z": 0.02135036513209343,
+          "visibility": 0.8259952068328857
+        }
+      }
+    },
+    {
+      "frame_index": 121,
+      "relative_time": 7.223202466964722,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8257092237472534,
+      "visibility_avg": 0.9225292007128397,
+      "selected_included_angle": 166.3414349649369,
+      "selected_flexion_angle_raw": 13.658565035063106,
+      "selected_flexion_angle_smoothed": 13.771183106587,
+      "included_angle_2d": 176.75727919400612,
+      "flexion_angle_2d": 3.2427208059938835,
+      "included_angle_3d": 166.3414349649369,
+      "flexion_angle_3d": 13.658565035063106,
+      "left_knee_angle": 166.3414349649369,
+      "keypoints": {
+        "hip": {
+          "x": 0.6578822731971741,
+          "y": 0.4825136959552765,
+          "z": -0.12230315059423447,
+          "visibility": 0.9976422786712646
+        },
+        "knee": {
+          "x": 0.6547970175743103,
+          "y": 0.7527408003807068,
+          "z": -0.07150604575872421,
+          "visibility": 0.9442360997200012
+        },
+        "ankle": {
+          "x": 0.6649333834648132,
+          "y": 0.9769463539123535,
+          "z": 0.021548429504036903,
+          "visibility": 0.8257092237472534
+        }
+      }
+    },
+    {
+      "frame_index": 122,
+      "relative_time": 7.281489372253418,
+      "selected_side": "left",
+      "selected_source": "3d_world",
+      "visibility_min": 0.8247713446617126,
+      "visibility_avg": 0.9225374857584635,
+      "selected_included_angle": 166.35397760714258,
+      "selected_flexion_angle_raw": 13.646022392857418,
+      "selected_flexion_angle_smoothed": 13.714313192791753,
+      "included_angle_2d": 176.7916552327285,
+      "flexion_angle_2d": 3.2083447672715124,
+      "included_angle_3d": 166.35397760714258,
+      "flexion_angle_3d": 13.646022392857418,
+      "left_knee_angle": 166.35397760714258,
+      "keypoints": {
+        "hip": {
+          "x": 0.6577074527740479,
+          "y": 0.48260465264320374,
+          "z": -0.12250621616840363,
+          "visibility": 0.9976488947868347
+        },
+        "knee": {
+          "x": 0.6547768712043762,
+          "y": 0.7526991963386536,
+          "z": -0.0701218992471695,
+          "visibility": 0.9451922178268433
+        },
+        "ankle": {
+          "x": 0.6649084687232971,
+          "y": 0.976963222026825,
+          "z": 0.02462332509458065,
+          "visibility": 0.8247713446617126
+        }
+      }
+    }
+  ]
+}
