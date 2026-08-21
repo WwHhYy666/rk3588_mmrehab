@@ -1,0 +1,68 @@
+action_id: "seated_knee_raise"
+action_name: "坐姿抬膝"
+pose_schema: "coco17_to_rehab_v1"
+primary_metric: "knee_raise_height_ratio"
+metric_unit: "body_ratio"
+metric_direction: "increase"
+keypoint_rule:
+  shoulder_index: 5
+  hip_index: 11
+  knee_index: 13
+  target_joint: "left_hip"
+angle_field: "target_angle_smoothed"
+angle_fields:
+  - "target_angle_smoothed"
+  - "selected_flexion_angle_smoothed"
+  - "selected_flexion_angle_raw"
+  - "flexion_angle_2d"
+metric_note: "NPU 坐姿抬膝使用 COCO-17 膝相对髋的上升高度，并以肩髋距离归一化。"
+thresholds:
+  rom_diff_max: 0.10
+  tut_ratio_min: 0.85
+  dtw_normalized_max: 0.12
+  speed_ratio_max: 1.5
+tut_work_zone:
+  mode: "relative_to_max"
+  offset_low: -0.12
+  offset_high: 0.0
+realtime:
+  segment_mode: "raise_lower"
+  rest_window_seconds: 0.7
+  rest_noise_max: 0.025
+  rest_velocity_max: 0.06
+  motion_start_velocity_min: 0.07
+  return_velocity_max: -0.03
+  start_delta_from_rest: 0.03
+  return_delta_from_rest: 0.05
+  return_to_start_delta: 0.0
+  stable_return_seconds: 0.30
+  max_rep_seconds: 5.0
+  return_timeout_seconds: 1.5
+  interrupt_reset_seconds: 0.4
+  reset_on_offscreen: true
+  start_delta: 0.07
+  attempt_start_delta: 0.06
+  return_delta: 0.08
+  require_return_reversal: true
+  return_reversal_confirm_frames: 4
+  finish_confirm_frames: 4
+  min_attempt_delta: 0.08
+  reentry_start_delta_multiplier: 2.5
+  reentry_min_attempt_delta: 0.12
+  reentry_start_confirm_frames: 4
+  min_rep_seconds: 1.0
+  tut_range_padding: 0.08
+  tut_ratio_min: 0.80
+  correction_tts_interval_seconds: 4.0
+  tut_count_mode: "at_or_above_target"
+  count_by_peak_target: false
+  raise_prompt: "膝盖再抬高一点"
+  hold_done_prompt: "可以慢慢放下"
+  returning_prompt: "慢慢放下"
+template_validation:
+  min_valid_frames: 20
+  min_duration_seconds: 2.0
+  peak_edge_fraction: 0.15
+  return_rom_tolerance_ratio: 0.20
+  min_rom: 0.25
+  max_rom: 1.20
