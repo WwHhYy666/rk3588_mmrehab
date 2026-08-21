@@ -1,0 +1,7 @@
+action_id: standing_shoulder_abduction
+messages:
+  bilateral_asymmetry: 双臂高度不一致，请保持左右同步。
+  body_side_lean: 身体出现侧倾，请收紧躯干并站稳。
+  low_visibility: 请正对摄像头并完整露出双臂。
+  sudden_jump: 请平稳抬起双臂，不要快速甩动。
+  incomplete_rom: 双臂侧平举幅度不足，请达到目标高度。

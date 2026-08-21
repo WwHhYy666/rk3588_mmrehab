@@ -1,0 +1,23 @@
+action_id: standing_shoulder_abduction
+label: 站姿侧平举
+description: 面向摄像头，双臂同步向身体两侧抬起并放下。
+view: front
+direction: increase
+metric_kind: bilateral_shoulder_abduction_deg
+metric_unit: deg
+seed_rom: 55.0
+attempt_start_delta: 12.0
+min_valid_rom: 45.0
+return_delta: 8.0
+min_duration: 1.2
+max_duration: 6.0
+max_frame_jump: 45.0
+visibility_threshold: 0.15
+required_points: [left_hip, right_hip, left_shoulder, right_shoulder, left_elbow, right_elbow, left_wrist, right_wrist]
+compensation:
+  max_bilateral_difference_deg: 18.0
+  max_body_side_lean_deg: 12.0
+instructions:
+  - 正面对准摄像头，双脚站稳，双臂自然下垂。
+  - 双臂同时向两侧抬起，左右高度尽量一致。
+  - 身体不要侧倾，在最高点停稳后缓慢放下。

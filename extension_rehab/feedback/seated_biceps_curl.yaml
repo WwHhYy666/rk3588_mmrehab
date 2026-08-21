@@ -1,0 +1,7 @@
+action_id: seated_biceps_curl
+messages:
+  wrist_visibility: 请完整露出手腕，不要让手臂被身体遮挡。
+  upper_arm_swing: 保持上臂贴近躯干，只弯曲肘关节。
+  trunk_lean: 保持坐稳和躯干直立，不要借助身体摆动。
+  sudden_jump: 动作变化过快，请放慢速度并连续完成。
+  incomplete_rom: 屈肘幅度不足，请在舒适范围内抬得更高。

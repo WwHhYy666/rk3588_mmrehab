@@ -1,0 +1,23 @@
+action_id: low_impact_step_jack
+label: 低冲击开合步
+description: 不跳跃地完成侧向迈步与双臂上举，再同步回到起始位。
+view: front
+direction: increase
+metric_kind: coordinated_arm_leg_progress
+metric_unit: ratio
+seed_rom: 0.55
+attempt_start_delta: 0.15
+min_valid_rom: 0.45
+return_delta: 0.12
+min_duration: 2.0
+max_duration: 8.0
+max_frame_jump: 0.75
+visibility_threshold: 0.15
+required_points: [left_shoulder, right_shoulder, left_wrist, right_wrist, left_hip, right_hip, left_ankle, right_ankle]
+compensation:
+  max_coordination_gap: 0.30
+  max_shoulder_tilt_deg: 12.0
+instructions:
+  - 正面对准摄像头，双脚自然站立，双臂放在身体两侧。
+  - 一侧脚向外迈开的同时双臂同步向上抬起，全程不跳跃。
+  - 手臂和脚同步回到起始位，避免只完成上肢或下肢。

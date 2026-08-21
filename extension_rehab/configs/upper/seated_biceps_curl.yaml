@@ -1,0 +1,23 @@
+action_id: seated_biceps_curl
+label: 坐姿屈肘训练
+description: 坐稳后保持上臂贴近躯干，缓慢屈肘再回到伸直位。
+view: side
+direction: increase
+metric_kind: elbow_flexion_deg
+metric_unit: deg
+seed_rom: 55.0
+attempt_start_delta: 12.0
+min_valid_rom: 35.0
+return_delta: 8.0
+min_duration: 1.2
+max_duration: 6.0
+max_frame_jump: 45.0
+visibility_threshold: 0.15
+required_points: [left_shoulder, left_elbow, left_wrist, left_hip]
+compensation:
+  max_upper_arm_swing_ratio: 0.35
+  max_trunk_lean_deg: 15.0
+instructions:
+  - 侧面对准摄像头，坐稳并完整露出肩、肘、腕。
+  - 上臂保持贴近躯干，只弯曲肘关节将手抬起。
+  - 在最高点短暂停留，再缓慢伸直回到起始位。

@@ -1,0 +1,8 @@
+group: upper
+rules:
+  - id: visibility
+    when: visibility < 0.15
+    message: 请保持肩、肘、腕关键点可见
+  - id: compensation
+    when: compensation_errors
+    message: 请减小躯干代偿并完成完整动作

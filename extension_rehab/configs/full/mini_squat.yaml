@@ -1,0 +1,23 @@
+action_id: mini_squat
+label: 半蹲训练
+description: 侧身站立，髋部向后下方移动完成小幅度下蹲并站起。
+view: side
+direction: increase
+metric_kind: knee_flexion_deg
+metric_unit: deg
+seed_rom: 30.0
+attempt_start_delta: 8.0
+min_valid_rom: 25.0
+return_delta: 6.0
+min_duration: 1.5
+max_duration: 7.0
+max_frame_jump: 40.0
+visibility_threshold: 0.15
+required_points: [left_shoulder, left_hip, left_knee, left_ankle]
+compensation:
+  min_hip_drop_ratio: 0.04
+  max_trunk_lean_deg: 20.0
+instructions:
+  - 侧面对准摄像头，双脚与肩同宽并保持全身入画。
+  - 髋部向后下方移动，像要坐向身后的椅子。
+  - 膝盖弯曲达到目标后站直，避免只弯膝不下沉。

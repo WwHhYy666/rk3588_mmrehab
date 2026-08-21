@@ -1,0 +1,23 @@
+action_id: seated_shoulder_flexion
+label: 坐姿前平举
+description: 坐稳并保持躯干直立，将手臂从体侧向前抬起后放下。
+view: side
+direction: increase
+metric_kind: shoulder_flexion_deg
+metric_unit: deg
+seed_rom: 50.0
+attempt_start_delta: 12.0
+min_valid_rom: 45.0
+return_delta: 8.0
+min_duration: 1.2
+max_duration: 6.0
+max_frame_jump: 45.0
+visibility_threshold: 0.15
+required_points: [left_hip, left_shoulder, left_elbow, left_wrist]
+compensation:
+  max_trunk_lean_deg: 15.0
+  min_elbow_angle_deg: 155.0
+instructions:
+  - 侧面对准摄像头，手臂自然垂在身体旁边。
+  - 肘部尽量伸直，将整条手臂缓慢向前抬起。
+  - 不要借助身体前后摆动，随后缓慢放回体侧。

@@ -1,0 +1,12 @@
+group: upper
+label: 上肢训练组
+actions:
+  - seated_biceps_curl
+  - seated_shoulder_flexion
+  - standing_shoulder_abduction
+default_reps: 5
+rest_seconds: 6
+rest_music_file: /assets/rest_music.wav
+rest_music_playback: backend
+rest_music_fade_seconds: 1.0
+feature_flag: REHAB_EXTENDED_GROUPS

@@ -1,0 +1,8 @@
+group: full
+rules:
+  - id: visibility
+    when: visibility < 0.15
+    message: 请保持全身关键点可见
+  - id: compensation
+    when: compensation_errors
+    message: 请控制躯干并完成返回

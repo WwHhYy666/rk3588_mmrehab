@@ -1,0 +1,7 @@
+action_id: low_impact_step_jack
+messages:
+  coordination: 手臂和腿部进度不同步，请同时上举和迈步。
+  ankle_visibility: 请完整露出双脚和双踝。
+  shoulder_tilt: 保持肩线水平和躯干稳定。
+  sudden_jump: 请保持低冲击，不要跳跃或突然加速。
+  incomplete_rom: 上肢或下肢幅度不足，请同步达到目标。

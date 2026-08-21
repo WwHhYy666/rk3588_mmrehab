@@ -1,0 +1,12 @@
+group: full
+label: 全身训练组
+actions:
+  - mini_squat
+  - lateral_step_touch
+  - low_impact_step_jack
+default_reps: 5
+rest_seconds: 6
+rest_music_file: /assets/rest_music.wav
+rest_music_playback: backend
+rest_music_fade_seconds: 1.0
+feature_flag: REHAB_EXTENDED_GROUPS

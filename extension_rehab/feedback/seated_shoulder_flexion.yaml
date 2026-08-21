@@ -1,0 +1,7 @@
+action_id: seated_shoulder_flexion
+messages:
+  elbow_bent: 前平举时请尽量保持肘部伸直。
+  trunk_lean: 保持躯干直立，不要用身体前后摆动带动手臂。
+  low_visibility: 请完整露出肩、肘和腕部。
+  sudden_jump: 请缓慢连续地抬起和放下手臂。
+  incomplete_rom: 前平举幅度不足，请达到医生模板目标。

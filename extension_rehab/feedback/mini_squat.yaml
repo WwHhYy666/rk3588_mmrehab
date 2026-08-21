@@ -1,0 +1,7 @@
+action_id: mini_squat
+messages:
+  hip_drop: 请让髋部向后下方移动，避免只弯膝不下蹲。
+  trunk_lean: 躯干前倾过大，请保持胸部抬起。
+  low_visibility: 请侧身并保持肩、髋、膝、踝完整入画。
+  sudden_jump: 下蹲或站起过快，请放慢并保持控制。
+  incomplete_rom: 下蹲幅度不足，请达到医生模板目标。

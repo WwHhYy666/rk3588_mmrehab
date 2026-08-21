@@ -1,0 +1,7 @@
+action_id: lateral_step_touch
+messages:
+  ankle_visibility: 请完整露出双脚和双踝。
+  shoulder_tilt: 肩线倾斜明显，请保持身体直立。
+  direction_error: 请向外迈步，不要先把双脚收得更窄。
+  sudden_jump: 步幅变化过快，请连续迈开并收回。
+  incomplete_rom: 侧向步幅不足，请达到医生模板目标。

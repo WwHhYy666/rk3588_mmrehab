@@ -1,0 +1,22 @@
+action_id: lateral_step_touch
+label: 站姿侧向迈步
+description: 面向摄像头，一侧脚向外迈开后收回到起始站距。
+view: front
+direction: increase
+metric_kind: ankle_span_over_shoulder_width
+metric_unit: ratio
+seed_rom: 0.45
+attempt_start_delta: 0.18
+min_valid_rom: 0.35
+return_delta: 0.12
+min_duration: 1.5
+max_duration: 7.0
+max_frame_jump: 0.75
+visibility_threshold: 0.15
+required_points: [left_shoulder, right_shoulder, left_hip, right_hip, left_ankle, right_ankle]
+compensation:
+  max_shoulder_tilt_deg: 12.0
+instructions:
+  - 正面对准摄像头，双脚自然站立并完整露出双踝。
+  - 一侧脚向外迈开，身体保持直立、肩线保持水平。
+  - 外侧脚收回并恢复起始站距后才算完成一次。
