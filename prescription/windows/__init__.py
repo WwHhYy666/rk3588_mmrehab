@@ -1,1 +1,0 @@
-"""Windows-side prescription entrypoints."""
